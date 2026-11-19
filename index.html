@@ -4,27 +4,39 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Casos Arquivados · Jogos de detetive</title>
-<meta name="description" content="Dois casos de detetive completos para jogar em casa: documentos, laudos, fotos, mapas e acusação final.">
+<meta name="description" content="Casos de detetive completos para jogar em casa: documentos, laudos, fotos, mapas e acusação final.">
 <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Playfair+Display:wght@700;800&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box}
 body{margin:0;background:#15171b;color:#e7e1d0;font-family:"Source Serif 4",Georgia,serif;min-height:100vh}
-header{text-align:center;padding:60px 20px 20px}
+header{text-align:center;padding:56px 20px 10px}
 .k{font-family:"Special Elite";letter-spacing:.3em;color:#c09a4a;font-size:12px;text-transform:uppercase}
 h1{font-family:"Playfair Display";font-size:clamp(36px,6vw,60px);margin:10px 0 6px}
 header p{color:#bdb59f;font-style:italic;margin:0}
-.wrap{max-width:1100px;margin:30px auto 60px;padding:0 18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:28px}
-.case{background:#f1ead8;color:#23201b;border-radius:3px;overflow:hidden;box-shadow:0 14px 34px rgba(0,0,0,.55);display:flex;flex-direction:column}
-.case .img{height:240px;background-size:cover;background-position:center;position:relative}
-.case .img span{position:absolute;top:14px;left:14px;background:#8f1d21;color:#fff;font-family:"Special Elite";font-size:12px;padding:4px 9px;letter-spacing:.08em}
-.case .b{padding:22px 24px 26px;display:flex;flex-direction:column;gap:10px;flex:1}
-.case h2{font-family:"Playfair Display";font-size:30px;margin:0}
+.bar{max-width:1140px;margin:28px auto 0;padding:0 18px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font-family:"Special Elite";font-size:13px;background:#232830;color:#e4dcc6;border:1px solid #434b57;padding:7px 12px;border-radius:20px;cursor:pointer}
+.chip.on{background:#f1ead8;color:#23201b;border-color:#f1ead8}
+input,select{font-family:"Source Serif 4";font-size:15px;background:#232830;color:#e7e1d0;border:1px solid #434b57;border-radius:4px;padding:8px 10px}
+.count{max-width:1140px;margin:12px auto 0;padding:0 18px;color:#8d8775;font-family:"Special Elite";font-size:12.5px}
+.wrap{max-width:1140px;margin:16px auto 60px;padding:0 18px;display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:26px}
+.case{background:#f1ead8;color:#23201b;border-radius:3px;overflow:hidden;box-shadow:0 14px 34px rgba(0,0,0,.55);display:flex;flex-direction:column;transition:transform .2s}
+.case:hover{transform:translateY(-3px)}
+.case .img{height:220px;background-size:cover;background-position:center;position:relative;display:block}
+.badge{position:absolute;top:12px;left:12px;background:#8f1d21;color:#fff;font-family:"Special Elite";font-size:12px;padding:4px 9px;letter-spacing:.06em}
+.age{position:absolute;top:12px;right:12px;background:rgba(0,0,0,.7);color:#fff;font-family:"Special Elite";font-size:12px;padding:4px 8px;border:1px solid #fff}
+.new{position:absolute;bottom:12px;left:12px;background:#c09a4a;color:#111;font-family:"Special Elite";font-size:11px;padding:3px 8px}
+.case .b{padding:20px 22px 24px;display:flex;flex-direction:column;gap:9px;flex:1}
+.case h2{font-family:"Playfair Display";font-size:28px;margin:0}
 .meta{font-family:"Special Elite";font-size:12.5px;color:#6b6352}
-.case p{margin:0;font-size:16px;line-height:1.5}
-.btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:auto;padding-top:8px}
-a.btn{font-family:"Special Elite";text-decoration:none;padding:11px 16px;border-radius:3px;font-size:14px;letter-spacing:.05em}
+.case p{margin:0;font-size:15.5px;line-height:1.5}
+.tags{display:flex;flex-wrap:wrap;gap:6px}.tags span{font-size:12px;border:1px solid #b9aa86;padding:2px 8px;border-radius:10px;color:#5a5140}
+.prog{font-family:"Special Elite";font-size:12px;color:#2f6b3a}
+.btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:auto;padding-top:6px}
+a.btn{font-family:"Special Elite";text-decoration:none;padding:10px 15px;border-radius:3px;font-size:14px;letter-spacing:.05em}
 a.play{background:#8f1d21;color:#fff}
 a.pdf{border:1px solid #23201b;color:#23201b}
+.empty{text-align:center;color:#8d8775;padding:40px;grid-column:1/-1}
 footer{text-align:center;color:#7d7766;font-size:13px;padding:0 20px 40px;font-family:"Special Elite"}
 </style>
 </head>
@@ -32,28 +44,40 @@ footer{text-align:center;color:#7d7766;font-size:13px;padding:0 20px 40px;font-f
 <header>
   <div class="k">Arquivo de casos não resolvidos</div>
   <h1>Casos Arquivados</h1>
-  <p>Leiam os documentos, cruzem os horários e apontem o culpado.</p>
+  <p>Escolham um caso, leiam os documentos, cruzem os horários e apontem o culpado.</p>
 </header>
-<div class="wrap">
-  <div class="case">
-    <div class="img" style="background-image:url(brinde/img/casa.jpg)"><span>CASO Nº 1 · INICIANTE</span></div>
-    <div class="b">
-      <h2>O Último Brinde</h2>
-      <div class="meta">Serra Gaúcha · junho de 1994 · 2 a 3 horas · 3 envelopes</div>
-      <p>Na noite do centenário de uma vinícola familiar, o patriarca aparece morto no pé da escada da adega. A família quer que seja acidente. O delegado não acredita.</p>
-      <div class="btns"><a class="btn play" href="brinde/">▶ Jogar online</a><a class="btn pdf" href="brinde/impressao.pdf" target="_blank">⎙ Versão para imprimir (PDF)</a></div>
-    </div>
-  </div>
-  <div class="case">
-    <div class="img" style="background-image:url(barqueiro/img/cover.jpg)"><span>CASO Nº 2 · AVANÇADO · +18</span></div>
-    <div class="b">
-      <h2>O Barqueiro de Ouro Preto</h2>
-      <div class="meta">Ouro Preto · julho de 1998 · 6 a 9 horas · 5 envelopes</div>
-      <p>Cinco mortos em dezessete dias, todos com moedas sobre os olhos, na porta de igrejas barrocas. Uma data de 1978 que ninguém quer lembrar. Um dos crimes não é o que parece.</p>
-      <div class="btns"><a class="btn play" href="barqueiro/">▶ Jogar online</a><a class="btn pdf" href="barqueiro/impressao.pdf" target="_blank">⎙ Versão para imprimir (PDF)</a></div>
-    </div>
+<div class="bar">
+  <div class="chips" id="chips"></div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap">
+    <input id="q" type="search" placeholder="Buscar caso, lugar, tema…" aria-label="Buscar">
+    <select id="sort" aria-label="Ordenar"><option value="num">Ordem do arquivo</option><option value="new">Mais recentes</option><option value="easy">Mais fáceis primeiro</option><option value="hard">Mais difíceis primeiro</option></select>
   </div>
 </div>
+<div class="count" id="count"></div>
+<div class="wrap" id="grid"><div class="empty">Carregando arquivo…</div></div>
 <footer>Casos fictícios. O progresso de cada jogo fica salvo no navegador de quem joga.</footer>
+<script>
+const LEVELS=['Iniciante','Intermediário','Avançado','Especialista'];
+let CASES=[],F={nivel:'Todos',q:'',sort:'num'};
+const progress=slug=>{try{const k={brinde:'valmorbida_v1',barqueiro:'barqueiro_v1'}[slug]||('caso_'+slug);const s=JSON.parse(localStorage.getItem(k)||'null');return s&&s.stage?s.stage:0;}catch(e){return 0;}};
+function render(){
+  const q=F.q.toLowerCase();
+  let L=CASES.filter(c=>(F.nivel==='Todos'||c.dificuldade===F.nivel)&&(!q||[c.titulo,c.local,c.sinopse,(c.tags||[]).join(' ')].join(' ').toLowerCase().includes(q)));
+  const lv=c=>LEVELS.indexOf(c.dificuldade);
+  L.sort({num:(a,b)=>a.numero-b.numero,new:(a,b)=>(b.adicionado||'').localeCompare(a.adicionado||''),easy:(a,b)=>lv(a)-lv(b),hard:(a,b)=>lv(b)-lv(a)}[F.sort]);
+  const now=Date.now();
+  document.getElementById('count').textContent=`${L.length} de ${CASES.length} caso${CASES.length>1?'s':''}`;
+  document.getElementById('grid').innerHTML=L.length?L.map(c=>{const p=progress(c.slug);const isNew=c.adicionado&&(now-Date.parse(c.adicionado))<1000*60*60*24*21;
+  return `<div class="case"><a class="img" href="${c.slug}/" style="background-image:url(${c.capa})"><span class="badge">CASO Nº ${c.numero} · ${c.dificuldade.toUpperCase()}</span><span class="age">${c.classificacao}</span>${isNew?'<span class="new">NOVO</span>':''}</a>
+  <div class="b"><h2>${c.titulo}</h2><div class="meta">${c.local} · ${c.ano} · ${c.duracao} · ${c.envelopes} envelopes</div><p>${c.sinopse}</p>
+  <div class="tags">${(c.tags||[]).map(t=>`<span>${t}</span>`).join('')}</div>
+  ${p?`<div class="prog">● Em andamento neste aparelho: envelope ${p} de ${c.envelopes}</div>`:''}
+  <div class="btns"><a class="btn play" href="${c.slug}/">▶ ${p?'Continuar':'Jogar online'}</a>${c.pdf?`<a class="btn pdf" href="${c.pdf}" target="_blank">⎙ Imprimir (PDF)</a>`:''}</div></div></div>`;}).join(''):'<div class="empty">Nenhum caso encontrado com esses filtros.</div>';
+}
+function chips(){const used=['Todos',...LEVELS.filter(l=>CASES.some(c=>c.dificuldade===l))];document.getElementById('chips').innerHTML=used.map(l=>`<button class="chip ${F.nivel===l?'on':''}" onclick="F.nivel='${l}';chips();render()">${l}</button>`).join('');}
+document.getElementById('q').oninput=e=>{F.q=e.target.value;render();};
+document.getElementById('sort').onchange=e=>{F.sort=e.target.value;render();};
+fetch('casos.json',{cache:'no-cache'}).then(r=>r.json()).then(d=>{CASES=d;chips();render();}).catch(()=>{document.getElementById('grid').innerHTML='<div class="empty">Não foi possível carregar o arquivo de casos.</div>';});
+</script>
 </body>
 </html>

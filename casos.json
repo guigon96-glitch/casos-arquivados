@@ -1,0 +1,34 @@
+[
+  {
+    "slug": "brinde",
+    "numero": 1,
+    "titulo": "O Último Brinde",
+    "local": "Serra Gaúcha",
+    "ano": 1994,
+    "dificuldade": "Iniciante",
+    "duracao": "2 a 3 horas",
+    "envelopes": 3,
+    "classificacao": "12+",
+    "tags": ["vinícola", "família", "herança"],
+    "capa": "brinde/img/casa.jpg",
+    "sinopse": "Na noite do centenário de uma vinícola familiar, o patriarca aparece morto no pé da escada da adega. A família quer que seja acidente. O delegado não acredita.",
+    "pdf": "brinde/impressao.pdf",
+    "adicionado": "2026-11-18"
+  },
+  {
+    "slug": "barqueiro",
+    "numero": 2,
+    "titulo": "O Barqueiro de Ouro Preto",
+    "local": "Ouro Preto, MG",
+    "ano": 1998,
+    "dificuldade": "Avançado",
+    "duracao": "6 a 9 horas",
+    "envelopes": 5,
+    "classificacao": "18+",
+    "tags": ["serial killer", "igrejas", "vingança"],
+    "capa": "barqueiro/img/cover.jpg",
+    "sinopse": "Cinco mortos em dezessete dias, todos com moedas sobre os olhos, na porta de igrejas barrocas. Uma data de 1978 que ninguém quer lembrar. Um dos crimes não é o que parece.",
+    "pdf": "barqueiro/impressao.pdf",
+    "adicionado": "2026-11-19"
+  }
+]
