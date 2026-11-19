@@ -1,0 +1,100 @@
+<style>
+@page{size:A4;margin:10mm}
+html,body.kit{background:#fff!important;color:#222}
+body.kit > *:not(#K){display:none!important}
+#K{font-family:"Source Serif 4",Georgia,serif;color:#222}
+#K .pg{break-before:page}
+#K h2.sec{font-family:"Playfair Display";font-size:26px;border-bottom:3px solid #222;padding-bottom:4px;margin:0 0 6mm}
+#K .tag{display:inline-block;font-family:"Special Elite";font-size:10px;letter-spacing:.08em;border:1.5px solid #8f1d21;color:#8f1d21;padding:1px 6px;transform:rotate(-2deg)}
+#K .cut{border:1.5px dashed #999;position:relative;break-inside:avoid}
+#K .cut::after{content:"✂";position:absolute;top:-11px;left:8px;background:#fff;color:#888;font-size:13px;padding:0 3px}
+/* capa envelope */
+#K .env{height:270mm;border:6px double #8f1d21;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:16mm;position:relative;-webkit-print-color-adjust:exact;print-color-adjust:exact;background:#f4ead2}
+#K .env .n{font-family:"Playfair Display";font-size:120px;line-height:1;color:#8f1d21}
+#K .env .t{font-family:"Special Elite";letter-spacing:.25em;font-size:18px;margin:4mm 0}
+#K .env h3{font-family:"Playfair Display";font-size:34px;margin:2mm 0 6mm}
+#K .env .lacre{width:46mm;height:46mm;border-radius:50%;background:radial-gradient(circle at 35% 35%,#c0392b,#7a1015);color:#f4ead2;display:flex;align-items:center;justify-content:center;font-family:"Special Elite";font-size:13px;box-shadow:0 3px 8px rgba(0,0,0,.4);margin:6mm auto;transform:rotate(-8deg)}
+#K .env .q{font-size:17px;max-width:150mm;border-top:1px solid #8f1d21;padding-top:5mm}
+#K .env .opts{font-size:14px;text-align:left;margin:4mm auto;line-height:1.8}
+#K .env .foot{position:absolute;bottom:10mm;left:0;right:0;font-family:"Special Elite";font-size:11px;color:#6b6352}
+/* fichas */
+#K .cards{display:grid;grid-template-columns:1fr 1fr;gap:6mm}
+#K .ficha{height:78mm;display:grid;grid-template-columns:34mm 1fr;gap:4mm;padding:4mm;background:#fbf7ec;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+#K .ficha img{width:34mm;height:44mm;object-fit:cover;border:3px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.3)}
+#K .ficha .r{font-family:"Special Elite";font-size:9.5px;color:#8f1d21;text-transform:uppercase;letter-spacing:.05em}
+#K .ficha h4{font-family:"Playfair Display";font-size:16px;margin:1mm 0}
+#K .ficha p{font-size:9.2px;line-height:1.3;margin:1mm 0}
+#K .ficha .boxes{grid-column:1/-1;display:grid;grid-template-columns:repeat(4,1fr);gap:2mm;font-family:"Special Elite";font-size:9px}
+#K .ficha .boxes div{border:1px solid #b9aa86;height:9mm;padding:1mm}
+#K .ficha.vit{background:#efe4e4}
+/* provas */
+#K .prop{margin:0 0 7mm;padding:3mm;break-inside:avoid}
+#K .prop .paper{box-shadow:none!important;margin:0!important;max-width:none!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+#K .prop .ptag{margin-bottom:2mm}
+/* santinhos */
+#K .sants{display:grid;grid-template-columns:repeat(4,1fr);gap:5mm}
+#K .sant{height:78mm;padding:3mm;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+#K .sant .f{height:100%;background:#efe2bd;border:4px double #8a6a2a;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:4mm 2mm;text-align:center}
+#K .sant .f.gl{background:linear-gradient(160deg,#dfe8ff,#f7e7ff);border:3px solid #c9a227}
+#K .sant .f .nm{font-family:"Playfair Display";font-size:13px;font-style:italic}
+#K .sant .f .ty{font-family:"Special Elite";font-size:7px;color:#6b5a3a}
+#K .sant .v{height:100%;background:#f6efdc;border:1px solid #c9b98f;display:flex;align-items:center;justify-content:center;font-family:"Caveat";font-size:17px;color:#1f3f8a;text-align:center}
+/* fotos */
+#K .fotos{display:grid;grid-template-columns:1fr;gap:5mm}
+#K .foto{padding:4mm;background:#fbfaf5;border:1px solid #ccc;break-inside:avoid;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+#K .foto img{width:100%;height:92mm;object-fit:cover;display:block}
+#K .foto .c{font-family:"Caveat";font-size:20px;margin-top:2mm}
+/* folhas */
+#K table.mx{border-collapse:collapse;width:100%;font-size:11px}
+#K table.mx th,#K table.mx td{border:1px solid #888;padding:2mm;height:12mm;vertical-align:top}
+#K table.mx th{background:#eee5cc;font-family:"Special Elite";font-weight:normal;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+#K .line{border-bottom:1px solid #999;height:8.5mm;display:flex;align-items:flex-end;font-family:"Special Elite";font-size:10px;color:#888}
+#K .qr{display:flex;gap:5mm;align-items:center;background:#f1ead8;padding:4mm;border-radius:2mm;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+#K .qr img{width:30mm;height:30mm}
+</style>
+<script>
+window.buildKit=function(c){
+ document.body.classList.add('kit');
+ const qrBox=t=>`<div class="qr"><img src="${c.qr}"><div><b style="font-family:'Special Elite'">${t}</b><br><span style="font-size:11px">${c.url}</span></div></div>`;
+ const docById=id=>(D.find(d=>d.id===id)||{}).html||'';
+ const envName=n=>c.stageNames[n]||('Envelope '+n);
+ let h='';
+ // capa e instruções
+ h+=`<div style="height:270mm;display:flex;flex-direction:column;justify-content:space-between;background:#15171b;color:#f3ecd9;padding:0;-webkit-print-color-adjust:exact;print-color-adjust:exact">
+  <div style="height:150mm;background:url(${c.cover}) center/cover"></div>
+  <div style="padding:10mm 14mm"><div style="font-family:'Special Elite';letter-spacing:.25em;font-size:11px;color:#c09a4a">KIT FÍSICO DE INVESTIGAÇÃO</div>
+  <h1 style="font-family:'Playfair Display';font-size:44px;margin:3mm 0">${c.title}</h1>
+  <p style="font-style:italic;margin:0 0 6mm">Capas de envelope, fichas de suspeitos, provas soltas, fotos e folhas de trabalho.</p>${qrBox('Jogo online: lacres, dicas e acusação final')}</div></div>`;
+ h+=`<div class="pg"><h2 class="sec">Como montar o kit</h2><div style="font-size:14.5px;line-height:1.6">
+  <ol><li>Imprimam este kit em A4. Se puderem, usem papel um pouco mais grosso (120 g) nas fichas e nos santinhos ou cartões.</li>
+  <li>Separem <b>${c.nEnv} envelopes pardos</b> (tamanho A4 ou ofício). Colem em cada um a <b>capa</b> correspondente.</li>
+  <li>Recortem nas linhas tracejadas (✂) as <b>fichas dos personagens</b> e as <b>provas soltas</b>. Cada prova tem uma etiqueta vermelha dizendo em qual envelope ela vai.</li>
+  <li>Coloquem em cada envelope as provas e as fotos daquele número. Os documentos completos estão no PDF principal (impressao.pdf) ou no site.</li>
+  <li>Fechem os envelopes 2 em diante. Só abram quando acertarem a pergunta impressa na capa, conferindo pelo QR code.</li>
+  <li>Usem as <b>folhas de trabalho</b> do final: a matriz de suspeitos, a linha do tempo e o relatório final.</li></ol>
+  <p><b>Dica de mesa:</b> espalhem as fichas e as fotos sobre a mesa, ou prendam num mural com barbante vermelho, como nos filmes. O site tem a mesma coisa na aba 🔎 Investigação.</p></div></div>`;
+ // capas de envelope
+ for(let n=1;n<=c.nEnv;n++){const g=c.gates[n];
+  h+=`<div class="env pg"><div class="t">${c.caseLine}</div><div class="n">${n}</div><div class="t">ENVELOPE</div><h3>${envName(n)}</h3>
+  ${n===1?`<div class="lacre">ABRIR<br>PRIMEIRO</div><div class="q">Comecem por aqui: boletim de ocorrência, perícia do local, depoimentos, fotos e o que mais o arquivo trouxer.</div>`:
+  `<div class="lacre">LACRADO</div><div class="q"><b>Só abram quando acertarem:</b><br>${g.q.replace(/^Para abrir a Etapa \d, respondam: /,'')}<div class="opts">${g.opts.filter(Boolean).map(o=>'☐ '+o).join('<br>')}</div>Confiram a resposta no site (QR code no kit e no PDF).</div>`}
+  <div class="foot">${c.title} · conteúdo: ${D.filter(d=>d.stage===n).length} documentos e ${Object.values(PH).filter(p=>p.stage===n).length} fotos</div></div>`;}
+ // fichas
+ const ficha=(p,vit)=>`<div class="ficha cut ${vit?'vit':''}"><img src="img/${p.id}.jpg"><div><div class="r">${vit&&p.n?(p.n+' vítima · '):''}${p.role}</div><h4>${p.name}</h4><div style="font-size:9.5px;color:#6b6352">${p.age} anos</div><p>${p.desc}</p>${p.facts?`<p style="font-style:italic">${p.facts}</p>`:''}${p.when?`<p style="font-family:'Special Elite';font-size:8.5px">${p.when}</p>`:''}</div>${vit?'':`<div class="boxes"><div>MOTIVO</div><div>MEIO</div><div>OPORTUNIDADE</div><div>ÁLIBI</div></div>`}</div>`;
+ h+=`<div class="pg"><h2 class="sec">Fichas dos personagens <span class="tag">recortar</span></h2><div class="cards">${c.people.map(p=>ficha(p,false)).join('')}</div></div>`;
+ if(c.victims&&c.victims.length) h+=`<div class="pg"><h2 class="sec">Fichas das vítimas <span class="tag">recortar</span></h2><div class="cards">${c.victims.map(p=>ficha(p,true)).join('')}</div></div>`;
+ // santinhos (opcional)
+ if(c.santinhos){h+=`<div class="pg"><h2 class="sec">Santinhos <span class="tag">recortar · dobrar ao meio</span></h2><p style="font-size:12px;margin-top:-3mm">Recortem cada par (frente e verso) e colem as costas uma na outra.</p><div class="sants">${c.santinhos.map(s=>`<div class="sant cut"><div class="f ${s.glossy?'gl':''}"><span class="tag">ENVELOPE ${s.stage}</span><div style="font-size:42px">${s.icon}</div><div class="nm">${s.name}</div><div class="ty">${s.glossy?'Casa Paroquial':'Typ. S. José — O. Preto'}</div></div></div><div class="sant cut"><div class="v">${s.back||'<span style="color:#bbb;font-family:Special Elite;font-size:10px">(verso em branco)</span>'}</div></div>`).join('')}</div></div>`;}
+ // provas soltas
+ for(let n=1;n<=c.nEnv;n++){const ids=c.props[n]||[];if(!ids.length)continue;
+  h+=`<div class="pg"><h2 class="sec">Provas soltas · Envelope ${n} <span class="tag">recortar</span></h2>${ids.map(id=>`<div class="prop cut"><div class="ptag"><span class="tag">ENVELOPE ${n}</span></div>${docById(id)}</div>`).join('')}</div>`;}
+ // fotos grandes
+ for(let n=1;n<=c.nEnv;n++){const ks=Object.keys(PH).filter(k=>PH[k].stage===n);if(!ks.length)continue;
+  h+=`<div class="pg"><h2 class="sec">Fotos · Envelope ${n}</h2><div class="fotos">${ks.map(k=>`<div class="foto cut"><span class="tag">ENVELOPE ${n} · ${k}</span><img src="img/${k}.jpg" style="margin-top:2mm"><div class="c">${PH[k].cap}</div><div style="font-size:10.5px">${PH[k].back}</div></div>`).join('')}</div></div>`;}
+ // folhas de trabalho
+ h+=`<div class="pg"><h2 class="sec">Matriz de suspeitos</h2><table class="mx"><tr><th style="width:24%">Suspeito</th><th>Motivo</th><th>Meio</th><th>Oportunidade</th><th>Álibi (confirmado?)</th><th style="width:9%">Culpado?</th></tr>${c.people.map(p=>`<tr><td><b>${p.name}</b><br><span style="font-size:9.5px">${p.role}</span></td><td></td><td></td><td></td><td></td><td></td></tr>`).join('')}</table></div>`;
+ h+=`<div class="pg"><h2 class="sec">Linha do tempo</h2>${c.timeSlots.map(t=>`<div class="line">${t}</div>`).join('')}</div>`;
+ h+=`<div class="pg"><h2 class="sec">Relatório final</h2>${c.finalQs.map(q=>`<p style="margin:5mm 0 1mm">${q}</p><div class="line"></div><div class="line"></div>`).join('')}<p style="margin-top:8mm">Assinaturas: ______________________ &nbsp; ______________________</p>${qrBox('Digitem a acusação no site para ver o resultado e a solução')}</div>`;
+ const K=document.createElement('div');K.id='K';K.innerHTML=h;document.body.appendChild(K);
+};
+</script>

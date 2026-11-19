@@ -1,0 +1,75 @@
+<style>
+@page{size:A4;margin:13mm 12mm}
+html,body.print{background:#fff!important;color:#222}
+body.print header.top,body.print nav.tabs,body.print main,body.print footer,body.print .modal{display:none!important}
+#P{max-width:none;font-family:"Source Serif 4",Georgia,serif;color:#222}
+#P .paper{box-shadow:none;border:1px solid #c9b98f;max-width:none;margin:0 0 10mm;break-inside:avoid;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+#P .paper.long{break-inside:auto}
+#P .pg{break-before:page}
+#P h1{font-family:"Playfair Display";font-size:40px;margin:0}
+#P h2.sec{font-family:"Playfair Display";font-size:28px;border-bottom:3px solid #222;padding-bottom:4px;margin:0 0 8mm}
+#P .cover{height:268mm;display:flex;flex-direction:column;justify-content:space-between;background:#1d221d;color:#f3ead4;padding:0;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+#P .cover .img{height:150mm;background-size:cover;background-position:center}
+#P .cover .txt{padding:10mm 14mm}
+#P .qr{display:flex;gap:6mm;align-items:center;background:#f3ead4;color:#222;padding:5mm;border-radius:2mm}
+#P .qr img{width:34mm;height:34mm}
+#P .chars{display:grid;grid-template-columns:1fr 1fr;gap:5mm}
+#P .chars .card{box-shadow:none;border:1px solid #c9b98f;break-inside:avoid;padding:4mm;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+#P .chars .card p{font-size:12.5px}
+#P .photos2{display:grid;grid-template-columns:1fr 1fr;gap:6mm}
+#P .ph{border:1px solid #bbb;padding:3mm;break-inside:avoid;background:#fbfaf5}
+#P .ph img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
+#P .ph .cap{font-family:"Caveat";font-size:20px;margin-top:2mm}
+#P .ph .bk{font-size:11.5px;color:#333;margin-top:1mm}
+#P .ph .bk i{font-family:"Special Elite";font-style:normal;font-size:11px;color:#555}
+#P .seal{height:250mm;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;border:4px double #9b2226;padding:15mm;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+#P .seal .big{font-family:"Special Elite";color:#9b2226;font-size:30px;letter-spacing:.15em}
+#P .fill{border-bottom:1px solid #777;height:9mm}
+#P .opts{font-size:15px;line-height:2}
+#P .mapbox svg{width:100%}
+</style>
+<script>
+window.buildPrint=function(QR,URL){
+ document.body.classList.add('print');
+ const docsOf=st=>D.filter(d=>d.stage===st).map(d=>d.html.replace('class="paper','class="paper '+((d.html.length>2600)?'long':''))).join('');
+ const photosOf=st=>`<div class="photos2">${Object.entries(PH).filter(([k,p])=>p.stage===st).map(([k,p])=>`<div class="ph"><img src="img/${k}.jpg"><div class="cap">${k} · ${p.cap}</div><div class="bk">${p.back}<br><i>${p.tech}</i></div></div>`).join('')}</div>`;
+ const qrBox=(t)=>`<div class="qr"><img src="${QR}"><div><b style="font-family:'Special Elite'">${t}</b><br><span style="font-size:12px">${URL}</span></div></div>`;
+ const seal=(st)=>{const g=GATES[st];return `<div class="seal pg"><div class="big">ENVELOPE ${st} · LACRADO</div><p style="font-size:18px;max-width:140mm">Não virem a página antes de responder:</p><p style="font-family:'Playfair Display';font-size:24px;max-width:150mm">${g.q.replace(/^Para abrir a Etapa \d, respondam: /,'')}</p><div class="opts">${g.opts.filter(Boolean).map(o=>'☐ '+o).join('<br>')}</div><p style="font-size:14px;max-width:140mm">Confiram a resposta escaneando o QR code e digitando-a na aba <b>Arquivo</b>. Só sigam em frente se acertarem.</p>${qrBox('Conferir a resposta no site')}</div>`;};
+ S.stage=4;renderMap();const pfx=h=>h.replace(/id="([A-Za-z0-9_]+)"/g,'id="p_$1"').replace(/url\(#([A-Za-z0-9_]+)\)/g,'url(#p_$1)').replace(/href="#([A-Za-z0-9_]+)"/g,'href="#p_$1"');const map=pfx(document.getElementById('mapsvg').outerHTML);
+ const lore=document.getElementById('v-caso').innerHTML;
+ const P=document.createElement('div');P.id='P';
+ P.innerHTML=`
+ <div class="cover"><div class="img" style="background-image:url(img/casa.jpg)"></div><div class="txt">
+  <div style="font-family:'Special Elite';letter-spacing:.2em;font-size:11px;color:#b8913a">POLÍCIA CIVIL DO RS · DP BENTO GONÇALVES · INQUÉRITO Nº 1.047/94</div>
+  <h1>O Último Brinde</h1><p style="font-style:italic;margin:2mm 0 6mm">A morte de Otávio Valmorbida na noite do centenário · Serra Gaúcha, 25 de junho de 1994</p>
+  ${qrBox('Escaneie para conferir respostas, pedir dicas e fazer a acusação final')}</div></div>
+ <div class="pg"><h2 class="sec">Como jogar</h2><div class="paper typed long">
+  <p>Vocês são a equipe de investigação. Leiam o caso, os personagens e o mapa, depois o Arquivo da Etapa 1.</p>
+  <p>O arquivo está dividido em <b>quatro envelopes</b>. Entre um e outro há uma página lacrada com uma pergunta. Respondam juntos e confiram no site (QR code). Só abram o próximo envelope se acertarem.</p>
+  <p>No fim, preencham o <b>Relatório Final</b> (última página) e digitem a acusação na aba <b>Acusação</b> do site para ver o resultado e a solução completa.</p>
+  <p>Dicas: o site tem três dicas progressivas por etapa, na aba <b>Dicas</b>.</p>
+  <p>Sugestão: recortem as fichas de personagens e as fotos e montem um quadro de investigação na mesa. 🔍</p>
+  <p style="font-size:13px">Contexto: junho de 1994. Não existe celular popular, a moeda é o Cruzeiro Real e os telefones fixos analógicos funcionam sem energia elétrica.</p></div></div>
+ <div class="pg">${lore}</div>
+ <div class="pg"><h2 class="sec">Personagens</h2><div class="chars">${document.getElementById('chars').innerHTML}</div>
+  <h2 class="sec" style="margin-top:8mm;font-size:20px">Testemunhas</h2><div class="chars">${document.getElementById('witness').innerHTML}</div></div>
+ <div class="pg"><h2 class="sec">Mapa</h2><div style="position:relative;height:262mm"><div style="position:absolute;top:0;left:0;width:262mm;transform-origin:top left;transform:translate(184mm,0) rotate(90deg)">${map}</div></div><div class="paper mapbox"><p style="font-size:12px;font-family:'Special Elite'">☎ L1 = ramal da Linha 1 (escritório) · ☎ L2 = ramal da Linha 2 (residência) · ⚡ quadro de força · ✕ corpo · ◉ garrafa · ▭ porta</p><p style="font-size:13px">O 2º piso (quartos, com ramais da L2) fica sobre o escritório e a sala de estar. Só se chega à adega pela escada no fim do corredor de serviço. A cantina fica a uns 80 m da casa.</p></div></div>
+ <div class="pg"><h2 class="sec">Envelope 1 · Arquivo inicial</h2>${docsOf(1)}<h2 class="sec pg">Envelope 1 · Fotografias</h2>${photosOf(1)}</div>
+ ${seal(2)}
+ <div class="pg"><h2 class="sec">Envelope 2 · Perícia e laudos</h2>${docsOf(2)}<h2 class="sec pg">Envelope 2 · Fotografias</h2>${photosOf(2)}</div>
+ ${seal(3)}
+ <div class="pg"><h2 class="sec">Envelope 3 · Papéis do escritório</h2>${docsOf(3)}</div>
+ ${seal(4)}
+ <div class="pg"><h2 class="sec">Envelope 4 · O cúmplice</h2>${docsOf(4)}<h2 class="sec pg">Envelope 4 · Fotografias</h2>${photosOf(4)}</div>
+ <div class="pg"><h2 class="sec">Relatório Final</h2><div class="paper typed long">
+  <p>1. Quem matou Otávio Valmorbida?</p><div class="fill"></div>
+  <p>2. Com o quê?</p><div class="fill"></div>
+  <p>3. Por quê?</p><div class="fill"></div><div class="fill"></div>
+  <p>4. Onde e quando ele realmente morreu?</p><div class="fill"></div>
+  <p>5. Alguém ajudou a encobrir o crime? Quem, e como?</p><div class="fill"></div>
+  <p>6. Provas que sustentam a acusação:</p><div class="fill"></div><div class="fill"></div><div class="fill"></div><div class="fill"></div><div class="fill"></div>
+  <p style="margin-top:8mm">Assinaturas dos detetives: ______________________ &nbsp; ______________________</p></div>
+  ${qrBox('Digitem a acusação na aba "Acusação" para ver o resultado e a solução')}</div>`;
+ document.body.appendChild(P);
+};
+</script>

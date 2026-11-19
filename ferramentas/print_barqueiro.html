@@ -1,0 +1,65 @@
+<style>
+@page{size:A4;margin:13mm 12mm}
+html,body.print{background:#fff!important;color:#222}
+body.print header.top,body.print nav.tabs,body.print main,body.print footer,body.print .modal{display:none!important}
+#P{font-family:"Source Serif 4",Georgia,serif;color:#222}
+#P .paper{box-shadow:none;border:1px solid #c9b98f;max-width:none;margin:0 0 9mm;break-inside:avoid;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+#P .paper.long{break-inside:auto}
+#P .paper.news{columns:2}
+#P .pg{break-before:page}
+#P h2.sec{font-family:"Playfair Display";font-size:28px;border-bottom:3px solid #222;padding-bottom:4px;margin:0 0 7mm}
+#P .cover{height:268mm;display:flex;flex-direction:column;justify-content:space-between;background:#15171b;color:#f3ecd9;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+#P .cover .img{height:150mm;background-size:cover;background-position:center}
+#P .cover .txt{padding:10mm 14mm}
+#P .qr{display:flex;gap:6mm;align-items:center;background:#f1ead8;color:#222;padding:5mm;border-radius:2mm;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+#P .qr img{width:34mm;height:34mm}
+#P .cards{display:grid;grid-template-columns:1fr 1fr;gap:5mm}
+#P .cards .card{box-shadow:none;border:1px solid #c9b98f;break-inside:avoid;padding:4mm;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+#P .cards .card p{font-size:12.5px}
+#P .photos2{display:grid;grid-template-columns:1fr 1fr;gap:6mm}
+#P .ph{border:1px solid #bbb;padding:3mm;break-inside:avoid;background:#fbfaf5}
+#P .ph img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
+#P .ph .cap{font-family:"Caveat";font-size:20px;margin-top:2mm}
+#P .ph .bk{font-size:11.5px;color:#333;margin-top:1mm}
+#P .ph .bk i{font-family:"Special Elite";font-style:normal;font-size:11px;color:#555}
+#P .seal{height:250mm;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;border:4px double #8f1d21;padding:15mm;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+#P .seal .big{font-family:"Special Elite";color:#8f1d21;font-size:30px;letter-spacing:.15em}
+#P .fill{border-bottom:1px solid #777;height:9mm}
+#P .opts{font-size:15px;line-height:2;text-align:left}
+#P .inlinepic{max-width:110mm}
+#P .prose p,#P .prose li{font-size:14px}#P .prose h2{color:#222;font-size:24px}#P .prose h3{color:#8f1d21}
+</style>
+<script>
+window.buildPrint=function(QR,URL){
+ document.body.classList.add('print');
+ const docsOf=st=>D.filter(d=>d.stage===st).map(d=>d.html.replace('class="paper','class="paper '+((d.html.length>2400)?'long ':''))).join('');
+ const photosOf=st=>{const ks=Object.keys(PH).filter(k=>PH[k].stage===st);return ks.length?`<h2 class="sec pg">${NAMES[st]} · Fotografias</h2><div class="photos2">${ks.map(k=>`<div class="ph"><img src="img/${k}.jpg"><div class="cap">${k.toUpperCase()} · ${PH[k].cap}</div><div class="bk">${PH[k].back}<br><i>${PH[k].tech}</i></div></div>`).join('')}</div>`:'';};
+ const qrBox=t=>`<div class="qr"><img src="${QR}"><div><b style="font-family:'Special Elite'">${t}</b><br><span style="font-size:12px">${URL}</span></div></div>`;
+ const seal=st=>{const g=GATES[st];return `<div class="seal pg"><div class="big">ENVELOPE ${st} · LACRADO</div><p style="font-size:18px">Não virem a página antes de responder:</p><p style="font-family:'Playfair Display';font-size:24px;max-width:150mm">${g.q}</p><div class="opts">${g.opts.filter(Boolean).map(o=>'☐ '+o).join('<br>')}</div><p style="font-size:14px;max-width:140mm">Confiram no site (aba <b>Arquivo</b>, lacre do Envelope ${st}). Só sigam se acertarem.</p>${qrBox('Conferir a resposta no site')}</div>`;};
+ S.stage=5;const pfx=h=>h.replace(/id="([A-Za-z0-9_]+)"/g,'id="p_$1"').replace(/url\(#([A-Za-z0-9_]+)\)/g,'url(#p_$1)').replace(/href="#([A-Za-z0-9_]+)"/g,'href="#p_$1"');
+ const P=document.createElement('div');P.id='P';
+ P.innerHTML=`
+ <div class="cover"><div class="img" style="background-image:url(img/cover.jpg)"></div><div class="txt">
+  <div style="font-family:'Special Elite';letter-spacing:.2em;font-size:11px;color:#c09a4a">POLÍCIA CIVIL DE MINAS GERAIS · FORÇA-TAREFA "BARQUEIRO" · OURO PRETO · JULHO DE 1998</div>
+  <h1 style="font-family:'Playfair Display';font-size:46px;margin:2mm 0">O Barqueiro de Ouro Preto</h1><p style="font-style:italic;margin:0 0 6mm">Cinco mortos em dezessete dias. Moedas sobre os olhos. Uma data que ninguém quer lembrar.</p>
+  ${qrBox('Escaneiem para conferir os lacres, pedir dicas e fazer a acusação final')}</div></div>
+ <div class="pg prose">${RULES.replace(/<p><button[\s\S]*?<\/p>/,'')}<p><b>Na versão impressa:</b> entre os envelopes há páginas lacradas. Respondam juntos e confiram no site pelo QR code. A acusação final e a solução estão só no site.</p></div>
+ <div class="pg">${CASE}</div>
+ <div class="pg"><h2 class="sec">As vítimas</h2><div class="cards">${document.getElementById('victims').innerHTML}</div></div>
+ <div class="pg"><h2 class="sec">Suspeitos</h2><div class="cards">${document.getElementById('chars').innerHTML}</div></div>
+ <div class="pg"><h2 class="sec">Testemunhas e autoridades</h2><div class="cards">${document.getElementById('witness').innerHTML}</div></div>
+ <div class="pg"><h2 class="sec">Mapa de Ouro Preto</h2><div style="position:relative;height:262mm"><div style="position:absolute;top:0;left:0;width:262mm;transform-origin:top left;transform:translate(176mm,0) rotate(90deg)">${pfx(cityMap())}</div></div></div>
+ <div class="pg"><h2 class="sec">${NAMES[1]}</h2>${docsOf(1)}${photosOf(1)}</div>
+ ${seal(2)}<div class="pg"><h2 class="sec">${NAMES[2]}</h2>${docsOf(2)}${photosOf(2)}</div>
+ ${seal(3)}<div class="pg"><h2 class="sec">${NAMES[3]}</h2>${docsOf(3)}${photosOf(3)}</div>
+ ${seal(4)}<div class="pg"><h2 class="sec">${NAMES[4]}</h2>${docsOf(4)}${photosOf(4)}<h2 class="sec pg">Croqui do casarão (1978)</h2><div class="paper">${pfx(casaraoMap())}</div></div>
+ ${seal(5)}<div class="pg"><h2 class="sec">${NAMES[5]}</h2>${docsOf(5)}${photosOf(5)}</div>
+ <div class="pg"><h2 class="sec">Relatório final</h2><div class="paper typed long">
+  ${ACCUSE_Q.map(q=>`<p>${q[1]}</p><div class="fill"></div>`).join('')}
+  <p>Provas principais:</p><div class="fill"></div><div class="fill"></div><div class="fill"></div><div class="fill"></div>
+  <p style="margin-top:8mm">Assinaturas: ______________________ &nbsp; ______________________</p></div>
+  ${qrBox('Digitem a acusação na aba "Acusação" para ver o resultado e a solução')}</div>`;
+ document.body.appendChild(P);
+};
+window.PRINT_HOOK=()=>buildPrint(window.QRDATA,window.QRURL);
+</script>
