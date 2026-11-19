@@ -225,14 +225,15 @@ footer{text-align:center;color:#7d7766;font-size:13px;padding:30px 10px;font-fam
 <section class="view" id="v-mapa">
   <div class="mapwrap">
     <div style="font-family:'Special Elite';font-size:13px;color:#6d6250;border-bottom:2px solid #2a241c;padding-bottom:6px;margin-bottom:10px">CROQUI DO LOCAL — CASA PRINCIPAL VALMORBIDA (TÉRREO) E ARREDORES · elaborado pela perícia em 26/06/1994 · sem escala</div>
-    <svg viewBox="0 0 920 600" id="mapsvg"></svg>
+    <div id="mapbox"></div>
+    <div id="mapinfo" style="margin-top:12px;padding:14px 16px;background:#fbf6e8;border:1px solid #b9aa86;border-left:5px solid #9b2226;min-height:56px;font-size:15px"><i style="color:#6d6250">Clique num marcador da planta para ver os detalhes. Novos marcadores aparecem quando vocês abrem as etapas.</i></div>
     <div class="legend">
-      <span>☎ L1 = ramal da Linha 1 (escritório)</span>
-      <span>☎ L2 = ramal da Linha 2 (residência)</span>
-      <span>⚡ = quadro de força</span>
-      <span>✕ = corpo encontrado</span>
-      <span>◉ = garrafa encontrada</span>
-      <span>▭ na parede = porta</span>
+      <span>☎ ramais de telefone (L1 escritório · L2 residência)</span>
+      <span>⚡ quadro de força</span>
+      <span style="color:#9b2226">✕ corpo</span>
+      <span>⇆ porta interna</span>
+      <span>● onde cada um diz que estava</span>
+      <span>👁 vigia</span>
     </div>
     <p style="font-size:14px;margin:12px 0 0">O 2º piso (quartos da família e de hóspedes, com ramais da L2) fica sobre o escritório e a sala de estar, e o acesso é pela escadaria principal. A <b>adega</b> fica no subsolo, escavada na rocha, e só se chega a ela pela escada no fim do corredor de serviço. A <b>cantina</b>, prédio de produção onde fica a câmara climatizada dos espumantes, está a uns 80 m da casa.</p>
   </div>
@@ -377,63 +378,105 @@ const WIT=[
 document.getElementById('chars').innerHTML=CHARS.map(c=>`<div class="card ${c.victim?'victim':''}">${pimg(c)}<div class="role">${c.role}</div><h4>${c.name}</h4><div class="small" style="color:#6d6250">${c.age} anos</div><p>${c.desc}</p><div class="facts">${c.facts}</div></div>`).join('');
 document.getElementById('witness').innerHTML=WIT.map(w=>`<div class="card"><div class="role">${w[1]}</div><h4 style="font-size:17px">${w[0]}</h4><p style="font-size:14px">${w[2]}</p></div>`).join('');
 
-/* ===================== MAP ===================== */
-(function(){
- const r=(x,y,w,h,label,sub,fill='#efe4c8')=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${fill}" stroke="#2a241c" stroke-width="3"/><text x="${x+w/2}" y="${y+h/2-(sub?6:0)}" text-anchor="middle" font-family="Special Elite" font-size="14" fill="#2a241c">${label}</text>${sub?`<text x="${x+w/2}" y="${y+h/2+12}" text-anchor="middle" font-family="Special Elite" font-size="11" fill="#6d6250">${sub}</text>`:''}`;
- const door=(x,y,vert)=>vert?`<rect x="${x-4}" y="${y}" width="8" height="26" fill="#f3ead4" stroke="#2a241c" stroke-width="1"/>`:`<rect x="${x}" y="${y-4}" width="26" height="8" fill="#f3ead4" stroke="#2a241c" stroke-width="1"/>`;
- const t=(x,y,s,sz=12,c='#2a241c',a='middle')=>`<text x="${x}" y="${y}" font-family="Special Elite" font-size="${sz}" fill="${c}" text-anchor="${a}">${s}</text>`;
- let s='';
- s+=`<rect x="0" y="0" width="920" height="600" fill="#f3ead4"/>`;
- // garden
- s+=`<rect x="770" y="250" width="140" height="210" fill="#dfe3c6" stroke="#8a9a6a" stroke-dasharray="4 4"/>`+t(840,272,'JARDIM LESTE',11,'#5d6b3f');
- for(let i=0;i<7;i++)s+=`<circle cx="${790+(i%3)*22}" cy="${320+Math.floor(i/3)*30+(i%2)*6}" r="10" fill="#b9c6e8" stroke="#6d7fae"/>`;
- s+=t(818,415,'hortênsias',11,'#4a5a8a');
- s+=`<circle cx="802" cy="372" r="7" fill="#9b2226"/>`+t(860,377,'◉ garrafa',11,'#9b2226');
- // cantina
- s+=r(790,30,120,120,'CANTINA','câmara espumantes','#e2d6b6');
- s+=`<path d="M780 150 Q770 210 760 230" stroke="#8b8066" stroke-dasharray="5 5" fill="none"/>`+t(800,200,'caminho ~80 m',10,'#6d6250');
- // house
- s+=r(40,40,180,240,'ESCRITÓRIO','☎ L1');
- s+=r(220,40,160,240,'ESCADARIA','(quartos no 2º piso)');
- s+=r(380,40,180,240,'SALA DE ESTAR','truco 22h45–23h30');
- s+=r(560,40,50,400,'','');
- s+=`<text transform="translate(590 250) rotate(-90)" font-family="Special Elite" font-size="13" text-anchor="middle" fill="#2a241c">CORREDOR DE SERVIÇO</text>`;
- s+=`<rect x="568" y="60" width="34" height="340" fill="none" stroke="#9b2226" stroke-width="1" stroke-dasharray="2 3" opacity=".5"/>`;
- s+=t(585,56,'passadeira',9,'#9b2226');
- s+=r(610,40,150,130,'COZINHA','☎ L2');
- s+=r(610,170,150,130,'BIBLIOTECA','☎ L1');
- s+=r(610,300,150,140,'','','#ead9c0');
- s+=t(685,340,'SALA DE',14)+t(685,357,'DEGUSTAÇÃO',14);
- s+=`<rect x="700" y="425" width="50" height="12" fill="#7a5a3a"/>`+t(725,420,'lareira',10,'#6d6250');
- s+=`<rect x="622" y="310" width="70" height="12" fill="#8a6a4a"/>`+t(657,334,'expositor 001–012',9,'#6d6250');
- s+=`<rect x="756" y="340" width="8" height="40" fill="#bcd3e6" stroke="#2a241c"/>`+t(752,395,'janela',10,'#2a3f6a','end');
- s+=r(40,280,260,160,'SALÃO DE JANTAR','');
- s+=r(300,280,140,160,'HALL','☎ L2');
- s+=r(440,280,120,160,'COPA','');
- // stairs adega
- for(let i=0;i<6;i++)s+=`<line x1="562" y1="${400+i*7}" x2="608" y2="${400+i*7}" stroke="#2a241c" stroke-width="1.5"/>`;
- s+=t(585,456,'↓ adega',11,'#2a241c');
+/* ===================== MAP (planta interativa) ===================== */
+const MPINS=[
+ // id,x,y,stage,ícone,título,texto
+ ['corpo',585,446,1,'x','Corpo de Otávio','Encontrado às 23h40 por Lúcia, de bruços no pé da escada da adega (subsolo, 14 degraus). Pouco sangue no local para o tamanho do ferimento.'],
+ ['passadeira',585,400,1,'trilha','Passadeira do corredor','Duas trilhas paralelas no pelo da passadeira vermelha, da porta da sala de degustação até o topo da escada (~3 m).'],
+ ['quadro',606,221,1,'raio','Quadro de força','Atrás de uma portinhola pintada da cor da parede, ao lado da porta da biblioteca. Disjuntor geral desligado às 22h04 e religado por Rafael às 22h19.'],
+ ['l1esc',130,90,1,'tel','☎ Linha 1 · Escritório','Ramal da Linha 1 (054) 451-2210.'],
+ ['l1bib',735,195,1,'tel','☎ Linha 1 · Biblioteca','Ramal da Linha 1. Brandão diz que telefonou daqui à esposa "pouco antes das dez", por uns vinte minutos.'],
+ ['l2hall',370,300,1,'tel','☎ Linha 2 · Hall','Ramal da Linha 2 (054) 451-2894. Jean-Luc ligou daqui para Paris às 22h31.'],
+ ['l2coz',735,65,1,'tel','☎ Linha 2 · Cozinha','Ramal da Linha 2.'],
+ ['l2quartos',300,70,1,'tel','☎ Linha 2 · Quartos (2º piso)','Pela escadaria principal. Dr. Saulo diz que ligou do quarto de hóspedes para o hospital em Caxias "logo depois das dez".'],
+ ['expositor',657,316,1,'garrafa','Expositor do Centenário','Doze magnums numeradas de 001 a 012. O nicho 001 está vazio.'],
+ ['janela',760,360,1,'janela','Janela leste da sala de degustação','Encontrada destrancada pela perícia. Dá para o jardim das hortênsias.'],
+ ['portaint',703,300,1,'porta','Porta interna','Liga a biblioteca direto à sala de degustação, sem passar pelo corredor.'],
+ ['cozinha',635,150,1,'pessoa','Cozinha · Lúcia e Zilá','As duas ficaram aqui durante o apagão, com velas. Por volta das 22h10 Rafael passou com o isqueiro e abriu a porta do corredor, e na hora as duas ouviram um baque no fundo.'],
+ ['salao',280,420,1,'pessoa','Salão de jantar · Rafael','Rafael diz que estava aqui sozinho terminando um Merlot quando a luz caiu.'],
+ ['biblio',650,282,1,'pessoa','Biblioteca · Dr. Augusto','Brandão diz que ficou aqui o apagão inteiro, ao telefone e depois no escuro.'],
+ ['estar',535,255,1,'pessoa','Sala de estar · Truco','Truco das 22h45 às 23h30: Helena, Dr. Saulo, Jean-Luc e Dr. Augusto. Rafael não quis jogar.'],
+ ['varanda',430,474,1,'cigarro','Varanda · Jean-Luc','Diz que fumou aqui no escuro durante todo o apagão. O vigia viu a brasa de um cigarro e ouviu alguém resmungar em língua estrangeira.'],
+ ['cantina',945,125,1,'pessoa','Cantina · Helena','Câmara climatizada dos espumantes, a ~80 m. O vigia viu a lanterna de Helena chegando aqui às 22h08.'],
+ ['guarita',840,545,1,'olho','Guarita · Dorival','Tem bateria própria. Daqui o vigia vê a varanda e o jardim leste. Viu uma chama de isqueiro na janela da sala de degustação às 22h11 e algo cair nas hortênsias.'],
+ ['garrafa',802,372,2,'alvo','Garrafa nº 001','Encontrada pelo jardineiro Tonico às 9h de 26/06, entre as hortênsias, logo abaixo da janela leste.'],
+ ['luminol',725,420,2,'luminol','Luminol junto à lareira','Reação positiva intensa (~1,2 m²) junto à lareira, com trilha até a porta do corredor. O piso foi lavado.'],
+ ['lareira',740,432,2,'fogo','Lareira da sala de degustação','Nas cinzas, restos de linho branco com um "V" bordado em azul: a toalha da mesa de degustação.'],
+ ['escritorio',195,255,3,'doc','Escritório · gaveta','Onde estavam a carta da auditoria, as autorizações de pagamento e o fax da Junta Comercial.']
+];
+function mpIcon(k){const c=(f,t)=>`<circle r="11" fill="${f}" stroke="#fff" stroke-width="1.5"/><text y="4.5" text-anchor="middle" font-size="12" fill="#fff">${t}</text>`;
+ return {x:`<path d="M-10 -10 L10 10 M10 -10 L-10 10" stroke="#9b2226" stroke-width="5" stroke-linecap="round"/>`,trilha:c('#9b2226','⇅'),raio:c('#b8860b','⚡'),tel:c('#2b4a7a','☎'),garrafa:c('#2f5a3a','◫'),janela:c('#3f6585','▭'),porta:c('#9b2226','⇆'),pessoa:c('#55606d','●'),cigarro:c('#7a4a1a','~'),olho:c('#6b2f7a','👁'),alvo:c('#9b2226','◉'),luminol:c('#1f78c8','✦'),fogo:c('#c0561a','♨'),doc:c('#6d6250','✉')}[k]||c('#555','•');}
+function buildMap(){
+ const t=(x,y,s,o={})=>`<text x="${x}" y="${y}" font-family="${o.f||'Special Elite'}" font-size="${o.sz||12}" fill="${o.c||'#2a241c'}" text-anchor="${o.a||'middle'}" ${o.it?'font-style="italic"':''} ${o.ls?`letter-spacing="${o.ls}"`:''}>${s}</text>`;
+ const room=(x,y,w,h,fill,label,sub)=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${fill}"/>`+(label?t(x+w/2,y+h/2-(sub?4:0),label,{sz:13,f:'Playfair Display'}):'')+(sub?t(x+w/2,y+h/2+12,sub,{sz:10,c:'#6d6250'}):'');
+ let s=`<defs>
+ <pattern id="wood" width="40" height="10" patternUnits="userSpaceOnUse"><rect width="40" height="10" fill="#d8b98a"/><line x1="0" y1="10" x2="40" y2="10" stroke="#b8956a" stroke-width="1"/><line x1="20" y1="0" x2="20" y2="10" stroke="#c4a374" stroke-width=".6"/></pattern>
+ <pattern id="wood2" width="40" height="10" patternUnits="userSpaceOnUse"><rect width="40" height="10" fill="#cfae7e"/><line x1="0" y1="10" x2="40" y2="10" stroke="#ad8a5e" stroke-width="1"/><line x1="8" y1="0" x2="8" y2="10" stroke="#bd9a6c" stroke-width=".6"/></pattern>
+ <pattern id="tile" width="22" height="22" patternUnits="userSpaceOnUse"><rect width="22" height="22" fill="#9a958a"/><rect x="1" y="1" width="20" height="20" fill="#aaa497"/></pattern>
+ <pattern id="tile2" width="16" height="16" patternUnits="userSpaceOnUse"><rect width="16" height="16" fill="#e4dccb"/><rect x="0" y="0" width="8" height="8" fill="#cfc6b2"/><rect x="8" y="8" width="8" height="8" fill="#cfc6b2"/></pattern>
+ <pattern id="grass" width="12" height="12" patternUnits="userSpaceOnUse"><rect width="12" height="12" fill="#cbd3a6"/><path d="M2 10 l1 -4 M7 11 l1 -5 M10 6 l1 -3" stroke="#9aa86c" stroke-width="1"/></pattern>
+ <pattern id="stone" width="30" height="18" patternUnits="userSpaceOnUse"><rect width="30" height="18" fill="#b3a58a"/><path d="M0 9 H30 M15 0 V9 M5 9 V18 M25 9 V18" stroke="#8f8268" stroke-width="1"/></pattern>
+ <pattern id="rug" width="8" height="8" patternUnits="userSpaceOnUse"><rect width="8" height="8" fill="#8f2a2a"/><circle cx="4" cy="4" r="1" fill="#a84040"/></pattern>
+ <filter id="sh"><feDropShadow dx="1.5" dy="2" stdDeviation="1.5" flood-opacity=".35"/></filter>
+ </defs><rect width="1000" height="700" fill="#efe6cf"/>`;
+ // exterior
+ s+=`<rect x="0" y="0" width="1000" height="520" fill="url(#grass)" opacity=".8"/>`;
+ s+=`<path d="M760 170 C800 160 820 140 840 150" stroke="#b9a77d" stroke-width="10" fill="none" stroke-dasharray="2 6" stroke-linecap="round"/>`+t(810,190,'caminho ~80 m',{sz:10,c:'#6d6250'});
+ for(let i=0;i<9;i++){const x=785+(i%3)*28+(i%2)*6,y=320+Math.floor(i/3)*38;s+=`<circle cx="${x}" cy="${y}" r="14" fill="#8ea3d6"/><circle cx="${x-4}" cy="${y-3}" r="7" fill="#b3c3ea"/>`;}
+ s+=t(830,445,'hortênsias',{sz:11,c:'#3a4f8a',it:1})+t(830,290,'JARDIM LESTE',{sz:11,c:'#4f5d2c',ls:2});
+ s+=`<g filter="url(#sh)"><rect x="790" y="30" width="170" height="110" fill="url(#stone)" stroke="#2a241c" stroke-width="3"/></g>`+t(860,72,'CANTINA',{sz:14,f:'Playfair Display'})+t(860,88,'câmara dos espumantes',{sz:10,c:'#3a3020'});
+ s+=`<path d="M0 560 L1000 560" stroke="#b9a77d" stroke-width="26"/>`+t(500,566,'estrada interna · portão',{sz:10,c:'#6d6250'});
+ s+=`<g filter="url(#sh)"><rect x="805" y="525" width="70" height="44" fill="url(#stone)" stroke="#2a241c" stroke-width="2.5"/></g>`+t(840,587,'GUARITA',{sz:11});
+ s+=`<path d="M840 528 L560 470 L800 300 Z" fill="#6b2f7a" opacity=".08"/><path d="M840 528 L560 470 M840 528 L800 300" stroke="#6b2f7a" stroke-width="1" stroke-dasharray="4 4" opacity=".5"/>`+t(700,520,'campo de visão do vigia',{sz:10,c:'#6b2f7a',it:1});
+ // casa: piso
+ s+=`<g filter="url(#sh)"><rect x="34" y="34" width="732" height="412" fill="#2a241c"/></g>`;
+ s+=room(40,40,180,240,'url(#wood)','ESCRITÓRIO','')+room(220,40,160,240,'url(#tile2)','ESCADARIA','quartos no 2º piso')+room(380,40,180,240,'url(#wood2)','SALA DE ESTAR','')+room(560,40,50,400,'url(#tile)','','');
+ s+=room(610,40,150,130,'url(#tile2)','COZINHA','')+room(610,170,150,130,'url(#wood)','BIBLIOTECA','')+room(610,300,150,140,'url(#tile)','','');
+ s+=room(40,280,260,160,'url(#wood2)','','')+room(300,280,140,160,'url(#tile2)','HALL','')+room(440,280,120,160,'url(#tile2)','COPA','');
+ s+=t(685,342,'SALA DE',{sz:13,f:'Playfair Display'})+t(685,358,'DEGUSTAÇÃO',{sz:13,f:'Playfair Display'});
+ // passadeira
+ s+=`<rect x="570" y="52" width="30" height="340" fill="url(#rug)" stroke="#5a1818" stroke-width="1"/>`;
+ s+=`<text transform="translate(589 240) rotate(-90)" font-family="Special Elite" font-size="12" text-anchor="middle" fill="#fff">CORREDOR DE SERVIÇO</text>`;
+ // escada adega
+ for(let i=0;i<7;i++)s+=`<rect x="562" y="${398+i*6}" width="46" height="5" fill="${i%2?'#6b6458':'#7d7568'}"/>`;
+ s+=t(585,462,'↓ adega',{sz:10,c:'#fff'});
+ // paredes internas (linhas grossas)
+ const W=(x1,y1,x2,y2)=>`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#2a241c" stroke-width="6"/>`;
+ s+=W(220,40,220,280)+W(380,40,380,280)+W(560,40,560,440)+W(610,40,610,440)+W(610,170,760,170)+W(610,300,760,300)+W(40,280,560,280)+W(300,280,300,440)+W(440,280,440,440);
+ // portas (vãos + arco)
+ const D=(x,y,v,flip)=>v?`<rect x="${x-4}" y="${y}" width="8" height="26" fill="#efe6cf"/><path d="M${x} ${y} A26 26 0 0 ${flip?0:1} ${x+(flip?-26:26)} ${y+26}" fill="none" stroke="#2a241c" stroke-width="1"/>`:`<rect x="${x}" y="${y-4}" width="26" height="8" fill="#efe6cf"/><path d="M${x} ${y} A26 26 0 0 1 ${x+26} ${y+(flip?-26:26)}" fill="none" stroke="#2a241c" stroke-width="1"/>`;
+ s+=D(560,100,1,1)+D(610,90,1)+D(610,232,1)+D(610,388,1)+D(560,350,1,1)+D(300,340,1,1)+D(440,340,1)+D(340,280,0,1)+D(350,440,0,1);
+ s+=`<rect x="690" y="296" width="26" height="8" fill="#e8d6a0" stroke="#9b2226" stroke-width="2"/>`;
+ // janelas
+ s+=`<rect x="757" y="340" width="9" height="42" fill="#bcd3e6" stroke="#2a241c"/>`;
+ // móveis
+ s+=`<rect x="80" y="320" width="180" height="70" rx="6" fill="#8a5a32" stroke="#4a2e18"/>`;for(let i=0;i<6;i++){s+=`<rect x="${92+i*28}" y="308" width="14" height="10" fill="#5a3a20"/><rect x="${92+i*28}" y="392" width="14" height="10" fill="#5a3a20"/>`;}
+ s+=`<rect x="70" y="60" width="90" height="40" fill="#7a4a28"/><rect x="45" y="220" width="10" height="55" fill="#5a3a20"/>`;
+ s+=`<rect x="618" y="178" width="12" height="110" fill="#6a4020"/><rect x="740" y="178" width="12" height="110" fill="#6a4020"/><rect x="662" y="250" width="46" height="24" rx="4" fill="#7a4a28"/>`;
+ s+=`<rect x="410" y="80" width="110" height="34" rx="8" fill="#6b3a3a"/><circle cx="465" cy="195" r="22" fill="#2f5a3a" stroke="#1d3a22"/><rect x="420" y="250" width="70" height="20" fill="#5a3a20"/>`+t(455,264,'lareira',{sz:9,c:'#fff'});
+ s+=`<rect x="630" y="60" width="60" height="22" fill="#555"/><rect x="700" y="100" width="45" height="50" fill="#bfb6a2" stroke="#7d7568"/>`;
+ s+=`<rect x="622" y="308" width="72" height="14" fill="#5a3a20"/>`;for(let i=0;i<12;i++)s+=`<rect x="${624+i*6}" y="310" width="4" height="10" fill="${i===0?'#efe6cf':'#1d3a22'}"/>`;
+ s+=`<rect x="640" y="372" width="60" height="30" rx="3" fill="#7a4a28"/><rect x="700" y="424" width="56" height="14" fill="#3a2a1a"/>`;
+ for(let i=0;i<8;i++)s+=`<rect x="${232+i*18}" y="60" width="16" height="200" fill="none" stroke="#9b8f78" stroke-width=".8"/>`;
+ s+=t(170,302,'SALÃO DE JANTAR',{sz:13,f:'Playfair Display'});
  // varanda
- s+=`<rect x="40" y="440" width="520" height="60" fill="#e3d7b8" stroke="#2a241c" stroke-width="2" stroke-dasharray="6 3"/>`+t(300,476,'VARANDA (coberta)',13);
- // doors
- s+=door(560,100,true)+door(610,90,true); // sala estar-corredor, cozinha-corredor (north)
- s+=door(610,240,true);  // biblioteca-corredor
- s+=door(610,385,true);  // degustação-corredor
- s+=`<rect x="690" y="296" width="26" height="8" fill="#f3ead4" stroke="#9b2226" stroke-width="2"/>`+t(745,292,'porta interna',9,'#9b2226');
- s+=door(560,350,true);  // copa-corredor
- s+=door(300,340,true)+door(440,340,true)+door(340,280,false)+door(350,440,false);
- // quadro
- s+=`<rect x="602" y="212" width="8" height="18" fill="#e6b800" stroke="#2a241c"/>`+t(632,206,'⚡ quadro',11,'#7a5a00','start');
- // body
- s+=t(585,446,'✕',22,'#9b2226');
- // guarita
- s+=r(800,520,80,50,'GUARITA','vigia','#e2d6b6');
- s+=`<line x1="640" y1="540" x2="800" y2="545" stroke="#8b8066" stroke-dasharray="3 4"/>`+t(700,560,'portão',10,'#6d6250');
- s+=`<path d="M800 520 L770 460 M820 520 L820 460" stroke="#b9aa86" stroke-dasharray="2 5"/>`+t(745,505,'linha de visão do vigia',9,'#8b8066');
- // north arrow
- s+=`<g transform="translate(60,560)"><path d="M0 0 L8 -26 L16 0 L8 -6Z" fill="#2a241c"/>${t(8,16,'N',12)}</g>`;
- document.getElementById('mapsvg').innerHTML=s;
-})();
+ s+=`<rect x="40" y="446" width="520" height="56" fill="url(#stone)" opacity=".9" stroke="#2a241c" stroke-dasharray="6 3"/>`+t(300,480,'VARANDA (coberta)',{sz:13,f:'Playfair Display'});
+ // subsolo inset
+ s+=`<g filter="url(#sh)"><rect x="40" y="590" width="360" height="100" fill="#4a443a" stroke="#2a241c" stroke-width="3"/></g>`;
+ for(let i=0;i<6;i++)s+=`<ellipse cx="${190+i*34}" cy="640" rx="14" ry="22" fill="#7a4a28" stroke="#3a2010"/>`;
+ s+=t(110,615,'SUBSOLO · ADEGA',{sz:12,c:'#efe6cf',a:'middle'})+t(110,632,'escavada na rocha',{sz:10,c:'#cfc6b2'})+`<rect x="55" y="645" width="80" height="34" fill="#6b6458"/>`+t(95,666,'escada ↑',{sz:10,c:'#fff'})+t(95,690,'✕ corpo no último degrau',{sz:9,c:'#ffb4a8'});
+ // pins
+ MPINS.forEach(p=>{if(p[3]>S.stage)return;s+=`<g class="mp" data-id="${p[0]}" transform="translate(${p[1]} ${p[2]})" style="cursor:pointer">${mpIcon(p[4])}</g>`;});
+ // título e norte
+ s+=`<g transform="translate(940 640)"><circle r="30" fill="#f6efdc" stroke="#2a241c"/><path d="M0 -26 L6 0 L0 26 L-6 0Z" fill="#2a241c"/>${t(0,-34,'N',{sz:12})}</g>`;
+ s+=t(500,640,'Vinícola Valmorbida · Linha Graciema · planta reconstituída pela perícia, 26/06/1994',{sz:11,c:'#6d6250',a:'start'});
+ return `<svg viewBox="0 0 1000 700" id="mapsvg" xmlns="http://www.w3.org/2000/svg">${s}</svg>`;
+}
+function renderMap(){
+ const el=document.getElementById('mapbox');if(!el)return;
+ el.innerHTML=buildMap();
+ el.querySelectorAll('.mp').forEach(g=>g.addEventListener('click',()=>{const p=MPINS.find(x=>x[0]===g.dataset.id);document.getElementById('mapinfo').innerHTML=`<div style="font-family:'Playfair Display';font-size:20px;margin-bottom:4px">${p[5]}</div><div>${p[6]}</div><div style="font-family:'Special Elite';font-size:11px;color:#6d6250;margin-top:6px">Etapa ${p[3]}</div>`;el.querySelectorAll('.mp').forEach(x=>x.style.opacity=x===g?1:.5);}));
+}
 
 /* ===================== PHOTOS (SVG scenes) ===================== */
 function person(x,y,sc,coat,head='#e0b993',hair='#3b2f25',extra=''){
@@ -443,9 +486,9 @@ const PH={
  F1:{stage:1,r:'-2deg',cap:'20h30 · Brinde de abertura',svg:`<svg viewBox="0 0 300 220"><defs><filter id="fd"><feColorMatrix type="saturate" values=".55"/></filter></defs><g filter="url(#fd)"><rect width="300" height="220" fill="#8a6a4e"/><rect y="150" width="300" height="70" fill="#5e4636"/><rect x="20" y="40" width="120" height="60" fill="#6b4f3a" stroke="#4a3626"/>${[0,1,2,3,4,5].map(i=>`<rect x="${26+i*19}" y="50" width="14" height="40" fill="#24402a"/>`).join('')}<rect x="26" y="50" width="14" height="40" fill="#3b2a20"/>${person(225,95,.95,'#22334f','#e3bb95','#9a9a92','<rect x="12" y="10" width="14" height="3" fill="#5a3b20"/><circle cx="27" cy="9" r="3" fill="#5a3b20"/>')}${person(110,105,1.25,'#3a3a3a','#e0b993','#d8d8d0')}${person(170,108,1.2,'#556070','#ddb48e','#1f1a16')}<rect x="133" y="110" width="12" height="46" rx="4" fill="#1d3a22"/><rect x="136" y="98" width="6" height="14" fill="#9b2226"/><rect x="133" y="128" width="12" height="12" fill="#f3ead4"/></g><rect width="300" height="220" fill="#ffcc88" opacity=".08"/></svg>`,
   back:'Seu Otávio e o filho Rafael segurando juntos a garrafa nº 001 para a foto oficial. Ao fundo, o Dr. Augusto com o cachimbo de sempre, de paletó azul-marinho. — Nei',
   tech:'Studio Gasparin · neg. 03 · 25/06/94 20h34 · Sala de degustação. Obs. do perito: Rafael segura a garrafa com a mão fechada no ombro, logo abaixo do lacre. Otávio segura por baixo, pela base e pelo rótulo.'},
- F2:{stage:1,r:'2deg',cap:'Local · pé da escada da adega',svg:`<svg viewBox="0 0 300 220"><rect width="300" height="220" fill="#4a4540"/>${[0,1,2,3,4,5,6].map(i=>`<rect x="${40+i*18}" y="${20+i*18}" width="${220-i*18}" height="18" fill="${i%2?'#6b655c':'#77716a'}" stroke="#3a3530"/>`).join('')}<rect x="0" y="146" width="300" height="74" fill="#5a544c"/><path d="M80 175 q30 -12 60 -4 q30 6 60 -2 l20 8 q-20 14 -44 10 l-40 4 q-30 2 -56 -4z" fill="none" stroke="#f3f0e6" stroke-width="2.5" stroke-dasharray="5 3"/><circle cx="210" cy="176" r="10" fill="none" stroke="#f3f0e6" stroke-width="2.5" stroke-dasharray="4 3"/><ellipse cx="214" cy="190" rx="9" ry="4" fill="#6a1a1a" opacity=".8"/><text x="20" y="210" font-family="Special Elite" font-size="11" fill="#e6e0d0">IGP · FOTO 2 · 26/06 00h41</text></svg>`,
-  back:'Contorno do corpo, de bruços, com a cabeça junto ao último degrau. Só uma mancha de sangue pequena no último degrau e no chão, perto da cabeça.',
-  tech:'Perito: "Quantidade de sangue incompatível com a extensão do ferimento craniano. Não há respingos nos degraus de cima, só a mancha junto à cabeça. Verificar se o corpo foi deslocado."'},
+ F2:{stage:1,r:'2deg',cap:'Local · pé da escada da adega',svg:'',
+  back:'Corpo de bruços, cabeça junto ao último degrau, braço dobrado sob o corpo. Ferimento na cabeça com o cabelo empapado de sangue. Relógio no pulso esquerdo.',
+  tech:'Perito: "Quantidade de sangue no piso (mancha de ~15 cm) incompatível com a extensão do ferimento craniano. Não há respingos nos degraus. Verificar se o corpo foi deslocado."'},
  F3:{stage:1,r:'-1deg',cap:'Relógio da vítima',svg:`<svg viewBox="0 0 300 220"><rect width="300" height="220" fill="#d8d2c4"/><rect x="128" y="0" width="44" height="220" fill="#3a3a3a"/><circle cx="150" cy="110" r="62" fill="#c9c9c9" stroke="#8a8a8a" stroke-width="6"/><circle cx="150" cy="110" r="52" fill="#1d2433"/>${Array.from({length:12},(_,i)=>{const a=i*Math.PI/6;return `<line x1="${150+44*Math.sin(a)}" y1="${110-44*Math.cos(a)}" x2="${150+50*Math.sin(a)}" y2="${110-50*Math.cos(a)}" stroke="#eee" stroke-width="3"/>`}).join('')}<line x1="150" y1="110" x2="${150+30*Math.sin((11+12/60)*Math.PI/6)}" y2="${110-30*Math.cos((11+12/60)*Math.PI/6)}" stroke="#eee" stroke-width="5"/><line x1="150" y1="110" x2="${150+44*Math.sin(12*Math.PI/30)}" y2="${110-44*Math.cos(12*Math.PI/30)}" stroke="#eee" stroke-width="3"/><path d="M110 70 L150 112 L190 60 M150 112 L120 160 M150 112 L200 140 M150 112 L105 115" stroke="#fff" stroke-width="1.3" opacity=".8"/><rect x="212" y="102" width="22" height="16" fill="#bdbdbd" stroke="#777"/><line x1="212" y1="110" x2="200" y2="110" stroke="#999" stroke-width="5"/><text x="10" y="210" font-family="Special Elite" font-size="11" fill="#333">IGP · FOTO 5</text></svg>`,
   back:'Omega Seamaster no pulso esquerdo. Cristal estilhaçado. Ponteiros parados em 23h12.',
   tech:'Perito: "A coroa parece estar fora da posição normal, saliente. Encaminhar ao laboratório."'},
@@ -455,6 +498,12 @@ const PH={
  F5:{stage:1,r:'-2.5deg',cap:'Expositor do Centenário',svg:`<svg viewBox="0 0 300 220"><rect width="300" height="220" fill="#7a5a40"/><rect x="20" y="30" width="260" height="160" fill="#4e3626"/>${Array.from({length:12},(_,i)=>{const x=30+(i%6)*42,y=40+Math.floor(i/6)*75;return `<rect x="${x}" y="${y}" width="36" height="66" fill="#3a271c" stroke="#2a1a10"/>`+(i===0?`<text x="${x+18}" y="${y+38}" font-family="Special Elite" font-size="11" fill="#e6d7b0" text-anchor="middle">001</text>`:`<rect x="${x+11}" y="${y+10}" width="14" height="50" rx="4" fill="#1d3a22"/><rect x="${x+14}" y="${y+4}" width="8" height="10" fill="#9b2226"/>`)}).join('')}<text x="10" y="210" font-family="Special Elite" font-size="11" fill="#eee">IGP · FOTO 7 · sala de degustação</text></svg>`,
   back:'Nicho 001 vazio. As outras onze garrafas estão no lugar, lacradas.',
   tech:'Perito: "Garrafa nº 001 não localizada na sala nem na adega. Buscas no entorno, amanhã cedo."'},
+ F9:{stage:1,r:'-1.5deg',cap:'Sapatos da vítima',svg:'',
+  back:'Os sapatos de couro preto de Otávio. A parte de trás dos dois calcanhares está raspada, com fiapos de lã vermelha presos ao couro.',
+  tech:'Perito: "Padrão de desgaste compatível com arrasto do corpo pelos calcanhares sobre tecido. Comparar fibras com a passadeira do corredor de serviço."'},
+ F10:{stage:2,r:'1deg',cap:'IML · o ferimento',svg:'',
+  back:'Necropsia 312/94. Ferimento contuso em forma de arco na cabeça, com fragmentos de vidro verde-escuro e partículas de cera vermelha presos no couro cabeludo.',
+  tech:'IML Caxias do Sul · Dr. Plínio Garbin · foto 04. O arco tem cerca de 9 cm de diâmetro.'},
  F6:{stage:2,r:'2deg',cap:'Garrafa nº 001 nas hortênsias',svg:`<svg viewBox="0 0 300 220"><rect width="300" height="220" fill="#5a6a3a"/>${Array.from({length:14},(_,i)=>`<circle cx="${(i*53)%300}" cy="${(i*37)%220}" r="${28+(i%3)*8}" fill="${i%2?'#7f93c4':'#9aaedc'}" opacity=".85"/>`).join('')}<g transform="rotate(-28 150 120)"><rect x="110" y="104" width="90" height="32" rx="10" fill="#1d3a22"/><path d="M200 108 L222 112 L216 120 L224 128 L200 132Z" fill="#1d3a22"/><rect x="128" y="106" width="30" height="28" fill="#efe6cc"/><path d="M112 112 q-6 8 0 16" stroke="#6a1a1a" stroke-width="5" fill="none"/></g><text x="10" y="210" font-family="Special Elite" font-size="11" fill="#fff">IGP · FOTO 11 · 26/06 09h20</text></svg>`,
   back:'Encontrada pelo jardineiro Tonico, às 9h, entre as hortênsias, logo abaixo da janela da sala de degustação. Vidro lascado e cacos verdes espalhados no canteiro.',
   tech:'Perito: "Manchas escuras na base da garrafa. Recolhida para exame. A janela fica a uns 2 m acima do canteiro."'},
@@ -788,7 +837,7 @@ function openDoc(id){
 }
 function tryGate(st){
   const v=document.getElementById('gate'+st).value,fb=document.getElementById('fb'+st),g=GATES[st];
-  if(v===g.a){S.stage=st;save();renderList();renderPhotos();renderHints();
+  if(v===g.a){S.stage=st;save();renderList();renderPhotos();renderHints();renderMap();
     document.getElementById('docview').innerHTML=`<div class="paper typed"><div class="stamp">LIBERADO</div><h2>Etapa ${st} aberta</h2><p>${st===2?'Correto: Otávio foi atacado na <b>sala de degustação</b> e arrastado até a escada. Os laudos chegaram do laboratório. Também há novas fotos na aba Fotos.':'Correto: Otávio morreu <b>durante o apagão</b>, e o relógio foi adulterado para indicar 23h12. Vocês receberam os papéis apreendidos no escritório de Otávio e com os suspeitos. Agora é com vocês.'}</p></div>`;}
   else{fb.className='feedback bad';fb.textContent=v?g.bad:'Escolham uma resposta.';}
 }
@@ -870,7 +919,7 @@ const SOLUTION=`
 <p style="text-align:center;font-family:'Special Elite';color:#b8913a;margin-top:30px">— CASO ENCERRADO —</p>`;
 
 /* ===================== INIT ===================== */
-renderList();renderPhotos();renderHints();
+renderList();renderPhotos();renderHints();renderMap();
 document.getElementById('docview').innerHTML=`<div class="paper typed"><h2>Arquivo do Inquérito 1.047/94</h2><p>Escolham um documento na lista. Sugestão de ordem: Boletim de Ocorrência → Relatório de Local → Folha do caderno → depoimentos.</p><p>Os documentos lidos ficam marcados com ✓. As etapas lacradas abrem quando vocês respondem a pergunta do envelope.</p></div>`;
 const h=(location.hash||'').slice(1);if(h&&document.getElementById('v-'+h))go(h);
 </script>
