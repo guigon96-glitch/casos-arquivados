@@ -59,6 +59,8 @@
     ],
     "capa": "marques/img/cover.jpg",
     "sinopse": "Um casamento de alta sociedade num hotel de 1946 nos Jardins. Às 01h12 a madrinha sobe sozinha ao 7º andar e não desce mais. A polícia acha que ela fugiu. Vocês têm cinco dias para provar o contrário.",
-    "adicionado": "2026-11-19"
+    "adicionado": "2026-11-19",
+    "pdf": "marques/impressao.pdf",
+    "kit": "marques/kit.pdf"
   }
 ]
