@@ -143,6 +143,7 @@ footer{text-align:center;color:#7d7766;font-size:13px;padding:30px 10px;font-fam
   <button data-v="mapa">Mapa</button>
   <button data-v="arquivo">Arquivo</button>
   <button data-v="fotos">Fotos</button>
+  <button data-v="invest">🔎 Investigação</button>
   <button data-v="notas">Anotações</button>
   <button data-v="dicas">Dicas</button>
   <button data-v="acusacao">Acusação</button>
@@ -155,12 +156,13 @@ footer{text-align:center;color:#7d7766;font-size:13px;padding:30px 10px;font-fam
     <h2>Bem-vindos à Delegacia, detetives.</h2>
     <p>Este é um caso arquivado completo, para jogar a dois (ou mais). Vocês receberam o inquérito sobre a morte de <b>Otávio Valmorbida</b>, patriarca de uma vinícola centenária. A família e o advogado querem encerrar como <i>queda acidental</i>. O delegado não acredita nisso, e agora o caso é de vocês.</p>
     <h3>Objetivo</h3>
-    <p>Ao final, vocês vão apresentar a acusação respondendo três perguntas: <b>quem</b> matou Otávio, <b>com o quê</b> e <b>por quê</b>. Cada resposta tem que se sustentar em provas do arquivo.</p>
+    <p>Ao final, vocês vão apresentar a acusação respondendo três perguntas: <b>quem</b> matou Otávio, <b>com o quê</b> e <b>por quê</b>. Há ainda duas perguntas bônus, uma delas sobre <b>quem ajudou a encobrir</b> o crime. Cada resposta tem que se sustentar em provas do arquivo.</p>
     <h3>Como o arquivo funciona</h3>
     <ul>
       <li><b>Etapa 1 — Arquivo inicial:</b> boletim de ocorrência, perícia de local, depoimentos, fotos e o caderno da vítima.</li>
       <li><b>Etapa 2 — Perícia e laudos:</b> fica lacrada até vocês responderem corretamente uma pergunta sobre a Etapa 1.</li>
       <li><b>Etapa 3 — Papéis do escritório:</b> fica lacrada até vocês responderem uma pergunta sobre a Etapa 2.</li>
+      <li><b>Etapa 4 — O cúmplice:</b> a noite não terminou com o crime. Fica lacrada até vocês responderem uma pergunta sobre a Etapa 3.</li>
       <li>Uma resposta errada não tem punição, mas joguem limpo: discutam antes de chutar.</li>
     </ul>
     <h3>Sugestão para jogar em casal</h3>
@@ -169,8 +171,9 @@ footer{text-align:center;color:#7d7766;font-size:13px;padding:30px 10px;font-fam
       <li>Dividam os papéis: um lê os depoimentos fazendo as vozes 🎭, o outro anota no quadro (aba <b>Anotações</b>, que fica salva neste navegador).</li>
       <li>Deixem o <b>Mapa</b> aberto em outra aba ou num segundo aparelho. Ele é essencial.</li>
       <li><b>Modo competitivo:</b> antes de abrir a Acusação, cada um escreve num papel quem acha que é o culpado. Quem acertar mais itens escolhe a próxima pizza.</li>
-      <li>Duração estimada: 2 a 3 horas. Dá para pausar, porque o progresso fica salvo.</li>
+      <li>Duração estimada: 3 a 4 horas. Dá para pausar, porque o progresso fica salvo.</li>
       <li>Se travarem, a aba <b>Dicas</b> tem três dicas progressivas por etapa.</li>
+      <li>Na aba <b>🔎 Investigação</b> vocês têm um <b>quadro</b> para montar com fotos, pessoas e documentos ligados por fios, uma <b>linha do tempo</b> que se ordena sozinha e <b>interrogatórios extras</b>: cada etapa aberta dá 3 fichas para fazer perguntas novas aos suspeitos. Escolham bem quem pressionar.</li>
     </ul>
     <div class="warn">⚠️ Não abram a solução antes de acusar. Ela fica escondida até vocês enviarem a acusação.</div>
     <p class="small">Contexto de época: junho de 1994. Ainda não existe celular popular e a moeda é o Cruzeiro Real, que dá lugar ao Real em 1º de julho. Telefones fixos analógicos funcionam mesmo sem energia elétrica.</p>
@@ -267,6 +270,9 @@ footer{text-align:center;color:#7d7766;font-size:13px;padding:30px 10px;font-fam
   </div>
 </section>
 
+<!-- ============ INVESTIGAÇÃO ============ -->
+<section class="view" id="v-invest"><div id="invest"></div></section>
+
 <!-- ============ DICAS ============ -->
 <section class="view" id="v-dicas">
   <div class="prose">
@@ -281,7 +287,7 @@ footer{text-align:center;color:#7d7766;font-size:13px;padding:30px 10px;font-fam
   <div class="paper accuse">
     <div class="stamp blue">RELATÓRIO FINAL</div>
     <div class="meta">RELATÓRIO FINAL DO INQUÉRITO 1.047/94 · Para: Del. E. Pagliarini</div>
-    <p id="acc-lock" style="font-style:italic">Recomendamos abrir as três etapas do arquivo antes de acusar. Vocês podem acusar a qualquer momento, mas só têm uma chance de ver o resultado com honra. 😉</p>
+    <p id="acc-lock" style="font-style:italic">Recomendamos abrir as quatro etapas do arquivo antes de acusar. Vocês podem acusar a qualquer momento, mas só têm uma chance de ver o resultado com honra. 😉</p>
     <div class="row"><label>1. Quem matou Otávio Valmorbida?</label>
       <select id="a-quem"><option value="">— escolham —</option>
         <option value="helena">Helena Valmorbida</option><option value="rafael">Rafael Valmorbida</option>
@@ -308,6 +314,13 @@ footer{text-align:center;color:#7d7766;font-size:13px;padding:30px 10px;font-fam
         <option value="b">Na sala de degustação, durante o apagão (22h04–22h19)</option>
         <option value="c">Na biblioteca, por volta das 21h45</option>
         <option value="d">Na sala de degustação, por volta das 23h00</option></select></div>
+    <div class="row"><label>5. (Bônus) Alguém ajudou a encobrir o crime depois? Quem, e fazendo o quê?</label>
+      <select id="a-ajuda"><option value="">— escolham —</option>
+        <option value="ninguem">Ninguém: o assassino agiu sozinho do começo ao fim</option>
+        <option value="lucia">Lúcia, lavando a sala de degustação</option>
+        <option value="ivo">Ivo, tentando roubar do escritório os papéis do desvio, durante o truco</option>
+        <option value="rafael">Rafael, escondendo a garrafa nas hortênsias</option>
+        <option value="jeanluc">Jean-Luc, telefonando a Paris para destruir provas</option></select></div>
     <button class="btn" onclick="accuse()">Entregar relatório ao delegado</button>
     <div id="acc-result"></div>
   </div>
@@ -367,7 +380,10 @@ const CHARS=[
   facts:'Fuma cachimbo, tabaco aromático. Casado com Marta, que ficou em Porto Alegre.'},
  {id:'saulo',name:'Dr. Saulo Vieira',age:57,role:'Médico da família',p:{hair:'#2e2e2e',coat:'#5a4632',skin:'#d9ae86'},
   desc:'Cardiologista em Caxias do Sul, cuida de Otávio desde o infarto. Velho companheiro de caça e de truco. Bonachão, mas na noite da festa estava preocupado com um paciente internado em estado grave.',
-  facts:'Prescreveu o antiarrítmico de Otávio. Dormiria no quarto de hóspedes.'}
+  facts:'Prescreveu o antiarrítmico de Otávio. Dormiria no quarto de hóspedes.'},
+ {id:'ivo',name:'Ivo Carvalho',age:48,role:'Motorista do Dr. Augusto',p:{},
+  desc:'Ex-caminhoneiro, irmão de Marta, a esposa do Dr. Augusto. Trouxe o doutor de Porto Alegre no Opala e passou a festa do lado de fora, "esperando no carro". Calado e desconfiado. Tem uma passagem pela polícia em 1987, por receptação.',
+  facts:"Calça 42. Usa botas de borracha no inverno. Não entrou na casa, segundo ele mesmo."}
 ];
 const WIT=[
  ['Dorival Zanella','Vigia noturno','Faz a ronda da propriedade desde 1977. A guarita fica junto ao portão, com vista para a varanda e para o jardim leste.'],
@@ -403,7 +419,9 @@ const MPINS=[
  ['garrafa',802,372,2,'alvo','Garrafa nº 001','Encontrada pelo jardineiro Tonico às 9h de 26/06, entre as hortênsias, logo abaixo da janela leste.'],
  ['luminol',725,420,2,'luminol','Luminol junto à lareira','Reação positiva intensa (~1,2 m²) junto à lareira, com trilha até a porta do corredor. O piso foi lavado.'],
  ['lareira',740,432,2,'fogo','Lareira da sala de degustação','Nas cinzas, restos de linho branco com um "V" bordado em azul: a toalha da mesa de degustação.'],
- ['escritorio',195,255,3,'doc','Escritório · gaveta','Onde estavam a carta da auditoria, as autorizações de pagamento e o fax da Junta Comercial.']
+ ['janoeste',38,150,4,'janela','Janela oeste do escritório','Trinco forçado por fora com chave de fenda de 6 mm. Barro de bota no parapeito. Dá para o pátio de terra onde estava estacionado o Opala.'],
+ ['opala',15,250,4,'pessoa','Pátio · Opala do Dr. Augusto','Onde Ivo diz ter passado a noite. Às 22h35 Brandão veio até aqui "buscar o cachimbo".'],
+ ['escritorio',195,255,3,'doc','Escritório · gaveta','Gaveta de baixo da escrivaninha, onde Otávio guardava a pasta azul "Fornecedores" até a quinta-feira, quando a levou para o quarto.']
 ];
 function mpIcon(k){const c=(f,t)=>`<circle r="11" fill="${f}" stroke="#fff" stroke-width="1.5"/><text y="4.5" text-anchor="middle" font-size="12" fill="#fff">${t}</text>`;
  return {x:`<path d="M-10 -10 L10 10 M10 -10 L-10 10" stroke="#9b2226" stroke-width="5" stroke-linecap="round"/>`,trilha:c('#9b2226','⇅'),raio:c('#b8860b','⚡'),tel:c('#2b4a7a','☎'),garrafa:c('#2f5a3a','◫'),janela:c('#3f6585','▭'),porta:c('#9b2226','⇆'),pessoa:c('#55606d','●'),cigarro:c('#7a4a1a','~'),olho:c('#6b2f7a','👁'),alvo:c('#9b2226','◉'),luminol:c('#1f78c8','✦'),fogo:c('#c0561a','♨'),doc:c('#6d6250','✉')}[k]||c('#555','•');}
@@ -505,6 +523,12 @@ const PH={
  F10:{stage:2,r:'1deg',cap:'IML · o ferimento',svg:'',
   back:'Necropsia 312/94. Ferimento contuso em forma de arco na cabeça, com fragmentos de vidro verde-escuro e partículas de cera vermelha presos no couro cabeludo.',
   tech:'IML Caxias do Sul · Dr. Plínio Garbin · foto 04. O arco tem cerca de 9 cm de diâmetro.'},
+ F11:{stage:4,r:'1.5deg',cap:'Escritório · gaveta forçada',svg:'',
+  back:'A gaveta de baixo da escrivaninha, forçada com chave de fenda. Ao lado, a janela oeste aberta, com barro no parapeito.',
+  tech:'Perita I. Sartori · 28/06/94 · marcas de ponta chata de 6 mm.'},
+ F12:{stage:4,r:'-2deg',cap:'Busca no Opala',svg:'',
+  back:'Sob o banco do passageiro do Opala do Dr. Augusto: luvas úmidas, chave de fenda, lanterna e um bilhete dobrado.',
+  tech:'Auto de apreensão · 29/06/94 · placa IAB-5512.'},
  F6:{stage:2,r:'2deg',cap:'Garrafa nº 001 nas hortênsias',svg:`<svg viewBox="0 0 300 220"><rect width="300" height="220" fill="#5a6a3a"/>${Array.from({length:14},(_,i)=>`<circle cx="${(i*53)%300}" cy="${(i*37)%220}" r="${28+(i%3)*8}" fill="${i%2?'#7f93c4':'#9aaedc'}" opacity=".85"/>`).join('')}<g transform="rotate(-28 150 120)"><rect x="110" y="104" width="90" height="32" rx="10" fill="#1d3a22"/><path d="M200 108 L222 112 L216 120 L224 128 L200 132Z" fill="#1d3a22"/><rect x="128" y="106" width="30" height="28" fill="#efe6cc"/><path d="M112 112 q-6 8 0 16" stroke="#6a1a1a" stroke-width="5" fill="none"/></g><text x="10" y="210" font-family="Special Elite" font-size="11" fill="#fff">IGP · FOTO 11 · 26/06 09h20</text></svg>`,
   back:'Encontrada pelo jardineiro Tonico, às 9h, entre as hortênsias, logo abaixo da janela da sala de degustação. Vidro lascado e cacos verdes espalhados no canteiro.',
   tech:'Perito: "Manchas escuras na base da garrafa. Recolhida para exame. A janela fica a uns 2 m acima do canteiro."'},
@@ -541,7 +565,7 @@ doc(1,'bo','Ocorrência','Boletim de Ocorrência nº 1.047/94','DP Bento Gonçal
 <p>O relógio de pulso da vítima estava danificado e parado às 23h12.</p>
 <p>O Dr. Augusto Brandão, advogado da família, pediu que a remoção fosse feita "com discrição" e declarou à guarnição que "o Otávio era cardíaco e tinha bebido; foi uma fatalidade".</p>
 <p>Local preservado. Acionada a perícia, que chegou às 00h35.</p>
-<p>Presentes na casa: Helena Valmorbida, Rafael Valmorbida, Lúcia Ferraz, Jean-Luc Moreau, Dr. Augusto C. Brandão, Dr. Saulo Vieira, Zilá Bortolini (cozinheira), Nei Gasparin (fotógrafo). Na guarita: Dorival Zanella (vigia).</p>
+<p>Presentes na casa: Helena Valmorbida, Rafael Valmorbida, Lúcia Ferraz, Jean-Luc Moreau, Dr. Augusto C. Brandão, Dr. Saulo Vieira, Zilá Bortolini (cozinheira), Nei Gasparin (fotógrafo). Na guarita: Dorival Zanella (vigia). No pátio, junto ao carro do Dr. Brandão: Ivo Carvalho (motorista).</p>
 <p>Escrivão: <span class="sig">R. Tessaro</span></p></div>`);
 
 doc(1,'local','Perícia','Relatório de Local (preliminar)','Perita Ivone Sartori · 26/06 03h10',`<div class="paper typed"><div class="stamp blue">PERÍCIA</div>
@@ -624,6 +648,13 @@ doc(1,'d-dorival','Depoimentos','Dorival Zanella (vigia)','testemunha',dep('DORI
 <p>Na varanda tinha um dos senhores fumando. Eu via a brasa do cigarro, e ele resmungava numa língua estrangeira. Ficou lá até a luz voltar.</p>
 <p>Lá pelas 22h11 vi uma chama de isqueiro na janela da sala das garrafas, do lado leste. A janela abriu e alguma coisa caiu nas hortênsias. Pensei que fosse o gato da Lúcia pulando e não fui ver. Hoje me arrependo.</p>
 <p>Depois das onze o moço Rafael ficou na varanda bebendo. Às vezes entrava e voltava.</p>`));
+
+doc(1,'d-ivo','Depoimentos','Ivo Carvalho (motorista)','26/06/1994',dep('IVO CARVALHO','48 anos, motorista','26/06/1994, 05h10',`
+<p>Sou motorista do Dr. Augusto, que é casado com a minha irmã, a Marta. Trouxe ele de Porto Alegre de tarde.</p>
+<p>Passei a noite no carro, no pátio, ouvindo rádio e cochilando. Festa de rico não é lugar pra mim. Não entrei na casa nenhuma vez.</p>
+<p>Quando a luz da casa apagou eu vi, porque o pátio ficou escuro. Não liguei. Lá pelas dez e pouco vi uma luzinha se mexendo numa janela do lado das flores. Pensei que fosse alguém procurando vela.</p>
+<p>Só soube da morte quando a moça gritou, perto da meia-noite.</p>
+<p>Perguntado se viu alguém sair da casa durante a festa, respondeu: "Não vi ninguém. Tava escuro e eu tava cochilando."</p>`));
 
 doc(1,'d-zila','Depoimentos','Zilá Bortolini (cozinheira)','testemunha',dep('ZILÁ BORTOLINI','47 anos, cozinheira','26/06/1994, 04h20',`
 <p>Fiquei a noite inteira na cozinha com a dona Lúcia. Quando faltou luz acendemos as velas.</p>
@@ -719,7 +750,7 @@ doc(2,'d-nei','Depoimentos','Nei Gasparin (fotógrafo)','testemunha',dep('NEI GA
 <p>Às 23h05 fotografei o truco. Reparei que o Dr. Augusto estava de cardigã, e no jantar ele estava de paletó azul-marinho. Achei estranho, porque a sala de estar estava quentinha com a lareira acesa. Ele também lavava as mãos toda hora, foi duas vezes ao lavabo durante o jogo.</p>`));
 
 /* ---------- ETAPA 3 ---------- */
-doc(3,'auditoria','Papéis do escritório','Carta da auditoria Lacombe & Associés','17/06/1994 · encontrada na gaveta de Otávio',`<div class="paper typed"><div class="stamp">CONFIDENCIAL</div>
+doc(3,'auditoria','Papéis do escritório','Carta da auditoria Lacombe & Associés','17/06/1994 · gaveta do quarto de Otávio',`<div class="paper typed"><div class="stamp">CONFIDENCIAL</div>
 <div class="meta">LACOMBE &amp; ASSOCIÉS · Auditores Independentes · Paris · São Paulo · São Paulo, 17 de junho de 1994</div>
 <p>Ao Sr. Otávio Valmorbida<br>Vinícola Valmorbida Ltda.</p>
 <p>Ref.: Due diligence, aquisição pela Maison Delacroix S.A.</p>
@@ -805,18 +836,107 @@ doc(3,'bilhete','Papéis do escritório','Bilhete de Helena ao pai','22/06/1994 
 <span class="margin-note" style="color:#7a1a1a">(no verso, letra de Otávio:) "Não vou vender, filha. Ia te contar no brinde."</span>
 </div>`);
 
+
+/* ---------- ETAPA 4: O CÚMPLICE ---------- */
+doc(4,'vist-esc','O escritório','Vistoria complementar · escritório','Perita Ivone Sartori · 28/06',`<div class="paper typed"><div class="stamp blue">PERÍCIA</div>
+<div class="meta">DEPARTAMENTO DE CRIMINALÍSTICA · VISTORIA COMPLEMENTAR · ESCRITÓRIO DA CASA PRINCIPAL · 28/06/1994</div>
+<p>Vistoria pedida depois que a governanta notou "a gaveta de baixo da escrivaninha emperrada" ao arrumar o escritório na segunda-feira.</p>
+<h3>1. ESCRIVANINHA</h3>
+<p>A gaveta inferior direita foi <b>forçada</b>. A fechadura está lascada, com marcas de uma ferramenta de ponta chata de <b>6 mm</b>, como uma chave de fenda. Os papéis da gaveta estão revirados. Segundo a governanta, era ali que o Sr. Otávio guardava a <b>pasta azul "Fornecedores"</b>, mas na quinta-feira (23/06) ele a levou para o quarto, no 2º piso, onde a polícia a apreendeu depois.</p>
+<h3>2. JANELA OESTE</h3>
+<p>O trinco da janela que dá para o pátio de terra foi <b>forçado por fora</b>, com a mesma ponta de 6 mm. No parapeito interno há <b>barro seco</b> com marca parcial de solado de borracha com ranhuras em zigue-zague, tamanho estimado 41–42.</p>
+<h3>3. CONCLUSÃO</h3>
+<p>Alguém entrou pelo pátio, forçou a janela e a gaveta e procurou algo específico. Não há sinal de que tenha levado objetos de valor (há um relógio de ouro e dinheiro em outra gaveta, intactos).</p>
+<p><span class="sig">Ivone Sartori</span></p></div>`);
+
+doc(4,'papilo','O escritório','Laudo papiloscópico · janela e gaveta','IGP · 29/06',`<div class="paper typed"><div class="stamp">LAUDO</div>
+<div class="meta">INSTITUTO DE IDENTIFICAÇÃO · LAUDO PAPILOSCÓPICO Nº 88/94 · 29/06/1994</div>
+<p><b>Material:</b> fragmentos revelados no batente externo da janela oeste do escritório e na frente da gaveta forçada.</p>
+<table><tr><th>Local</th><th>Resultado</th></tr>
+<tr><td>Batente externo da janela</td><td>Polegar e indicador direitos, identificados no arquivo criminal: <b>IVO CARVALHO</b> (prontuário RS-1987/4471, receptação).</td></tr>
+<tr><td>Frente da gaveta</td><td>Palma parcial, mesma pessoa. Demais áreas com marcas de luva.</td></tr>
+<tr><td>Garrafa nº 001 (reexame)</td><td>Nenhuma impressão de Ivo Carvalho.</td></tr>
+<tr><td>Sala de degustação, interruptores e porta interna</td><td>Nenhuma impressão de Ivo Carvalho.</td></tr></table>
+<span class="margin-note">O motorista entrou no escritório. Mas não há nada dele na cena do crime. — Pagliarini</span></div>`);
+
+doc(4,'d-dorival2','Depoimentos','Dorival Zanella (complementar)','vigia · 28/06',dep('DORIVAL ZANELLA','63 anos, vigia noturno (depoimento complementar)','28/06/1994',`
+<p>Peço desculpa ao doutor delegado. Na primeira vez eu não contei tudo, com medo de perder o emprego, porque é proibido receber visita na guarita.</p>
+<p>O motorista do Dr. Augusto, o seu Ivo, passou a noite comigo na guarita, tomando chimarrão e ouvindo rádio, das nove e meia até umas dez e meia. Quando a luz da casa caiu, às 22h04, ele estava sentado do meu lado. Ele também viu a chama na janela das garrafas às 22h11. Disse: "o pessoal deve estar procurando vela."</p>
+<p>Lá pelas dez e trinta e cinco o Dr. Augusto veio até o portão e chamou o seu Ivo. Disse que ia "buscar o cachimbo no carro". Os dois conversaram baixinho perto do Opala uns cinco minutos. Depois o doutor voltou para a casa e o seu Ivo foi para o carro.</p>
+<p>Lá pelas onze horas vi uma lanterna atravessando o pátio de terra para o lado oeste da casa, o lado do escritório. Não fui ver. Uns quinze minutos depois a lanterna voltou para o carro.</p>`,'<div class="stamp blue">RETIFICA DEPOIMENTO</div>'));
+
+doc(4,'carro-ivo','Busca no carro','Busca no Opala do Dr. Augusto','29/06/1994',`<div class="paper typed"><div class="stamp">APREENSÃO</div>
+<div class="meta">AUTO DE BUSCA E APREENSÃO · GM Opala Diplomata azul-escuro, placa IAB-5512, registrado em nome de Augusto C. Brandão, conduzido por Ivo Carvalho · 29/06/1994</div>
+<p>Sob o banco do passageiro (foto F12):</p>
+<ol><li>Um par de <b>luvas de couro</b> ainda úmidas, com barro avermelhado nos dedos.</li>
+<li>Uma <b>chave de fenda</b> de ponta chata de <b>6 mm</b>, com lascas de verniz escuro na ponta, compatíveis com o verniz da escrivaninha.</li>
+<li>Uma lanterna de pilha.</li>
+<li>Um <b>bilhete manuscrito</b> em papel timbrado "Vinícola Valmorbida", dobrado em quatro (ver documento).</li></ol>
+<p>No porta-malas, um par de botas de borracha com solado em zigue-zague, tamanho 42, com barro igual ao do parapeito.</p></div>`);
+
+doc(4,'bilhete-ivo','Busca no carro','Bilhete encontrado no Opala','manuscrito',`<div class="paper hand" style="max-width:540px">
+<p>Ivo —</p>
+<p>Às 23h, durante o truco. Janela do escritório, lado do pátio.</p>
+<p>Escrivaninha, gaveta de baixo, pasta <u>azul</u> "Fornecedores". Tudo o que tiver "Serra Alta" ou "Lacombe".</p>
+<p>Traga para o carro. Não acenda luz.</p>
+<p>Se não achar, <u>nada aconteceu</u>.</p>
+<p style="text-align:right">— A.</p>
+<span class="margin-note" style="color:#7a1a1a">Papel timbrado da vinícola, do bloco que fica sobre a mesa da biblioteca. — I.S.</span></div>`);
+
+doc(4,'grafo-bilhete','Busca no carro','Exame grafotécnico do bilhete','IGP · 30/06',`<div class="paper typed"><div class="stamp blue">LAUDO</div>
+<div class="meta">INSTITUTO DE CRIMINALÍSTICA · DOCUMENTOSCOPIA · 30/06/1994</div>
+<p><b>Questionado:</b> bilhete assinado "A.", apreendido no Opala.</p>
+<p><b>Padrões:</b> as 61 assinaturas "p.p. A. C. Brandão" das autorizações de pagamento e anotações de próprio punho do Dr. Augusto C. Brandão em processos do Fórum de Porto Alegre.</p>
+<p><b>Resultado:</b> convergências em inclinação, ataques e finais de traço, no "A" maiúsculo com laçada e no "z" cortado. <b>A autoria do Dr. Augusto Carvalho Brandão é altamente provável.</b></p>
+<p>O papel vem do bloco timbrado da <b>biblioteca</b>. A folha imediatamente abaixo, que ficou no bloco, tem o sulco da escrita, legível sob luz rasante.</p></div>`);
+
+doc(4,'d-ivo2','Depoimentos','Ivo Carvalho (2º)','28/06 · após a busca',dep('IVO CARVALHO','48 anos, motorista (2º depoimento, assistido por defensor)','30/06/1994',`
+<p>Tá bom. Eu entrei no escritório. Mas eu não matei ninguém. Eu tava com o Dorival quando a luz caiu, ele mesmo disse.</p>
+<p>Lá pelas dez e meia o Augusto veio no carro, dizendo que ia pegar o cachimbo. Tava branco feito cera e com as mãos cheirando a sabão. Me deu o bilhete e disse: "O velho tem uns papéis da tanoaria que podem botar a Marta na cadeia. Vai lá durante o truco que eu seguro todo mundo na sala." Eu fui. Forcei a janela, forcei a gaveta e não tinha pasta azul nenhuma. Voltei pro carro e fiquei quieto.</p>
+<p>Sobre a tanoaria: eu sou sócio de papel. Assinei o que a Marta mandou em 1989. Nunca vi barrica nenhuma. O Augusto me dava "uma ajuda" todo mês. Eu sabia que era rolo, mas não sabia que era tanto.</p>
+<p>Perguntado se sabia da morte de Otávio quando foi ao escritório: "Juro que não. Só fiquei sabendo à meia-noite, quando a mulher gritou. Aí entendi tudo e fiquei com medo dele."</p>
+<p>Perguntado por que não contou antes: "Porque eu tenho ficha. Quem ia acreditar em mim?"</p>`));
+
+doc(4,'extrato-tan','A tanoaria','Extrato bancário · Tanoaria Serra Alta','Banrisul · requisição judicial',`<div class="paper telex">
+<div class="meta" style="font-family:'IBM Plex Mono'">BANRISUL · AG. 0318 PORTO ALEGRE-CENTRO · C/C 06.114.882-0 · TANOARIA SERRA ALTA LTDA · EXTRATO RESUMIDO 1993–1994 (valores em CR$ mil)</div>
+<table style="font-family:'IBM Plex Mono';font-size:12.5px"><tr><th>DATA</th><th>HISTÓRICO</th><th>CRÉDITO</th><th>DÉBITO</th></tr>
+<tr><td>11/03/93</td><td>TED VINICOLA VALMORBIDA LTDA</td><td>2.400</td><td></td></tr>
+<tr><td>12/03/93</td><td>TRANSF. M. C. BRANDAO</td><td></td><td>2.150</td></tr>
+<tr><td>12/03/93</td><td>SAQUE AVULSO · I. CARVALHO</td><td></td><td>120</td></tr>
+<tr><td>09/11/93</td><td>TED VINICOLA VALMORBIDA LTDA</td><td>31.000</td><td></td></tr>
+<tr><td>10/11/93</td><td>TRANSF. M. C. BRANDAO</td><td></td><td>29.500</td></tr>
+<tr><td>22/02/94</td><td>TED VINICOLA VALMORBIDA LTDA</td><td>486.000</td><td></td></tr>
+<tr><td>23/02/94</td><td>TRANSF. M. C. BRANDAO</td><td></td><td>470.000</td></tr>
+<tr><td>24/06/94</td><td>TRANSF. M. C. BRANDAO</td><td></td><td><b>SALDO TOTAL</b></td></tr></table>
+<p>Nenhum pagamento a fornecedores de madeira, nenhum funcionário, nenhum imposto.</p>
+<span class="margin-note">24/06, véspera da festa: a conta foi zerada. Quem sabia que o cerco estava fechando? — Pagliarini</span></div>`);
+
+doc(4,'bloco','A tanoaria','Folha de baixo do bloco da biblioteca','luz rasante · 30/06',`<div class="paper hand" style="background:#f3efe2;background-image:none;color:#6b6352">
+<p style="font-family:'Special Elite';font-size:13px;color:#2a241c">LEITURA SOB LUZ RASANTE (sulcos de escrita na folha seguinte do bloco timbrado da biblioteca):</p>
+<p>Ivo — Às 23h, durante o truco. Janela do escritório...</p>
+<p style="margin-top:22px">...e, mais abaixo, em outra pressão de caneta, um rascunho riscado:</p>
+<p><span class="strike">Otávio, posso explicar tudo. Me dá até segunda.</span></p>
+<p><span class="strike">22h — degustação</span></p>
+<span class="margin-note" style="color:#7a1a1a">Ele preparou o que ia dizer ao Otávio antes do encontro. E escreveu o bilhete para o Ivo no mesmo bloco, na mesma noite, na biblioteca. — Pagliarini</span></div>`);
+
+doc(4,'d-nei2','Depoimentos','Nei Gasparin (complementar)','fotógrafo · 29/06',dep('NEI GASPARIN','34 anos, fotógrafo (complementar)','29/06/1994',`
+<p>Revendo os negativos achei uma coisa. No negativo 17, das 22h48, o truco ainda está começando, e pela janela da sala de estar dá para ver o pátio. Tem um vulto perto do Opala com uma lanterna apagada na mão.</p>
+<p>E no negativo 21, das 23h20, o Dr. Augusto está olhando para o relógio de pulso. Lembro que ele perguntou duas vezes "que horas são?" durante o jogo. Achei engraçado, porque ele estava de relógio.</p>`));
+
 /* ===================== ARCHIVE RENDER ===================== */
 const GATES={
  2:{q:'Para abrir a Etapa 2, respondam: em que cômodo Otávio realmente foi atacado?',opts:['','Escada da adega','Biblioteca','Sala de degustação','Sala de estar','Escritório','Cozinha'],a:'Sala de degustação',
     bad:'Não. Releiam o caderno de Otávio, o depoimento de Jean-Luc e o relatório da perita, e olhem a foto da passadeira.'},
  3:{q:'Para abrir a Etapa 3, respondam: quando Otávio morreu?',opts:['','Entre 21h30 e 21h50','Durante o apagão, entre 22h04 e 22h19','Entre 22h45 e 23h12','Às 23h12, como marca o relógio','Entre 23h12 e 23h40'],a:'Durante o apagão, entre 22h04 e 22h19',
-    bad:'Não. Comparem a digestão do sagu com o horário em que ele repetiu a sobremesa, vejam o que o laboratório diz do relógio e lembrem do baque que Zilá ouviu.'}
+    bad:'Não. Comparem a digestão do sagu com o horário em que ele repetiu a sobremesa, vejam o que o laboratório diz do relógio e lembrem do baque que Zilá ouviu.'},
+ 4:{q:'Para abrir a Etapa 4, respondam: em nome de quem estava a Tanoaria Serra Alta?',opts:['','Otávio e Helena Valmorbida','Marta Carvalho Brandão e Ivo Carvalho','Augusto Brandão e Jean-Luc Moreau','Rafael Valmorbida e N. Albuquerque','Lúcia Ferraz e Dorival Zanella'],a:'Marta Carvalho Brandão e Ivo Carvalho',
+    bad:'Não. Leiam com atenção o fax da Junta Comercial.'}
 };
 let current=null;
 function renderList(){
   const L=document.getElementById('doclist');let h='';
-  const names={1:'Etapa 1 · Arquivo inicial',2:'Etapa 2 · Perícia e laudos',3:'Etapa 3 · Papéis do escritório'};
-  for(let st=1;st<=3;st++){
+  const names={1:'Etapa 1 · Arquivo inicial',2:'Etapa 2 · Perícia e laudos',3:'Etapa 3 · Papéis do escritório',4:'Etapa 4 · O cúmplice'};
+  for(let st=1;st<=4;st++){
     h+=`<div class="stage-h">${names[st]}</div>`;
     if(st>S.stage){
       if(st===S.stage+1){const g=GATES[st];h+=`<div class="locked gate"><div class="lockt">🔒 Envelope lacrado</div><p style="margin:6px 0">${g.q}</p><select id="gate${st}">${g.opts.map(o=>`<option>${o}</option>`).join('')}</select><button class="btn" onclick="tryGate(${st})">Romper o lacre</button><div class="feedback" id="fb${st}"></div></div>`;}
@@ -839,7 +959,7 @@ function openDoc(id){
 function tryGate(st){
   const v=document.getElementById('gate'+st).value,fb=document.getElementById('fb'+st),g=GATES[st];
   if(v===g.a){S.stage=st;save();renderList();renderPhotos();renderHints();renderMap();
-    document.getElementById('docview').innerHTML=`<div class="paper typed"><div class="stamp">LIBERADO</div><h2>Etapa ${st} aberta</h2><p>${st===2?'Correto: Otávio foi atacado na <b>sala de degustação</b> e arrastado até a escada. Os laudos chegaram do laboratório. Também há novas fotos na aba Fotos.':'Correto: Otávio morreu <b>durante o apagão</b>, e o relógio foi adulterado para indicar 23h12. Vocês receberam os papéis apreendidos no escritório de Otávio e com os suspeitos. Agora é com vocês.'}</p></div>`;}
+    document.getElementById('docview').innerHTML=`<div class="paper typed"><div class="stamp">LIBERADO</div><h2>Etapa ${st} aberta</h2><p>${st===4?'Correto: a tanoaria estava em nome de <b>Marta Carvalho Brandão</b>, a esposa do Dr. Augusto, e de <b>Ivo Carvalho</b>, o irmão dela, que é o motorista que passou a noite no pátio. A perícia voltou à casa e ao carro. A noite de 25 de junho ainda tinha uma parte escondida.':st===2?'Correto: Otávio foi atacado na <b>sala de degustação</b> e arrastado até a escada. Os laudos chegaram do laboratório. Também há novas fotos na aba Fotos.':'Correto: Otávio morreu <b>durante o apagão</b>, e o relógio foi adulterado para indicar 23h12. Vocês receberam os papéis apreendidos no escritório de Otávio e com os suspeitos. Agora é com vocês.'}</p></div>`;}
   else{fb.className='feedback bad';fb.textContent=v?g.bad:'Escolham uma resposta.';}
 }
 
@@ -850,21 +970,22 @@ document.querySelectorAll('textarea[data-note]').forEach(t=>{t.value=S.notes[t.d
 /* ===================== HINTS ===================== */
 const HINTS={1:['O caderno de Otávio marca um encontro num horário e num lugar. Jean-Luc viu alguma coisa nesse horário.','A perita estranhou a quantidade de sangue no pé da escada. Se ele tivesse caído ali, onde estaria o resto do sangue?','Vejam a foto F4 e o mapa: as trilhas de arrasto começam diante de qual porta? A resposta da Etapa 1 é a sala de degustação.'],
  2:['O legista diz quanto tempo depois de comer ele morreu. Lúcia diz a que horas ele repetiu o sagu.','Relógio com a coroa puxada não para sozinho numa queda. Quem fez questão de estar acompanhado às 23h12, e quem ficou sozinho nessa hora?','Zilá ouviu o baque do corpo na escada enquanto Rafael estava parado ao lado dela, na cozinha. O vigia viu algo ser jogado pela janela às 22h11. A resposta da Etapa 2 é: durante o apagão.'],
+ 4:['A gaveta foi forçada às 23h, durante o truco. Quem estava na sala de estar nessa hora não pode ter sido. Quem estava lá fora?','O vigia mudou a versão. Onde Ivo estava às 22h04–22h19? E às 23h?','O bilhete é do Dr. Augusto e manda buscar a pasta "durante o truco". Ivo é o cúmplice que tentou sumir com as provas, não o assassino: ele estava na guarita na hora do crime.'],
  3:['Há dois "doutores" na casa. Confiram no extrato telefônico quem estava mesmo ao telefone durante o apagão, e de qual linha cada um poderia ter ligado.','Quem é Marta? Releiam os depoimentos da Etapa 1 e procurem esse nome.','Comparem a foto F1 (20h30) com a F7 (23h05). Quem trocou de roupa, e por quê? Depois leiam a ordem da lavanderia.']};
 function renderHints(){
-  document.getElementById('hints').innerHTML=[1,2,3].map(st=>`<div class="hint"><h4>ETAPA ${st}${st>S.stage?' · 🔒 abram a etapa primeiro':''}</h4>${st<=S.stage?HINTS[st].map((h,i)=>{const k=st+'-'+i;return `<button class="btn ghost" style="color:#e9e2cf;margin:4px 4px 0 0" onclick="showHint('${k}')">Dica ${i+1}</button><div class="h ${S.hints[k]?'show':''}" id="h${k}">${h}</div>`}).join(''):''}</div>`).join('');
+  document.getElementById('hints').innerHTML=[1,2,3,4].map(st=>`<div class="hint"><h4>ETAPA ${st}${st>S.stage?' · 🔒 abram a etapa primeiro':''}</h4>${st<=S.stage?HINTS[st].map((h,i)=>{const k=st+'-'+i;return `<button class="btn ghost" style="color:#e9e2cf;margin:4px 4px 0 0" onclick="showHint('${k}')">Dica ${i+1}</button><div class="h ${S.hints[k]?'show':''}" id="h${k}">${h}</div>`}).join(''):''}</div>`).join('');
 }
 function showHint(k){S.hints[k]=1;save();document.getElementById('h'+k).classList.add('show');}
 
 /* ===================== ACCUSATION ===================== */
 function accuse(){
-  const q=document.getElementById('a-quem').value,a=document.getElementById('a-arma').value,m=document.getElementById('a-motivo').value,w=document.getElementById('a-quando').value;
+  const q=document.getElementById('a-quem').value,a=document.getElementById('a-arma').value,m=document.getElementById('a-motivo').value,w=document.getElementById('a-quando').value,x=document.getElementById('a-ajuda').value;
   const R=document.getElementById('acc-result');
   if(!q||!a||!m){R.innerHTML='<div class="result">O delegado quer as três respostas: quem, com o quê e por quê.</div>';return;}
-  const ok=[q==='brandao',a==='garrafa',m==='desvio',w==='b'];
-  const pts=ok.slice(0,3).filter(Boolean).length+(ok[3]?0.5:0);
+  const ok=[q==='brandao',a==='garrafa',m==='desvio',w==='b',x==='ivo'];
+  const pts=ok.slice(0,3).filter(Boolean).length+(ok[3]?0.5:0)+(ok[4]?0.5:0);
   const verdict=ok[0]&&ok[1]&&ok[2]?'🏆 CASO RESOLVIDO. O delegado Pagliarini fecha a pasta, acende um palheiro e diz: "Eu sabia que tinha sangue de menos naquela escada."':ok[0]?'✔️ Culpado certo, mas a acusação tem furos. A defesa do Dr. Brandão vai explorar cada um deles.':'❌ A pessoa errada foi acusada. O verdadeiro culpado continua tomando vinho na Serra… Leiam a solução.';
-  R.innerHTML=`<div class="result">Quem: ${ok[0]?'✔️':'✖️'} · Arma: ${ok[1]?'✔️':'✖️'} · Motivo: ${ok[2]?'✔️':'✖️'} · Bônus local/hora: ${ok[3]?'✔️':'✖️'}<br><br>Pontuação: ${pts} / 3,5<br><br>${verdict}</div><p><button class="btn" onclick="showSolution()">Ler a solução completa</button></p>`;
+  R.innerHTML=`<div class="result">Quem: ${ok[0]?'✔️':'✖️'} · Arma: ${ok[1]?'✔️':'✖️'} · Motivo: ${ok[2]?'✔️':'✖️'} · Bônus local/hora: ${ok[3]?'✔️':'✖️'} · Bônus cúmplice: ${ok[4]?'✔️':'✖️'}<br><br>Pontuação: ${pts} / 4<br><br>${verdict}</div><p><button class="btn" onclick="showSolution()">Ler a solução completa</button></p>`;
 }
 function showSolution(){const s=document.getElementById('solution');s.style.display='block';s.innerHTML=SOLUTION;s.scrollIntoView({behavior:'smooth'});}
 const SOLUTION=`
@@ -887,10 +1008,14 @@ const SOLUTION=`
 <div><b>~22h11</b> De volta à sala, acende o isqueiro do cachimbo, abre a janela leste e joga a garrafa nas hortênsias. É a chama que o vigia Dorival vê.</div>
 <div><b>22h11–22h19</b> Lava o piso com a água do balde de gelo, enxuga com a toalha de linho e queima a toalha na lareira acesa. Volta para a biblioteca pela porta interna. O cheiro de cachimbo fica no corredor, e Rafael o sente ao passar perto da porta da biblioteca.</div>
 <div><b>22h19</b> Rafael religa o disjuntor.</div>
+<div><b>22h35</b> Brandão vai ao portão "buscar o cachimbo no carro" e entrega a Ivo, o cunhado e sócio de papel da tanoaria, um bilhete escrito no bloco da biblioteca: buscar no escritório a pasta azul com os papéis da Serra Alta durante o truco.</div>
 <div><b>22h40</b> Brandão, que detesta cartas, <b>insiste no truco</b> para ter testemunhas às 23h12. Antes troca o paletó manchado por um <b>cardigã</b>, com a desculpa do frio numa sala aquecida pela lareira. Durante o jogo vai lavar as mãos duas vezes.</div>
 <div><b>Domingo</b> Pede a Lúcia que mande o paletó à lavanderia, com "mancha de vinho". A lavanderia identifica sangue. Ao mesmo tempo ele pressiona delegado e prefeito para encerrar o caso como acidente.</div>
 </div>
 
+<div class="timeline"><div><b>~23h00</b> Enquanto Brandão segura todo mundo no truco (e pergunta as horas duas vezes), Ivo atravessa o pátio com a lanterna, força a janela oeste e a gaveta do escritório com uma chave de fenda. A pasta não está lá: Otávio a tinha levado para o quarto na quinta-feira. Ivo volta para o carro de mãos vazias.</div></div>
+<h3>O cúmplice: Ivo Carvalho</h3>
+<p>Ivo <b>não matou</b> Otávio: das 21h30 às 22h30 estava na guarita com Dorival, que só admitiu isso depois (visita é proibida). Mas foi <b>cúmplice no encobrimento</b>: sócio de fachada da tanoaria desde 1989, recebia uma "ajuda" mensal e aceitou invadir o escritório para sumir com as provas do desvio. As digitais na janela e na gaveta, a chave de fenda de 6 mm, as botas com barro e o bilhete de próprio punho de Brandão provam isso. O sulco do bilhete no bloco da biblioteca ainda mostra o rascunho do que Brandão pretendia dizer a Otávio às 22h.</p>
 <h3>As provas que o condenam</h3>
 <ol>
 <li><b>O álibi telefônico é falso.</b> Ele disse que falou com Marta por vinte minutos durante o apagão. O extrato da Linha 1, a única com ramal na biblioteca, mostra uma ligação para a casa dele às 21h41, de <b>3 minutos</b>, e nada durante o apagão.</li>
@@ -910,12 +1035,13 @@ const SOLUTION=`
 <li><b>Helena</b> tinha motivo aparente, já que era contra a venda. Mas Otávio já tinha desistido de vender ("Venda SUSPENSA", e o verso do bilhete). E das 22h08 às 22h25 ela estava na cantina, a 80 m, vista pelo vigia.</li>
 <li><b>Jean-Luc</b> recebeu o telex ameaçador. Mas com Otávio morto a venda ficaria mais difícil, porque Helena (45%) nunca venderia. Durante o apagão o vigia viu a brasa do cigarro dele na varanda e o ouviu resmungar em francês. E ele não conhecia a casa nem o quadro escondido.</li>
 <li><b>Lúcia</b> herdaria 10% e a Casa do Vale, mas passou a noite toda com Zilá na cozinha. Foi a testemunha que abriu o caso.</li>
+<li><b>Ivo</b> parecia o assassino perfeito, com ficha criminal, motivo (a tanoaria também estava em nome dele) e invasão do escritório. Mas na hora do crime estava na guarita com o vigia, e não há nenhuma impressão dele na sala de degustação nem na garrafa.</li>
 <li><b>Dr. Saulo</b> era o "outro doutor", a ambiguidade de propósito. Estava ao telefone com Caxias das 22h06 às 22h17, comprovado pelo extrato e pela enfermeira.</li>
 <li><b>As armas falsas:</b> o atiçador tinha fuligem intacta e os castiçais deram luminol negativo. A tese da queda acidental cai porque as lesões da escada não têm reação vital, o ferimento tem formato curvo e havia pouco sangue no local.</li>
 </ul>
 
 <h3>Epílogo</h3>
-<p>O Dr. Augusto Carvalho Brandão foi preso em 1º de julho de 1994, no primeiro dia do Real. Marta Brandão foi indiciada por estelionato. A venda à Maison Delacroix nunca aconteceu. Helena assumiu a vinícola e Rafael, com sua parte, pagou as dívidas e voltou a morar em Bento.</p>
+<p>O Dr. Augusto Carvalho Brandão foi preso em 1º de julho de 1994, no primeiro dia do Real. Marta Brandão foi indiciada por estelionato, e Ivo Carvalho por favorecimento e furto qualificado tentado. Ivo fez acordo e depôs contra o cunhado. A venda à Maison Delacroix nunca aconteceu. Helena assumiu a vinícola e Rafael, com sua parte, pagou as dívidas e voltou a morar em Bento.</p>
 <p>Na noite de 26 de junho de 1995, a família abriu a garrafa nº 002 da Reserva do Centenário. Lúcia pôs na mesa outra toalha bordada por Dona Irene. Ninguém falou nada por um bom tempo.</p>
 <p style="text-align:center;font-family:'Special Elite';color:#b8913a;margin-top:30px">— CASO ENCERRADO —</p>`;
 
@@ -923,6 +1049,200 @@ const SOLUTION=`
 renderList();renderPhotos();renderHints();renderMap();
 document.getElementById('docview').innerHTML=`<div class="paper typed"><h2>Arquivo do Inquérito 1.047/94</h2><p>Escolham um documento na lista. Sugestão de ordem: Boletim de Ocorrência → Relatório de Local → Folha do caderno → depoimentos.</p><p>Os documentos lidos ficam marcados com ✓. As etapas lacradas abrem quando vocês respondem a pergunta do envelope.</p></div>`;
 const h=(location.hash||'').slice(1);if(h&&document.getElementById('v-'+h))go(h);
+</script>
+<script>
+window.TOOLS_CFG={
+ key:'valmorbida_tools', stageWord:'etapa', fichasPorEtapa:3, defaultDay:625, dayRollover:6, whenHint:'22:04 ou 26/06 00:20',
+ stage:()=>S.stage,
+ people:[...CHARS.filter(c=>!c.victim).map(c=>({id:c.id,name:c.name,role:c.role,img:'img/'+c.id+'.jpg'})),{id:'dorival',name:'Dorival Zanella',role:'Vigia noturno',img:''},{id:'otavio',name:'Otávio Valmorbida',role:'A vítima',img:'img/otavio.jpg'}],
+ evidence:()=>[...Object.entries(PH).map(([k,p])=>({id:k,label:k+' · '+p.cap,img:'img/'+k+'.jpg',stage:p.stage})),...D.map(d=>({id:d.id,label:d.title,sub:d.sub,stage:d.stage}))],
+ questions:{
+  helena:[
+   {s:1,q:'A senhora sabia onde ficava o quadro de força?',a:'Claro, cresci nesta casa. Mas não passei nem perto: saí pela porta da cozinha direto para a cantina, com a lanterna do hall. O Dorival me viu.'},
+   {s:2,q:'Por que seu pai iria à sala de degustação às dez da noite?',a:'Era o lugar das conversas sérias dele. Fechava a porta e ninguém incomodava. Se marcou alguém ali, era assunto que não queria que a família ouvisse.'},
+   {s:3,q:'A senhora já ouviu falar da Tanoaria Serra Alta?',a:'Nunca. Nossas barricas vêm da França e da Mazzini, de Garibaldi. Eu escolho cada uma pessoalmente. Se alguém pagou barrica de outra tanoaria, ela nunca entrou na minha cave.'}],
+  rafael:[
+   {s:1,q:'Você tem certeza do cheiro de cachimbo no corredor?',a:'Absoluta. Cresci com aquele cheiro: é o tabaco de baunilha do meu padrinho. Estava forte perto da porta da biblioteca, como se alguém tivesse acabado de passar.'},
+   {s:2,q:'Por que suas digitais estão na garrafa nº 001?',a:'O fotógrafo me mandou segurar a garrafa junto com o pai às oito e meia. Segurei pelo ombro, perto do gargalo. Está na foto. Depois disso nunca mais toquei nela.'},
+   {s:3,q:'Quem é N. Albuquerque?',a:'Um homem de São Paulo a quem devo dinheiro. Ele não estava aqui, se é o que querem saber. Sim, eu estava desesperado. Mas desespero não é crime.'}],
+  lucia:[
+   {s:1,q:'Quem sabia onde fica o quadro de força?',a:'Eu, a família, o Dorival… e o Dr. Augusto. Foi ele quem me mostrou a portinhola escondida, num temporal, anos atrás. Visita de fora não acha aquilo nem de dia.'},
+   {s:2,q:'Quando a senhora viu a toalha do "V" azul pela última vez?',a:'Às sete da noite, quando forrei a mesa da degustação. No domingo de manhã não estava mais lá. Era uma das últimas que a Dona Irene bordou.'},
+   {s:3,q:'Seu Otávio mudou papéis de lugar nos últimos dias?',a:'Na quinta, quando voltou de Pinto Bandeira, subiu com uma pasta azul debaixo do braço e trancou na cômoda do quarto. Nunca tinha feito isso. A pasta sempre ficou no escritório.'}],
+  jeanluc:[
+   {s:1,q:'Havia alguém perto do senhor durante o apagão?',a:'Ninguém na varanda, só a chuva e o meu Gauloises. Mas ouvi conversa de dois homens lá para os lados da guarita, e o rádio tocando música gaúcha.'},
+   {s:2,q:'A que horas o senhor ligou para Paris?',a:'Logo depois que a luz voltou e eu achei o telefone do hall, umas dez e meia. Foram quatorze minutos de bronca. Depois fui direto para o truco.'},
+   {s:3,q:'O que significava "faça o necessário" no telex?',a:'Convencer o velho. Oferecer mais dinheiro, talvez um cargo para a filha. Eu vendo vinho, monsieur, não mato ninguém. Com ele morto, o negócio morreu também.'}],
+  brandao:[
+   {s:1,q:'O senhor sabia de algum encontro marcado na sala de degustação?',a:'Que encontro? O Otávio não marcou nada comigo. Eu estava na biblioteca, ao telefone com a Marta.'},
+   {s:2,q:'Por que o senhor trocou o paletó pelo cardigã?',a:'Frio, delegado. Tenho sessenta anos. E tinha derramado vinho na manga no jantar.'},
+   {s:3,q:'Quem aprovava os pagamentos a fornecedores?',a:'Eu assinava por procuração, desde 85, o que o Otávio me pedia. Se há erro na contabilidade, procurem o contador.'},
+   {s:4,q:'O senhor saiu da casa em algum momento da noite?',a:'Fui ao carro buscar o cachimbo, coisa de dois minutos, antes do truco. O Ivo estava lá. Por que a pergunta?'}],
+  saulo:[
+   {s:1,q:'Quem mais sabia da arritmia de Otávio?',a:'A família e o Augusto, que vivia dizendo que o Otávio "ia cair duro qualquer dia". Achava de mau gosto.'},
+   {s:2,q:'A morte pode ter sido causada por uma arritmia?',a:'Depois desse laudo, não. Arritmia nenhuma deixa um arco de vidro na cabeça de um homem.'}],
+  ivo:[
+   {s:1,q:'O senhor ficou o tempo todo dentro do carro?',a:'Fiquei. (desvia o olhar) Quase o tempo todo. Fui esticar as pernas um pouco.'},
+   {s:4,q:'Por que o senhor mentiu no primeiro depoimento?',a:'Porque eu tava na guarita com o Dorival tomando chimarrão, e depois fiz besteira a pedido do Augusto. Eu tenho ficha, doutor. Quem ia acreditar em mim?'},
+   {s:4,q:'O que o Dr. Augusto disse ao lhe entregar o bilhete?',a:'"Vai durante o truco que eu seguro todo mundo na sala." E perguntou duas vezes se o relógio do carro estava certo. Tava suando, com aquele frio.'}],
+  dorival:[
+   {s:1,q:'O senhor estava sozinho na guarita a noite toda?',a:'(hesita) Tava sozinho, doutor. Como sempre.'},
+   {s:4,q:'Agora diga a verdade: quem estava na guarita com o senhor?',a:'O seu Ivo, das nove e meia às dez e meia. Ele tava do meu lado quando a luz caiu e viu a chama na janela comigo. Depois o Dr. Augusto chamou ele no carro.'}]
+ }
+};
+
+/* ===== Ferramentas de investigação: Quadro, Linha do tempo, Interrogatórios ===== */
+(function(){
+const C=window.TOOLS_CFG; if(!C) return;
+const K=C.key;
+const ld=(k,d)=>{try{const v=JSON.parse(localStorage.getItem(K+'_'+k));return v==null?d:v;}catch(e){return d;}};
+const sv=(k,v)=>{try{localStorage.setItem(K+'_'+k,JSON.stringify(v));}catch(e){}};
+let B=ld('board',{items:[],links:[]}), TL=ld('timeline',[]), IQ=ld('interrog',{});
+let sub='quadro', linkMode=false, linkFrom=null, selLink=-1, tlFilter='';
+const st=()=>C.stage();
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const css=`
+#v-invest .tsub{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:16px}
+#v-invest .tsub button{font-family:"Special Elite",monospace;background:#2b3138;color:#e4dcc6;border:1px solid #4a535e;padding:8px 14px;border-radius:3px;cursor:pointer}
+#v-invest .tsub button.on{background:#c09a4a;color:#111;border-color:#c09a4a}
+.tb{display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:#20262d;border:1px solid #3a434e;padding:8px 10px;border-radius:4px;margin-bottom:10px;font-family:"Special Elite",monospace;font-size:13px;color:#ddd}
+.tb button,.tb select,.tb input{font-family:inherit;font-size:13px;background:#f1ead8;color:#222;border:1px solid #8b8066;border-radius:3px;padding:6px 9px;cursor:pointer}
+.tb button.on{background:#8f1d21;color:#fff;border-color:#8f1d21}
+.bwrap{display:grid;grid-template-columns:220px 1fr;gap:10px}
+@media(max-width:820px){.bwrap{grid-template-columns:1fr}}
+.pal{background:#20262d;border:1px solid #3a434e;border-radius:4px;padding:8px;max-height:640px;overflow:auto}
+.pal h5{font-family:"Special Elite";color:#c09a4a;margin:10px 4px 6px;font-weight:normal;font-size:12px;letter-spacing:.08em}
+.pal .pi{display:flex;align-items:center;gap:8px;padding:5px;border-radius:3px;cursor:pointer;color:#ddd;font-size:13px}
+.pal .pi:hover{background:#2f3742}.pal .pi img{width:34px;height:34px;object-fit:cover;border:2px solid #fff}
+.pal .pi .ic{width:34px;height:34px;display:flex;align-items:center;justify-content:center;background:#f1ead8;color:#222;font-size:16px}
+.board{position:relative;height:640px;overflow:auto;border-radius:4px;border:1px solid #3a434e;background:#8a6a45 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='6' height='6'%3E%3Ccircle cx='1' cy='1' r='.8' fill='%23735534'/%3E%3C/svg%3E")}
+.binner{position:relative;width:1800px;height:1200px}
+.binner svg{position:absolute;inset:0;width:1800px;height:1200px;z-index:5;pointer-events:none}
+.binner svg g{pointer-events:visibleStroke}
+.bcard{position:absolute;width:150px;background:#fbf8ef;color:#222;box-shadow:0 6px 14px rgba(0,0,0,.45);border-radius:2px;user-select:none;touch-action:none}
+.bcard.sel{outline:3px solid #c09a4a}
+.bcard .h{cursor:move;font-family:"Special Elite";font-size:11px;padding:4px 22px 4px 6px;background:#e9e0c8;position:relative;line-height:1.2}
+.bcard .h .x{position:absolute;right:4px;top:2px;cursor:pointer;color:#8f1d21;font-size:14px}
+.bcard img{width:100%;height:100px;object-fit:cover;display:block}
+.bcard .t{padding:5px 6px;font-size:12.5px;font-family:"Source Serif 4",serif}
+.bcard.note{background:#fff59a;width:160px}.bcard.note .h{background:#f2e470}
+.bcard.note .t{min-height:60px;font-family:"Caveat",cursive;font-size:20px;line-height:1.1;outline:none}
+.pin{position:absolute;top:-7px;left:50%;width:14px;height:14px;border-radius:50%;background:#c0392b;box-shadow:0 2px 3px rgba(0,0,0,.5);transform:translateX(-50%)}
+.tlist{position:relative;margin:10px 0 0 10px;border-left:3px solid #c09a4a;padding-left:18px}
+.tli{position:relative;background:#f1ead8;color:#222;padding:8px 34px 8px 12px;margin:10px 0;border-radius:2px;box-shadow:0 4px 10px rgba(0,0,0,.35)}
+.tli::before{content:"";position:absolute;left:-27px;top:12px;width:14px;height:14px;border-radius:50%;background:var(--c,#c09a4a);border:2px solid #15171b}
+.tli b{font-family:"Special Elite";color:#8f1d21;margin-right:8px}
+.tli .who{font-family:"Special Elite";font-size:11px;padding:1px 6px;border-radius:8px;color:#fff;background:var(--c,#666);margin-left:6px}
+.tli .src{display:block;font-size:12px;color:#6b6352;margin-top:2px}
+.tli .del{position:absolute;right:8px;top:6px;cursor:pointer;color:#8f1d21;font-size:16px;background:none;border:0}
+.iq{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.iqc{background:#f1ead8;color:#222;border-radius:2px;padding:14px;box-shadow:0 6px 14px rgba(0,0,0,.4)}
+.iqc .hd{display:flex;gap:10px;align-items:center;margin-bottom:8px}.iqc .hd img{width:54px;height:66px;object-fit:cover;border:3px solid #fff;box-shadow:0 2px 5px rgba(0,0,0,.3)}
+.iqc h4{margin:0;font-family:"Playfair Display",serif;font-size:18px}
+.iqq{border-top:1px dashed #c8ba98;padding:8px 0}
+.iqq .q{font-weight:600;font-size:14.5px}
+.iqq .a{font-family:"Special Elite",monospace;font-size:13.5px;margin-top:6px;background:#fff;padding:8px;border-left:3px solid #8f1d21;line-height:1.5}
+.iqq button{font-family:"Special Elite";font-size:12px;background:#8f1d21;color:#fff;border:0;padding:5px 9px;border-radius:3px;cursor:pointer;margin-top:5px}
+.iqq button:disabled{background:#999;cursor:not-allowed}
+.fichas{text-align:center;font-family:"Special Elite";color:#e4dcc6;margin-bottom:14px}
+.fichas span{display:inline-block;width:16px;height:22px;background:#c09a4a;margin:0 2px;border-radius:2px;vertical-align:middle}.fichas span.u{background:#3a434e}
+.lockq{font-size:13px;color:#8a8270;font-style:italic;padding:6px 0;border-top:1px dashed #c8ba98}
+`;
+const s=document.createElement('style');s.textContent=css;document.head.appendChild(s);
+
+const PCOL=['#8f1d21','#2b4a7a','#2f6b3a','#7a4a1a','#6b2f7a','#1f6f78','#a0522d','#555f6d','#b8860b','#3f3f8f'];
+const pcolor=id=>{const i=C.people.findIndex(p=>p.id===id);return i<0?'#666':PCOL[i%PCOL.length];};
+
+function render(){
+ const el=document.getElementById('invest');if(!el)return;
+ el.innerHTML=`<div class="tsub">${[['quadro','🧵 Quadro de investigação'],['tempo','🕰 Linha do tempo'],['interrog','🗣 Interrogatórios']].map(([k,l])=>`<button class="${sub===k?'on':''}" data-s="${k}">${l}</button>`).join('')}</div><div id="tbody"></div>`;
+ el.querySelectorAll('.tsub button').forEach(b=>b.onclick=()=>{sub=b.dataset.s;render();});
+ ({quadro:renderBoard,tempo:renderTL,interrog:renderIQ})[sub]();
+}
+
+/* ---------- QUADRO ---------- */
+function evidence(){return C.evidence().filter(e=>e.stage<=st());}
+function renderBoard(){
+ const T=document.getElementById('tbody');
+ T.innerHTML=`<div class="tb"><button id="bLink" class="${linkMode?'on':''}">🧵 ${linkMode?'Ligando: clique em 2 cartões':'Ligar cartões com fio'}</button>
+ <input id="bLabel" placeholder="texto do fio (opcional)" style="width:180px">
+ <select id="bColor"><option value="#c0392b">fio vermelho</option><option value="#1f4f9a">fio azul</option><option value="#1e7a3a">fio verde</option><option value="#222">fio preto</option></select>
+ <button id="bNote">＋ Nota</button><button id="bDelLink" ${selLink<0?'disabled':''}>Apagar fio selecionado</button><button id="bClear">Limpar quadro</button>
+ <span style="margin-left:auto;opacity:.8">Arraste pelo topo do cartão. Clique num fio para selecioná-lo.</span></div>
+ <div class="bwrap"><div class="pal" id="pal"></div><div class="board" id="board"><div class="binner" id="binner"><svg id="bsvg"></svg></div></div></div>`;
+ const pal=document.getElementById('pal');
+ pal.innerHTML=`<h5>PESSOAS</h5>`+C.people.map(p=>`<div class="pi" data-t="person" data-r="${p.id}">${p.img?`<img src="${p.img}">`:'<div class="ic">👤</div>'}${esc(p.name)}</div>`).join('')+
+ `<h5>PROVAS & FOTOS</h5>`+evidence().filter(e=>e.img).map(e=>`<div class="pi" data-t="photo" data-r="${e.id}"><img src="${e.img}">${esc(e.label)}</div>`).join('')+
+ `<h5>DOCUMENTOS</h5>`+evidence().filter(e=>!e.img).map(e=>`<div class="pi" data-t="doc" data-r="${e.id}"><div class="ic">📄</div>${esc(e.label)}</div>`).join('');
+ pal.querySelectorAll('.pi').forEach(p=>p.onclick=()=>{const bd=document.getElementById('board');B.items.push({id:'i'+Date.now(),t:p.dataset.t,r:p.dataset.r,x:bd.scrollLeft+40+Math.random()*120,y:bd.scrollTop+40+Math.random()*80,text:''});sv('board',B);drawBoard();});
+ document.getElementById('bLink').onclick=()=>{linkMode=!linkMode;linkFrom=null;renderBoard();};
+ document.getElementById('bNote').onclick=()=>{const bd=document.getElementById('board');B.items.push({id:'i'+Date.now(),t:'note',r:'',x:bd.scrollLeft+60,y:bd.scrollTop+60,text:'Escreva aqui…'});sv('board',B);drawBoard();};
+ document.getElementById('bDelLink').onclick=()=>{if(selLink>=0){B.links.splice(selLink,1);selLink=-1;sv('board',B);renderBoard();}};
+ const clr=document.getElementById('bClear');clr.onclick=()=>{if(clr.dataset.c){B={items:[],links:[]};sv('board',B);renderBoard();}else{clr.dataset.c=1;clr.textContent='Clique de novo para confirmar';setTimeout(()=>{clr.textContent='Limpar quadro';delete clr.dataset.c;},2500);}};
+ drawBoard();
+}
+function cardHTML(it){
+ let title='',body='';
+ if(it.t==='person'){const p=C.people.find(x=>x.id===it.r)||{name:'?'};title=p.name;body=(p.img?`<img src="${p.img}">`:'')+(p.role?`<div class="t">${esc(p.role)}</div>`:'');}
+ else if(it.t==='photo'||it.t==='doc'){const e=C.evidence().find(x=>x.id===it.r)||{label:'?'};title=e.label;body=(e.img?`<img src="${e.img}">`:'')+(e.sub?`<div class="t">${esc(e.sub)}</div>`:'');}
+ else {title='Nota';body=`<div class="t" contenteditable="true" data-note="${it.id}">${esc(it.text)}</div>`;}
+ return `<div class="bcard ${it.t==='note'?'note':''} ${linkFrom===it.id?'sel':''}" data-id="${it.id}" style="left:${it.x}px;top:${it.y}px"><div class="pin"></div><div class="h">${esc(title)}<span class="x" data-x="${it.id}">×</span></div>${body}</div>`;
+}
+function drawBoard(){
+ const inner=document.getElementById('binner');if(!inner)return;
+ inner.querySelectorAll('.bcard').forEach(n=>n.remove());
+ inner.insertAdjacentHTML('beforeend',B.items.map(cardHTML).join(''));
+ drawLinks();
+ inner.querySelectorAll('.bcard').forEach(card=>{
+  const id=card.dataset.id,it=B.items.find(x=>x.id===id);
+  card.querySelector('.x').onclick=e=>{e.stopPropagation();B.items=B.items.filter(x=>x.id!==id);B.links=B.links.filter(l=>l.a!==id&&l.b!==id);sv('board',B);drawBoard();};
+  const nt=card.querySelector('[data-note]');if(nt){nt.oninput=()=>{it.text=nt.innerText;sv('board',B);};}
+  card.addEventListener('click',e=>{if(!linkMode||e.target.closest('.x'))return;
+   if(!linkFrom){linkFrom=id;card.classList.add('sel');}
+   else if(linkFrom!==id){B.links.push({a:linkFrom,b:id,label:document.getElementById('bLabel').value||'',c:document.getElementById('bColor').value});linkFrom=null;sv('board',B);drawBoard();}});
+  const h=card.querySelector('.h');let sx,sy,ox,oy,drag=false;
+  h.addEventListener('pointerdown',e=>{if(e.target.closest('.x'))return;drag=true;sx=e.clientX;sy=e.clientY;ox=it.x;oy=it.y;h.setPointerCapture(e.pointerId);});
+  h.addEventListener('pointermove',e=>{if(!drag)return;it.x=Math.max(0,Math.min(1650,ox+e.clientX-sx));it.y=Math.max(0,Math.min(1100,oy+e.clientY-sy));card.style.left=it.x+'px';card.style.top=it.y+'px';drawLinks();});
+  h.addEventListener('pointerup',()=>{if(drag){drag=false;sv('board',B);}});
+ });
+}
+function drawLinks(){
+ const svg=document.getElementById('bsvg');if(!svg)return;
+ const pos=id=>{const it=B.items.find(x=>x.id===id);return it?[it.x+75,it.y+4]:null;};
+ svg.innerHTML=B.links.map((l,i)=>{const a=pos(l.a),b=pos(l.b);if(!a||!b)return'';const mx=(a[0]+b[0])/2,my=(a[1]+b[1])/2+25;
+  return `<g data-l="${i}" style="cursor:pointer"><path d="M${a[0]} ${a[1]} Q${mx} ${my} ${b[0]} ${b[1]}" stroke="transparent" stroke-width="14" fill="none"/><path d="M${a[0]} ${a[1]} Q${mx} ${my} ${b[0]} ${b[1]}" stroke="${l.c}" stroke-width="${selLink===i?4:2.4}" fill="none" ${selLink===i?'stroke-dasharray="6 4"':''}/>${l.label?`<text x="${mx}" y="${my-8}" text-anchor="middle" font-family="Special Elite" font-size="13" fill="#fff" stroke="#000" stroke-width="3" paint-order="stroke">${esc(l.label)}</text>`:''}</g>`;}).join('');
+ svg.querySelectorAll('g[data-l]').forEach(g=>g.onclick=()=>{selLink=+g.dataset.l;const b=document.getElementById('bDelLink');if(b)b.disabled=false;drawLinks();});
+}
+
+/* ---------- LINHA DO TEMPO ---------- */
+function tkey(w){const d=w.match(/(\d{1,2})\/(\d{1,2})(?:\/(\d{2,4}))?/);const t=w.match(/(\d{1,2})\s*[:h]\s*(\d{2})?/);
+ let day=d?(+d[2])*100+(+d[1]):C.defaultDay;let hh=t?+t[1]:0,mm=t&&t[2]?+t[2]:0;if(!d&&C.dayRollover&&hh<C.dayRollover)day+=1;return day*10000+hh*100+mm;}
+function renderTL(){
+ const T=document.getElementById('tbody');
+ T.innerHTML=`<div class="tb"><input id="tWhen" placeholder="${C.whenHint}" style="width:130px"><input id="tText" placeholder="o que aconteceu" style="flex:1;min-width:200px"><select id="tWho"><option value="">— pessoa —</option>${C.people.map(p=>`<option value="${p.id}">${esc(p.name)}</option>`).join('')}</select><input id="tSrc" placeholder="fonte (doc.)" style="width:150px"><button id="tAdd">＋ Adicionar</button></div>
+ <div class="tb">Filtrar: <select id="tFil"><option value="">todas as pessoas</option>${C.people.map(p=>`<option value="${p.id}" ${tlFilter===p.id?'selected':''}>${esc(p.name)}</option>`).join('')}</select><span style="margin-left:auto">${TL.length} registro(s) · ordenado por horário · fica salvo neste navegador</span></div>
+ <div class="tlist">${TL.filter(e=>!tlFilter||e.who===tlFilter).sort((a,b)=>tkey(a.when)-tkey(b.when)).map(e=>`<div class="tli" style="--c:${e.who?pcolor(e.who):'#c09a4a'}"><b>${esc(e.when)}</b>${esc(e.text)}${e.who?`<span class="who">${esc((C.people.find(p=>p.id===e.who)||{}).name||'')}</span>`:''}${e.src?`<span class="src">fonte: ${esc(e.src)}</span>`:''}<button class="del" data-d="${e.id}">×</button></div>`).join('')||'<p style="color:#a69e88;font-style:italic">Nenhum registro ainda. Comecem pelos horários do Boletim de Ocorrência e dos depoimentos.</p>'}</div>`;
+ document.getElementById('tAdd').onclick=()=>{const w=document.getElementById('tWhen').value.trim(),x=document.getElementById('tText').value.trim();if(!w||!x)return;TL.push({id:'t'+Date.now(),when:w,text:x,who:document.getElementById('tWho').value,src:document.getElementById('tSrc').value.trim()});sv('timeline',TL);renderTL();};
+ document.getElementById('tText').onkeydown=e=>{if(e.key==='Enter')document.getElementById('tAdd').click();};
+ document.getElementById('tFil').onchange=e=>{tlFilter=e.target.value;renderTL();};
+ T.querySelectorAll('.del').forEach(b=>b.onclick=()=>{TL=TL.filter(e=>e.id!==b.dataset.d);sv('timeline',TL);renderTL();});
+}
+
+/* ---------- INTERROGATÓRIOS ---------- */
+function renderIQ(){
+ const T=document.getElementById('tbody');
+ const total=C.fichasPorEtapa*st(),used=Object.keys(IQ).length,left=Math.max(0,total-used);
+ T.innerHTML=`<div class="fichas">Fichas de interrogatório: ${'<span></span>'.repeat(left)}${'<span class="u"></span>'.repeat(Math.min(used,total))} &nbsp; ${left} de ${total} · vocês ganham ${C.fichasPorEtapa} a cada ${C.stageWord} ${C.stageWord==='etapa'?'aberta':'aberto'}. Escolham bem quem pressionar.</div>
+ <div class="iq">${C.people.filter(p=>C.questions[p.id]).map(p=>{const qs=C.questions[p.id];return `<div class="iqc"><div class="hd">${p.img?`<img src="${p.img}">`:''}<div><h4>${esc(p.name)}</h4><div style="font-size:12.5px;color:#6b6352">${esc(p.role||'')}</div></div></div>`+
+ qs.map((q,i)=>{const k=p.id+'_'+i;if(q.s>st())return `<div class="lockq">🔒 Nova pergunta disponível no ${C.stageWord} ${q.s}.</div>`;
+  return `<div class="iqq"><div class="q">“${esc(q.q)}”</div>${IQ[k]?`<div class="a">${q.a}</div>`:`<button data-k="${k}" ${left<1?'disabled':''}>Perguntar (usa 1 ficha)</button>`}</div>`;}).join('')+`</div>`;}).join('')}</div>`;
+ T.querySelectorAll('button[data-k]').forEach(b=>b.onclick=()=>{IQ[b.dataset.k]=1;sv('interrog',IQ);renderIQ();});
+}
+
+window.TOOLS={render};
+const og=window.go;window.go=function(v){og(v);if(v==='invest')render();};
+})();
+
 </script>
 </body>
 </html>

@@ -72,7 +72,7 @@ function render(){
   <div class="b"><h2>${c.titulo}</h2><div class="meta">${c.local} · ${c.ano} · ${c.duracao} · ${c.envelopes} envelopes</div><p>${c.sinopse}</p>
   <div class="tags">${(c.tags||[]).map(t=>`<span>${t}</span>`).join('')}</div>
   ${p?`<div class="prog">● Em andamento neste aparelho: envelope ${p} de ${c.envelopes}</div>`:''}
-  <div class="btns"><a class="btn play" href="${c.slug}/">▶ ${p?'Continuar':'Jogar online'}</a>${c.pdf?`<a class="btn pdf" href="${c.pdf}" target="_blank">⎙ Imprimir (PDF)</a>`:''}</div></div></div>`;}).join(''):'<div class="empty">Nenhum caso encontrado com esses filtros.</div>';
+  <div class="btns"><a class="btn play" href="${c.slug}/">▶ ${p?'Continuar':'Jogar online'}</a>${c.pdf?`<a class="btn pdf" href="${c.pdf}" target="_blank">⎙ Imprimir (PDF)</a>`:''}${c.kit?`<a class="btn pdf" href="${c.kit}" target="_blank">✂ Kit físico</a>`:''}</div></div></div>`;}).join(''):'<div class="empty">Nenhum caso encontrado com esses filtros.</div>';
 }
 function chips(){const used=['Todos',...LEVELS.filter(l=>CASES.some(c=>c.dificuldade===l))];document.getElementById('chips').innerHTML=used.map(l=>`<button class="chip ${F.nivel===l?'on':''}" onclick="F.nivel='${l}';chips();render()">${l}</button>`).join('');}
 document.getElementById('q').oninput=e=>{F.q=e.target.value;render();};

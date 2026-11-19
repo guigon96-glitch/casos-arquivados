@@ -30,6 +30,7 @@ const RULES=`
 <li>Um lê os depoimentos em voz alta e o outro mantém a <b>linha do tempo</b> na aba Anotações. A cada envelope, troquem.</li>
 <li>Deixem os <b>Mapas</b> abertos num segundo aparelho, porque eles têm pistas.</li>
 <li><b>Modo competitivo:</b> antes de abrir o Envelope 5, cada um escreve num papel quem acha que é o Barqueiro. Antes da acusação final, escrevem de novo.</li>
+<li>Na aba <b>🔎 Investigação</b> vocês têm um <b>quadro</b> com fotos, pessoas e documentos ligados por fios, uma <b>linha do tempo</b> que se ordena sozinha e <b>interrogatórios extras</b>: cada envelope aberto dá 3 fichas para fazer perguntas novas. Escolham bem quem pressionar.</li>
 <li>Duração estimada: <b>6 a 9 horas</b>. Dá para jogar em duas ou três noites, porque o progresso fica salvo.</li>
 </ul>
 <div class="warn">⚠️ Conteúdo adulto: assassinatos em série, fotos de perícia (sem sangue explícito) e temas de morte. A solução só aparece depois da acusação final.</div>

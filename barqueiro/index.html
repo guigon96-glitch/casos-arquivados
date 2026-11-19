@@ -127,6 +127,7 @@ footer{text-align:center;color:#7d7766;font-size:13px;padding:30px 10px;font-fam
   <button data-v="mapa">Mapas</button>
   <button data-v="arquivo">Arquivo</button>
   <button data-v="fotos">Fotos</button>
+  <button data-v="invest">🔎 Investigação</button>
   <button data-v="notas">Anotações</button>
   <button data-v="dicas">Dicas</button>
   <button data-v="acusacao">Acusação</button>
@@ -141,6 +142,7 @@ footer{text-align:center;color:#7d7766;font-size:13px;padding:30px 10px;font-fam
 <section class="view" id="v-fotos"><p class="small" style="text-align:center">Clique numa foto para ampliar e ler o verso. Novas fotos aparecem a cada envelope aberto.</p><div id="photos"></div></section>
 <section class="view" id="v-notas"><div class="paper notes"><h2>Quadro da força-tarefa</h2><p style="font-size:14px;color:#6b6352">Fica salvo neste navegador.</p><div id="notefields"></div>
 <label>Linha do tempo</label><textarea class="big" data-note="timeline"></textarea><label>Teorias &amp; perguntas</label><textarea class="big" data-note="teorias"></textarea></div></section>
+<section class="view" id="v-invest"><div id="invest"></div></section>
 <section class="view" id="v-dicas"><div class="prose"><h2>Dicas</h2><p>Abram uma por vez. A terceira de cada envelope é quase uma resposta.</p><div id="hints"></div></div></section>
 <section class="view" id="v-acusacao"><div class="paper accuse" id="accuse"></div><div id="solution" class="prose"></div></section>
 </main>
@@ -154,5 +156,7 @@ footer{text-align:center;color:#7d7766;font-size:13px;padding:30px 10px;font-fam
 <script src="docs5.js"></script>
 <script src="map.js"></script>
 <script src="app.js"></script>
+<script src="tools_cfg.js"></script>
+<script src="tools.js"></script>
 </body>
 </html>
