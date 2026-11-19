@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Caso 3 · Hotel Marquês de Itu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Caveat:wght@500;700&family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=IBM+Plex+Mono:wght@400;600&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--desk:#15171b;--paper:#f1ead8;--ink:#23201b;--muted:#6b6352;--red:#8f1d21;--gold:#c09a4a;--line:#c8ba98}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--desk);color:#e7e1d0;font-family:"Source Serif 4",Georgia,serif;line-height:1.55}
+body{background:radial-gradient(ellipse at top,#262a31 0%,var(--desk) 65%) fixed}
+header.top{text-align:center;padding:90px 20px 34px;background:linear-gradient(rgba(15,17,20,.35),rgba(21,23,27,1)),url(img/cover.jpg) center/cover;border-bottom:1px solid #333a44}
+.kicker{font-family:"Special Elite";letter-spacing:.25em;font-size:12px;color:var(--gold);text-transform:uppercase}
+h1.title{font-family:"Playfair Display";font-weight:800;font-size:clamp(34px,6vw,64px);margin:6px 0 2px;color:#f3ecd9;text-shadow:0 2px 20px #000}
+.subtitle{font-style:italic;color:#cfc6ae;margin:0}
+nav.tabs{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;padding:12px 10px;position:sticky;top:0;background:rgba(21,23,27,.96);z-index:20;border-bottom:1px solid #333a44}
+nav.tabs button{font-family:"Special Elite";background:#232830;color:#e4dcc6;border:1px solid #434b57;padding:8px 12px;border-radius:3px;cursor:pointer;font-size:14px}
+nav.tabs button:hover{border-color:var(--gold)}
+nav.tabs button.active{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+main{max-width:1200px;margin:0 auto;padding:24px 16px 80px}
+section.view{display:none}section.view.active{display:block;animation:f .25s}
+@keyframes f{from{opacity:0;transform:translateY(4px)}to{opacity:1}}
+.paper{background:var(--paper);color:var(--ink);padding:34px 38px;border-radius:2px;box-shadow:0 12px 30px rgba(0,0,0,.5),inset 0 0 60px rgba(150,120,60,.16);position:relative;margin:0 auto 24px;max-width:880px}
+.paper.typed{font-family:"Special Elite",monospace;font-size:15.5px;line-height:1.65}
+.paper.hand{font-family:"Caveat",cursive;font-size:25px;line-height:1.35;background:#f7f1dc;background-image:repeating-linear-gradient(#f7f1dc 0 33px,#c9d6e3 33px 34px);padding-top:40px}
+.paper.telex{font-family:"IBM Plex Mono",monospace;font-size:14px;background:#ece6d6}
+.paper.old{background:#e9dcb8;filter:sepia(.25)}
+.paper.news{font-family:"Source Serif 4";background:#efe9dc;columns:2;column-gap:28px;font-size:15px}
+.paper.news .mast{column-span:all;font-family:"Playfair Display";font-weight:800;font-size:38px;text-align:center;border-bottom:4px double #222;letter-spacing:.02em;margin-bottom:4px}
+.paper.news .ed{column-span:all;text-align:center;font-family:"Special Elite";font-size:12px;border-bottom:1px solid #222;margin-bottom:12px;padding-bottom:4px}
+.paper.news .hl{column-span:all;font-family:"Oswald";font-weight:700;font-size:34px;line-height:1.05;text-transform:uppercase;margin:6px 0 10px}
+.paper.news .sub{column-span:all;font-style:italic;font-size:17px;margin-bottom:12px}
+@media(max-width:700px){.paper.news{columns:1}}
+.paper h2{font-family:"Playfair Display";font-size:26px;margin:0 0 6px}
+.paper h3{font-family:"Special Elite";font-size:16px;letter-spacing:.08em;margin:22px 0 6px;border-bottom:1px dashed var(--line);padding-bottom:3px}
+.paper .meta{font-family:"Special Elite";font-size:13px;color:var(--muted);border-bottom:2px solid var(--ink);padding-bottom:8px;margin-bottom:16px}
+.paper table{border-collapse:collapse;width:100%;margin:10px 0;font-size:14px}
+.paper th,.paper td{border:1px solid #b9aa86;padding:6px 8px;text-align:left;vertical-align:top}
+.paper th{background:#e3d5b0}
+.stamp{position:absolute;top:26px;right:26px;border:3px solid var(--red);color:var(--red);font-family:"Special Elite";padding:4px 10px;transform:rotate(8deg);opacity:.78;letter-spacing:.12em;font-size:14px}
+.stamp.blue{border-color:#2b4a7a;color:#2b4a7a;transform:rotate(-6deg)}
+.margin-note{font-family:"Caveat";color:#1f3f8a;font-size:23px;line-height:1.2;display:block;margin:6px 0 6px 18px;transform:rotate(-1.2deg)}
+.strike{text-decoration:line-through;text-decoration-thickness:2px}
+.sig{font-family:"Caveat";font-size:28px;color:#1f3f8a}
+.inlinepic{width:100%;max-width:520px;display:block;margin:12px auto;border:6px solid #fff;box-shadow:0 3px 10px rgba(0,0,0,.35)}
+.grid{display:grid;gap:18px}.grid.c2{grid-template-columns:repeat(auto-fit,minmax(330px,1fr))}.grid.c3{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.card{background:var(--paper);color:var(--ink);border-radius:2px;padding:18px;box-shadow:0 8px 20px rgba(0,0,0,.45);position:relative}
+.card h4{font-family:"Playfair Display";font-size:20px;margin:6px 0 0}
+.card .role{font-family:"Special Elite";font-size:12.5px;color:var(--red);letter-spacing:.06em;text-transform:uppercase}
+.card p{margin:8px 0;font-size:15px}
+.card .facts{font-size:13.5px;color:#4a4232;border-top:1px dashed var(--line);margin-top:10px;padding-top:8px}
+.portrait{width:120px;height:150px;object-fit:cover;float:right;margin:0 0 6px 12px;border:5px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.35);background:#aaa}
+.card.victim{outline:3px solid var(--red);outline-offset:-3px}
+.card.victim .portrait{filter:grayscale(.85)}
+.secth{font-family:"Playfair Display";color:#f3ecd9;font-size:26px;margin:30px 0 12px;border-bottom:1px solid #3a414c;padding-bottom:6px}
+.archive{display:grid;grid-template-columns:310px 1fr;gap:20px;align-items:start}
+@media(max-width:860px){.archive{grid-template-columns:1fr}.paper{padding:24px 18px}}
+.doclist{background:#1f242b;border:1px solid #39414c;border-radius:4px;padding:10px;position:sticky;top:70px;max-height:calc(100vh - 90px);overflow:auto}
+@media(max-width:860px){.doclist{position:static;max-height:none}}
+.stage-h{font-family:"Special Elite";color:var(--gold);font-size:13px;letter-spacing:.1em;margin:14px 6px 6px;text-transform:uppercase}
+.grp{font-size:11px;color:#8d8775;margin:8px 10px 2px;font-family:"Special Elite"}
+.docbtn{display:block;width:100%;text-align:left;background:transparent;border:0;border-left:3px solid transparent;color:#ddd5bf;padding:7px 10px;font-family:"Source Serif 4";font-size:14.5px;cursor:pointer;border-radius:2px}
+.docbtn small{display:block;color:#9d9580;font-size:11.5px;font-family:"Special Elite"}
+.docbtn:hover{background:#29303a}.docbtn.active{background:#333b47;border-left-color:var(--gold)}
+.docbtn.read::after{content:"✓";float:right;color:#7d9a6d;font-size:12px}
+.locked{border:1px dashed #56606d;border-radius:4px;padding:12px;margin:6px 4px;color:#bdb49c;font-size:14px}
+.locked .lockt{font-family:"Special Elite";color:#e4dcc6}
+.gate select{width:100%;margin:8px 0;padding:7px;background:#f1ead8;border:1px solid #8b8066;border-radius:2px;font-size:14.5px}
+.btn{background:var(--red);color:#fff;border:0;padding:9px 14px;border-radius:3px;cursor:pointer;font-family:"Special Elite";letter-spacing:.06em}
+.btn.ghost{background:transparent;border:1px solid #8b8066;color:#e7e1d0}
+.feedback{margin-top:6px;font-size:13.5px;font-style:italic}.feedback.bad{color:#e08a7a}
+.photos{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:26px}
+.stageph{font-family:"Special Elite";color:var(--gold);margin:26px 0 10px;letter-spacing:.1em}
+.polaroid{background:#fbfaf5;padding:12px 12px 14px;box-shadow:0 10px 24px rgba(0,0,0,.55);transform:rotate(var(--r,0deg));cursor:pointer;transition:transform .2s;color:var(--ink)}
+.polaroid:hover{transform:rotate(0) scale(1.03)}
+.polaroid img{width:100%;display:block;aspect-ratio:4/3;object-fit:cover;background:#222}
+.polaroid .cap{font-family:"Caveat";font-size:21px;margin-top:8px;line-height:1.1}
+.polaroid .num{font-family:"Special Elite";font-size:11px;color:var(--muted)}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;align-items:center;justify-content:center;z-index:50;padding:20px}
+.modal.open{display:flex}
+.modal .inner{max-width:1000px;width:100%;max-height:92vh;overflow:auto;display:grid;grid-template-columns:1.4fr 1fr;gap:18px}
+@media(max-width:760px){.modal .inner{grid-template-columns:1fr}}
+.modal .inner img{width:100%;display:block}
+.modal .back{background:#f4efe2;color:var(--ink);padding:22px;font-family:"Caveat";font-size:23px;line-height:1.3}
+.modal .back .tech{font-family:"Special Elite";font-size:13.5px;line-height:1.5;margin-top:12px;color:#3d3628;border-top:1px dashed var(--line);padding-top:10px}
+.modal .close{position:fixed;top:14px;right:18px;font-size:30px;color:#fff;background:none;border:0;cursor:pointer}
+.mapwrap{background:var(--paper);padding:20px;border-radius:2px;box-shadow:0 12px 30px rgba(0,0,0,.45);color:var(--ink);margin-bottom:26px}
+.mapwrap svg{width:100%;height:auto;display:block}
+.maph{font-family:"Special Elite";font-size:13px;color:#6b6352;border-bottom:2px solid #23201b;padding-bottom:6px;margin-bottom:10px}
+.notes textarea{width:100%;min-height:100px;background:#f7f1dc;border:1px solid #b9aa86;border-radius:2px;padding:10px;font-family:"Caveat";font-size:22px;line-height:1.25;color:#1f3f8a}
+.notes .big{min-height:240px}.notes label{font-family:"Playfair Display";font-size:18px;color:var(--ink)}
+.hint{background:#1f242b;border:1px solid #39414c;border-radius:4px;padding:14px 16px;margin-bottom:14px}
+.hint h4{font-family:"Special Elite";color:var(--gold);margin:0 0 8px;font-weight:normal;letter-spacing:.08em}
+.hint .h{display:none;margin:8px 0 0;padding:8px 10px;background:#f1ead8;color:var(--ink);border-radius:2px;font-size:15px}.hint .h.show{display:block}
+.prose{max-width:840px;margin:0 auto}.prose p{font-size:17px}
+.prose h2{font-family:"Playfair Display";color:#f3ecd9;font-size:28px;margin:30px 0 8px}
+.prose h3{font-family:"Special Elite";color:var(--gold);font-weight:normal;letter-spacing:.06em;margin:22px 0 6px}
+.prose li{margin:5px 0;font-size:16.5px}
+.timeline{border-left:2px solid var(--gold);margin:10px 0 10px 8px;padding-left:18px}
+.timeline div{margin:8px 0;position:relative;font-size:16px}
+.timeline div::before{content:"";position:absolute;left:-24px;top:8px;width:10px;height:10px;border-radius:50%;background:var(--gold)}
+.timeline b{font-family:"Special Elite";color:var(--gold);font-weight:normal;margin-right:6px}
+.accuse .row{margin:14px 0}.accuse label{display:block;font-family:"Playfair Display";font-size:19px;margin-bottom:6px}
+.accuse select{width:100%;padding:9px;background:#fff9e8;border:1px solid #8b8066;border-radius:2px;font-size:15px}
+#solution{display:none}
+.result{font-family:"Special Elite";font-size:16px;margin-top:16px;padding:14px;border:2px solid var(--ink)}
+.small{font-size:13.5px;color:#a69e88}
+.warn{border:1px solid var(--red);color:#f0c8bf;padding:10px 14px;border-radius:3px;background:rgba(143,29,33,.15);margin:12px 0;font-size:15px}
+.rule{color:#f0c8bf;border-left:3px solid var(--red);padding-left:12px}
+footer{text-align:center;color:#7d7766;font-size:13px;padding:30px 10px;font-family:"Special Elite"}
+.paper:has(> .stamp) .meta{padding-right:170px}
+:root{--desk:#14181a;--gold:#c8a85a}
+header.top{background:linear-gradient(rgba(10,14,16,.35),rgba(20,24,26,1)),url(img/cover.jpg) center/cover}
+#countdown{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;align-items:center;padding:10px;background:#101315;border-bottom:1px solid #2c3438;font-family:"Special Elite"}
+#countdown .day{border:1px solid #3c464c;padding:3px 9px;font-size:12px;color:#6f7a80;text-align:center;line-height:1.1}
+#countdown .day b{display:block;font-weight:normal;font-size:11px}
+#countdown .day.past{color:#4a5358;text-decoration:line-through}
+#countdown .day.now{background:#8f1d21;border-color:#8f1d21;color:#fff}
+#countdown .cdtext{font-size:12.5px;color:#c8a85a;margin-left:8px}
+#tabs button.dis{opacity:.35}
+.floorbtns{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap}
+.floorbtns button{font-family:"Special Elite";background:#e3d5b0;border:1px solid #8b8066;padding:6px 14px;cursor:pointer;color:#23201b}
+.floorbtns button.on{background:#23201b;color:#f1ead8}
+.polaroid.cftv{background:#1b1e20;color:#d9e2d3}.polaroid.cftv .cap{font-family:"IBM Plex Mono";font-size:14px}.polaroid.cftv .num{color:#7f8b80}
+.safe{max-width:340px;margin:0 auto 26px;background:linear-gradient(#5d6266,#3b3f42);border-radius:10px;padding:22px;box-shadow:0 14px 30px rgba(0,0,0,.6),inset 0 2px 0 rgba(255,255,255,.15)}
+.safebrand{font-family:"IBM Plex Mono";font-size:11px;letter-spacing:.3em;color:#c9ced1;text-align:center;margin-bottom:10px}
+.safedisp{background:#0f1a10;color:#7dff7a;font-family:"IBM Plex Mono";font-size:34px;text-align:center;padding:10px;border-radius:4px;letter-spacing:.2em;text-shadow:0 0 8px #3cff3a;margin-bottom:16px}
+.safedisp.bad{color:#ff6a5a;text-shadow:0 0 8px #ff3a2a}.safedisp.ok{color:#9fe8ff;text-shadow:0 0 8px #39c3ff}
+.keys{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.keys button{font-family:"IBM Plex Mono";font-size:22px;padding:12px 0;border-radius:6px;border:1px solid #222;background:linear-gradient(#e9eaeb,#b7bbbe);cursor:pointer;color:#222}
+.keys button:active{transform:translateY(1px)}
+
+</style>
+</head>
+<body>
+<div style="position:relative"><a href="../" style="position:absolute;top:14px;left:16px;font-family:'Special Elite',monospace;font-size:13px;color:#e7e1d0;text-decoration:none;background:rgba(0,0,0,.45);padding:6px 10px;border:1px solid rgba(255,255,255,.3);border-radius:3px;z-index:30">← Todos os casos</a></div><header class="top">
+  <div class="kicker">Investigação particular · Hotel Marquês de Itu · São Paulo · Setembro de 2007</div>
+  <h1 class="title">A Madrinha do 7º Andar</h1>
+  <p class="subtitle">Um casamento, um hotel de 1946, uma câmera às 01h12. E cinco dias para encontrar quem subiu e não desceu.</p>
+</header>
+<nav class="tabs" id="tabs">
+  <button data-v="regras" class="active">Como jogar</button>
+  <button data-v="caso">O caso &amp; a lore</button>
+  <button data-v="vitimas">A desaparecida</button>
+  <button data-v="personagens">Suspeitos</button>
+  <button data-v="mapa">Plantas do hotel</button>
+  <button data-v="arquivo">Arquivo</button>
+  <button data-v="fotos">Fotos &amp; câmeras</button>
+  <button data-v="cofre">🔐 Cofre 704</button>
+  <button data-v="invest">🔎 Investigação</button>
+  <button data-v="notas">Anotações</button>
+  <button data-v="dicas">Dicas</button>
+  <button data-v="acusacao">Relatório final</button>
+</nav>
+<div id="countdown"></div>
+<main>
+<section class="view active" id="v-regras"><div class="prose" id="regras"></div></section>
+<section class="view" id="v-caso"><div id="caso"></div></section>
+<section class="view" id="v-vitimas"><div class="grid c2" id="victims"></div></section>
+<section class="view" id="v-personagens"><h2 class="secth">Suspeitos</h2><div class="grid c2" id="chars"></div><h2 class="secth">Outras pessoas</h2><div class="grid c3" id="witness"></div></section>
+<section class="view" id="v-mapa"><div id="maps"></div></section>
+<section class="view" id="v-cofre"><div id="cofre"></div></section>
+<section class="view" id="v-arquivo"><div class="archive"><aside class="doclist" id="doclist"></aside><div id="docview"></div></div></section>
+<section class="view" id="v-fotos"><p class="small" style="text-align:center">Clique numa foto para ampliar e ler o verso. Novas fotos aparecem a cada envelope aberto.</p><div id="photos"></div></section>
+<section class="view" id="v-notas"><div class="paper notes"><h2>Quadro da investigação</h2><p style="font-size:14px;color:#6b6352">Fica salvo neste navegador.</p><div id="notefields"></div>
+<label>Linha do tempo</label><textarea class="big" data-note="timeline"></textarea><label>Teorias &amp; perguntas</label><textarea class="big" data-note="teorias"></textarea></div></section>
+<section class="view" id="v-invest"><div id="invest"></div></section>
+<section class="view" id="v-dicas"><div class="prose"><h2>Dicas</h2><p>Abram uma por vez. A terceira de cada envelope é quase uma resposta.</p><div id="hints"></div></div></section>
+<section class="view" id="v-acusacao"><div class="paper accuse" id="accuse"></div><div id="solution" class="prose"></div></section>
+</main>
+<footer>Caso fictício. O Hotel Marquês de Itu, as pessoas, as empresas e os documentos foram inventados para este jogo. Ruas e bairros de São Paulo são reais; os fatos atribuídos a eles, não.</footer>
+<div class="modal" id="modal" onclick="if(event.target===this)closeModal()"><button class="close" onclick="closeModal()">×</button><div class="inner" id="modalInner"></div></div>
+<script src="data_core.js"></script>
+<script src="docs1.js"></script>
+<script src="docs2.js"></script>
+<script src="docs3.js"></script>
+<script src="docs4.js"></script>
+<script src="docs5.js"></script>
+<script src="map.js"></script>
+<script src="app.js"></script>
+<script src="tools_cfg.js"></script>
+<script src="tools.js"></script>
+</body>
+</html>
