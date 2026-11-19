@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Caso Valmorbida — O Último Brinde</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Caveat:wght@500;700&family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=IBM+Plex+Mono:wght@400;600&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --desk:#1d221d; --desk2:#262d26; --felt:#2f3a2f;
+  --paper:#f3ead4; --paper2:#ebdfc2; --ink:#2a241c; --muted:#6d6250;
+  --red:#9b2226; --navy:#22334f; --gold:#b8913a; --line:#cbbd99;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--desk);color:#e9e2cf;font-family:"Source Serif 4",Georgia,serif;line-height:1.55}
+body{background:radial-gradient(ellipse at top,#2c352c 0%,var(--desk) 60%) fixed}
+a{color:inherit}
+header.top{padding:28px 20px 10px;text-align:center;border-bottom:1px solid #3a443a}
+.kicker{font-family:"Special Elite",monospace;letter-spacing:.25em;font-size:12px;color:var(--gold);text-transform:uppercase}
+h1.title{font-family:"Playfair Display",serif;font-weight:800;font-size:clamp(30px,5vw,54px);margin:6px 0 2px;color:#f3ead4;letter-spacing:.01em}
+.subtitle{font-style:italic;color:#bfb59c;margin:0 0 10px}
+nav.tabs{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;padding:12px 10px;position:sticky;top:0;background:rgba(29,34,29,.96);z-index:20;border-bottom:1px solid #3a443a;backdrop-filter:blur(4px)}
+nav.tabs button{font-family:"Special Elite",monospace;background:#2b332b;color:#e4dcc6;border:1px solid #475247;padding:8px 13px;border-radius:3px;cursor:pointer;font-size:14px}
+nav.tabs button:hover{border-color:var(--gold)}
+nav.tabs button.active{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+main{max-width:1180px;margin:0 auto;padding:24px 16px 80px}
+section.view{display:none}
+section.view.active{display:block;animation:fade .25s ease}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1}}
+
+/* paper */
+.paper{background:var(--paper);color:var(--ink);padding:34px 38px;border-radius:2px;box-shadow:0 12px 30px rgba(0,0,0,.45),inset 0 0 60px rgba(160,130,70,.18);position:relative;margin:0 auto 24px;max-width:860px}
+.paper.typed{font-family:"Special Elite",monospace;font-size:15.5px;line-height:1.65}
+.paper.hand{font-family:"Caveat",cursive;font-size:25px;line-height:1.35;background:#f7f1dc;background-image:repeating-linear-gradient(#f7f1dc 0 33px,#c9d6e3 33px 34px);padding-top:40px}
+.paper.telex{font-family:"IBM Plex Mono",monospace;font-size:14px;background:#efe9d8;text-transform:none}
+.paper h2{font-family:"Playfair Display",serif;font-size:26px;margin:0 0 6px}
+.paper h3{font-family:"Special Elite",monospace;font-size:16px;letter-spacing:.08em;margin:22px 0 6px;border-bottom:1px dashed var(--line);padding-bottom:3px}
+.paper .meta{font-family:"Special Elite",monospace;font-size:13px;color:var(--muted);border-bottom:2px solid var(--ink);padding-bottom:8px;margin-bottom:16px}
+.paper table{border-collapse:collapse;width:100%;margin:10px 0;font-size:14px}
+.paper th,.paper td{border:1px solid #b9aa86;padding:6px 8px;text-align:left;vertical-align:top}
+.paper th{background:#e6d8b5}
+.stamp{position:absolute;top:26px;right:26px;border:3px solid var(--red);color:var(--red);font-family:"Special Elite",monospace;padding:4px 10px;transform:rotate(8deg);opacity:.78;letter-spacing:.12em;font-size:14px}
+.stamp.blue{border-color:#2b4a7a;color:#2b4a7a;transform:rotate(-6deg)}
+.margin-note{font-family:"Caveat",cursive;color:#1f3f8a;font-size:23px;line-height:1.2;display:block;margin:6px 0 6px 18px;transform:rotate(-1.2deg)}
+.strike{text-decoration:line-through;text-decoration-thickness:2px}
+.sig{font-family:"Caveat",cursive;font-size:28px;color:#1f3f8a}
+.redact{background:#1b1b1b;color:#1b1b1b;padding:0 4px}
+
+/* cards */
+.grid{display:grid;gap:18px}
+.grid.c2{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+.grid.c3{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.card{background:var(--paper);color:var(--ink);border-radius:2px;padding:18px;box-shadow:0 8px 20px rgba(0,0,0,.4);position:relative}
+.card h4{font-family:"Playfair Display",serif;font-size:20px;margin:6px 0 0}
+.card .role{font-family:"Special Elite",monospace;font-size:12.5px;color:var(--red);letter-spacing:.06em;text-transform:uppercase}
+.card p{margin:8px 0;font-size:15px}
+.card .facts{font-size:13.5px;color:#4a4232;border-top:1px dashed var(--line);margin-top:10px;padding-top:8px}
+.portrait{width:120px;height:150px;float:right;margin:0 0 6px 12px;border:5px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.35);background:#cdbb95}
+.victim{outline:3px solid var(--red);outline-offset:-3px}
+.tag{display:inline-block;font-family:"Special Elite",monospace;font-size:11px;padding:2px 6px;border:1px solid var(--muted);margin-right:4px;border-radius:2px}
+
+/* archive */
+.archive{display:grid;grid-template-columns:300px 1fr;gap:20px;align-items:start}
+@media (max-width:860px){.archive{grid-template-columns:1fr}.paper{padding:24px 18px}}
+.doclist{background:#252c25;border:1px solid #3d473d;border-radius:4px;padding:10px;position:sticky;top:70px;max-height:calc(100vh - 90px);overflow:auto}
+@media (max-width:860px){.doclist{position:static;max-height:none}}
+.stage-h{font-family:"Special Elite",monospace;color:var(--gold);font-size:13px;letter-spacing:.12em;margin:12px 6px 6px;text-transform:uppercase}
+.docbtn{display:block;width:100%;text-align:left;background:transparent;border:0;border-left:3px solid transparent;color:#ddd5bf;padding:7px 10px;font-family:"Source Serif 4",serif;font-size:14.5px;cursor:pointer;border-radius:2px}
+.docbtn small{display:block;color:#9d9580;font-size:11.5px;font-family:"Special Elite",monospace}
+.docbtn:hover{background:#2f382f}
+.docbtn.active{background:#3a443a;border-left-color:var(--gold)}
+.docbtn.read::after{content:"✓";float:right;color:#7d9a6d;font-size:12px}
+.locked{border:1px dashed #5b665b;border-radius:4px;padding:12px;margin:6px 4px;color:#bdb49c;font-size:14px}
+.locked .lockt{font-family:"Special Elite",monospace;color:#e4dcc6}
+.gate select,.gate button,.accuse select,.accuse button,textarea{font-family:"Source Serif 4",serif;font-size:15px}
+.gate select{width:100%;margin:8px 0;padding:7px;background:#f3ead4;border:1px solid #8b8066;border-radius:2px}
+.btn{background:var(--red);color:#fff;border:0;padding:9px 14px;border-radius:3px;cursor:pointer;font-family:"Special Elite",monospace;letter-spacing:.06em}
+.btn.ghost{background:transparent;border:1px solid #8b8066;color:inherit}
+.btn:hover{filter:brightness(1.1)}
+.feedback{margin-top:6px;font-size:13.5px;font-style:italic}
+.feedback.bad{color:#e08a7a}.feedback.good{color:#a6c98f}
+
+/* photos */
+.photos{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:26px}
+.polaroid{background:#fbfaf5;padding:12px 12px 14px;box-shadow:0 10px 24px rgba(0,0,0,.5);transform:rotate(var(--r,0deg));cursor:pointer;transition:transform .2s;color:var(--ink)}
+.polaroid:hover{transform:rotate(0deg) scale(1.03)}
+.polaroid svg{width:100%;display:block;background:#ccc}
+.polaroid .cap{font-family:"Caveat",cursive;font-size:21px;margin-top:8px;line-height:1.1}
+.polaroid .num{font-family:"Special Elite",monospace;font-size:11px;color:var(--muted)}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.82);display:none;align-items:center;justify-content:center;z-index:50;padding:20px}
+.modal.open{display:flex}
+.modal .inner{max-width:900px;width:100%;max-height:92vh;overflow:auto;display:grid;grid-template-columns:1.3fr 1fr;gap:18px}
+@media (max-width:760px){.modal .inner{grid-template-columns:1fr}}
+.modal .inner .back{background:#f4efe2;color:var(--ink);padding:22px;font-family:"Caveat",cursive;font-size:23px;line-height:1.3;box-shadow:0 10px 24px rgba(0,0,0,.5)}
+.modal .inner .back .tech{font-family:"Special Elite",monospace;font-size:13.5px;line-height:1.5;margin-top:12px;color:#3d3628;border-top:1px dashed var(--line);padding-top:10px}
+.modal .close{position:fixed;top:14px;right:18px;font-size:30px;color:#fff;background:none;border:0;cursor:pointer}
+
+/* map */
+.mapwrap{background:var(--paper);padding:20px;border-radius:2px;box-shadow:0 12px 30px rgba(0,0,0,.45);color:var(--ink)}
+.mapwrap svg{width:100%;height:auto;display:block}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:14px;margin-top:10px;font-family:"Special Elite",monospace}
+
+/* notes */
+.notes textarea{width:100%;min-height:110px;background:#f7f1dc;border:1px solid #b9aa86;border-radius:2px;padding:10px;font-family:"Caveat",cursive;font-size:22px;line-height:1.25;color:#1f3f8a}
+.notes .big{min-height:240px}
+.notes label{font-family:"Playfair Display",serif;font-size:18px;color:var(--ink)}
+
+.hint{background:#252c25;border:1px solid #3d473d;border-radius:4px;padding:14px 16px;margin-bottom:14px}
+.hint h4{font-family:"Special Elite",monospace;color:var(--gold);margin:0 0 8px;font-weight:normal;letter-spacing:.08em}
+.hint .h{display:none;margin:8px 0 0;padding:8px 10px;background:#f3ead4;color:var(--ink);border-radius:2px;font-size:15px}
+.hint .h.show{display:block}
+.prose{max-width:820px;margin:0 auto}
+.prose p{font-size:17px}
+.prose h2{font-family:"Playfair Display",serif;color:#f3ead4;font-size:28px;margin:30px 0 8px}
+.prose h3{font-family:"Special Elite",monospace;color:var(--gold);font-weight:normal;letter-spacing:.06em;margin:22px 0 6px}
+.prose ul li,.prose ol li{margin:5px 0;font-size:16.5px}
+.timeline{border-left:2px solid var(--gold);margin:10px 0 10px 8px;padding-left:18px}
+.timeline div{margin:8px 0;position:relative;font-size:16px}
+.timeline div::before{content:"";position:absolute;left:-24px;top:8px;width:10px;height:10px;border-radius:50%;background:var(--gold)}
+.timeline b{font-family:"Special Elite",monospace;color:var(--gold);font-weight:normal;margin-right:6px}
+.accuse .row{margin:14px 0}
+.accuse label{display:block;font-family:"Playfair Display",serif;font-size:19px;margin-bottom:6px}
+.accuse select{width:100%;padding:9px;background:#fff9e8;border:1px solid #8b8066;border-radius:2px}
+#solution{display:none}
+.result{font-family:"Special Elite",monospace;font-size:16px;margin-top:16px;padding:14px;border:2px solid var(--ink)}
+.small{font-size:13.5px;color:#a69e88}
+.warn{border:1px solid var(--red);color:#f0c8bf;padding:10px 14px;border-radius:3px;background:rgba(155,34,38,.12);margin:12px 0;font-size:15px}
+footer{text-align:center;color:#7d7766;font-size:13px;padding:30px 10px;font-family:"Special Elite",monospace}
+</style>
+</head>
+<body>
+<header class="top" style="background:linear-gradient(rgba(20,24,20,.55),rgba(29,34,29,1)),url(img/casa.jpg) center/cover;padding-top:70px;padding-bottom:30px">
+  <div class="kicker">Polícia Civil do Rio Grande do Sul · Delegacia de Bento Gonçalves · Inquérito nº 1.047/94</div>
+  <h1 class="title">O Último Brinde</h1>
+  <p class="subtitle">A morte de Otávio Valmorbida na noite do centenário — Serra Gaúcha, 25 de junho de 1994</p>
+</header>
+<nav class="tabs" id="tabs">
+  <button data-v="regras" class="active">Como jogar</button>
+  <button data-v="caso">O caso &amp; a lore</button>
+  <button data-v="personagens">Personagens</button>
+  <button data-v="mapa">Mapa</button>
+  <button data-v="arquivo">Arquivo</button>
+  <button data-v="fotos">Fotos</button>
+  <button data-v="notas">Anotações</button>
+  <button data-v="dicas">Dicas</button>
+  <button data-v="acusacao">Acusação</button>
+</nav>
+<main>
+
+<!-- ============ REGRAS ============ -->
+<section class="view active" id="v-regras">
+  <div class="prose">
+    <h2>Bem-vindos à Delegacia, detetives.</h2>
+    <p>Este é um caso arquivado completo, para jogar a dois (ou mais). Vocês receberam o inquérito sobre a morte de <b>Otávio Valmorbida</b>, patriarca de uma vinícola centenária. A família e o advogado querem encerrar como <i>queda acidental</i>. O delegado não acredita nisso, e agora o caso é de vocês.</p>
+    <h3>Objetivo</h3>
+    <p>Ao final, vocês vão apresentar a acusação respondendo três perguntas: <b>quem</b> matou Otávio, <b>com o quê</b> e <b>por quê</b>. Cada resposta tem que se sustentar em provas do arquivo.</p>
+    <h3>Como o arquivo funciona</h3>
+    <ul>
+      <li><b>Etapa 1 — Arquivo inicial:</b> boletim de ocorrência, perícia de local, depoimentos, fotos e o caderno da vítima.</li>
+      <li><b>Etapa 2 — Perícia e laudos:</b> fica lacrada até vocês responderem corretamente uma pergunta sobre a Etapa 1.</li>
+      <li><b>Etapa 3 — Papéis do escritório:</b> fica lacrada até vocês responderem uma pergunta sobre a Etapa 2.</li>
+      <li>Uma resposta errada não tem punição, mas joguem limpo: discutam antes de chutar.</li>
+    </ul>
+    <h3>Sugestão para jogar em casal</h3>
+    <ul>
+      <li>Leiam primeiro <b>O caso &amp; a lore</b> e os <b>Personagens</b>, de preferência em voz alta.</li>
+      <li>Dividam os papéis: um lê os depoimentos fazendo as vozes 🎭, o outro anota no quadro (aba <b>Anotações</b>, que fica salva neste navegador).</li>
+      <li>Deixem o <b>Mapa</b> aberto em outra aba ou num segundo aparelho. Ele é essencial.</li>
+      <li><b>Modo competitivo:</b> antes de abrir a Acusação, cada um escreve num papel quem acha que é o culpado. Quem acertar mais itens escolhe a próxima pizza.</li>
+      <li>Duração estimada: 2 a 3 horas. Dá para pausar, porque o progresso fica salvo.</li>
+      <li>Se travarem, a aba <b>Dicas</b> tem três dicas progressivas por etapa.</li>
+    </ul>
+    <div class="warn">⚠️ Não abram a solução antes de acusar. Ela fica escondida até vocês enviarem a acusação.</div>
+    <p class="small">Contexto de época: junho de 1994. Ainda não existe celular popular e a moeda é o Cruzeiro Real, que dá lugar ao Real em 1º de julho. Telefones fixos analógicos funcionam mesmo sem energia elétrica.</p>
+    <p><button class="btn" onclick="go('caso')">Abrir o caso →</button> &nbsp; <button class="btn ghost" style="color:#e9e2cf" onclick="resetAll()">Reiniciar progresso</button></p>
+  </div>
+</section>
+
+<!-- ============ CASO / LORE ============ -->
+<section class="view" id="v-caso">
+  <div class="paper typed">
+    <div class="stamp">CONFIDENCIAL</div>
+    <div class="meta">MEMORANDO INTERNO · DP Bento Gonçalves · 28/06/1994 · De: Del. Ernesto Pagliarini · Para: Equipe de investigação</div>
+    <p>Colegas,</p>
+    <p>No sábado, 25/06, durante a festa de centenário da Vinícola Valmorbida, o patriarca <b>OTÁVIO VALMORBIDA</b> (71 anos) foi encontrado morto às 23h40, no pé da escada que desce à adega da casa principal. O relógio dele estava quebrado, parado às 23h12.</p>
+    <p>A família quer enterrar o assunto. O advogado da casa, <b>Dr. Augusto Brandão</b>, já me telefonou duas vezes pedindo que o inquérito seja concluído como "queda acidental de pessoa idosa e cardíaca, sob efeito de álcool". O prefeito também ligou.</p>
+    <p>Eu não estou convencido. Tem sangue de menos naquela escada e gente demais com motivo naquela casa.</p>
+    <p>Vocês têm o arquivo completo. Leiam tudo, cruzem horários e me digam o que aconteceu de verdade. Quero um nome, uma arma e um motivo até segunda-feira.</p>
+    <p>— <span class="sig">E. Pagliarini</span><br>Delegado Titular</p>
+  </div>
+
+  <div class="prose">
+    <h2>A Casa Valmorbida: cem anos de vinho</h2>
+    <p><b>26 de junho de 1894.</b> Giuseppe Valmorbida, imigrante do Vêneto, chega à Linha Graciema, no interior de Bento Gonçalves, com uma mala, uma enxada e um punhado de mudas de uva Isabel enroladas em pano úmido. Planta as primeiras fileiras numa encosta de basalto que ninguém queria. A família guarda essa data como o nascimento da vinícola.</p>
+    <p>O filho, <b>Ângelo</b>, atravessa a crise de 1929 e a Segunda Guerra vendendo vinho a granel em pipas de grápia para Porto Alegre. Em 1952 ele constrói a casa de pedra que existe até hoje, com o porão escavado na rocha para servir de adega. Ali ficam as safras especiais da família.</p>
+    <p><b>Otávio</b> assume em 1961, aos 38 anos. É ele quem troca a Isabel por Cabernet e Merlot, compra barricas francesas quando ninguém na Serra fazia isso e transforma a Valmorbida numa das casas mais respeitadas da região. Casou-se com <b>Irene</b>, professora de bordado de Garibaldi, que morreu de pneumonia em 1979. Dela ficaram dois filhos, Helena e Rafael, e um enxoval de toalhas de linho bordadas com um "V" azul que até hoje vão à mesa nas ocasiões especiais.</p>
+    <p>Em <b>1985</b>, depois de um infarto, Otávio assinou uma procuração para que seu advogado e amigo de trinta anos, <b>Dr. Augusto Brandão</b>, cuidasse dos pagamentos a fornecedores e da parte burocrática. "O Augusto é da família", dizia.</p>
+    <p>Em <b>1994</b>, o centenário chega com uma novidade que poucos conhecem: o grupo francês <b>Maison Delacroix</b> quer comprar a Valmorbida. Os franceses mandaram um representante, <b>Jean-Luc Moreau</b>, e uma auditoria para examinar as contas. O fechamento está previsto para 30 de junho, antes da troca de moeda do Plano Real.</p>
+    <p>Para a meia-noite de 25 para 26 de junho, quando a vinícola completaria exatamente cem anos, Otávio separou doze garrafas magnum da <b>Reserva do Centenário</b>, numeradas de 001 a 012 e lacradas com cera vermelha. Ele mesmo abriria a <b>nº 001</b> no brinde.</p>
+    <p>Ele não chegou à meia-noite.</p>
+
+    <h2>A noite de 25 de junho de 1994</h2>
+    <p>Fazia frio, uns 6 °C lá fora, e caía uma garoa fina. Na casa de pedra estavam a família, a governanta, dois convidados de confiança e o francês. Os funcionários eram a cozinheira, o vigia e um fotógrafo contratado. Às <b>22h04</b> faltou luz em toda a casa principal, que ficou às escuras até as <b>22h19</b>. Ninguém deu muita importância, porque na Serra a energia cai com frequência no inverno.</p>
+    <p>Às 23h30 alguém perguntou por Otávio. Às 23h40 a governanta desceu à adega para buscar o espumante do brinde e o encontrou caído de bruços no pé da escada.</p>
+    <h3>Programa da noite (impresso pela família)</h3>
+    <div class="timeline">
+      <div><b>20h30</b> Brinde de abertura e fotos na sala de degustação, com a apresentação das garrafas do Centenário</div>
+      <div><b>21h00</b> Jantar no salão: sopa de capeletti, galeto, polenta brustolada e radicci</div>
+      <div><b>21h30</b> Sobremesa: sagu de vinho tinto com creme de baunilha (receita de Dona Irene)</div>
+      <div><b>22h00</b> Licores e café na sala de estar</div>
+      <div><b>00h00</b> Brinde do Centenário, com a abertura da garrafa nº 001 por Otávio Valmorbida</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PERSONAGENS ============ -->
+<section class="view" id="v-personagens">
+  <div class="grid c2" id="chars"></div>
+  <div class="prose"><h2 style="font-size:22px">Testemunhas (não suspeitos)</h2></div>
+  <div class="grid c3" id="witness"></div>
+</section>
+
+<!-- ============ MAPA ============ -->
+<section class="view" id="v-mapa">
+  <div class="mapwrap">
+    <div style="font-family:'Special Elite';font-size:13px;color:#6d6250;border-bottom:2px solid #2a241c;padding-bottom:6px;margin-bottom:10px">CROQUI DO LOCAL — CASA PRINCIPAL VALMORBIDA (TÉRREO) E ARREDORES · elaborado pela perícia em 26/06/1994 · sem escala</div>
+    <svg viewBox="0 0 920 600" id="mapsvg"></svg>
+    <div class="legend">
+      <span>☎ L1 = ramal da Linha 1 (escritório)</span>
+      <span>☎ L2 = ramal da Linha 2 (residência)</span>
+      <span>⚡ = quadro de força</span>
+      <span>✕ = corpo encontrado</span>
+      <span>◉ = garrafa encontrada</span>
+      <span>▭ na parede = porta</span>
+    </div>
+    <p style="font-size:14px;margin:12px 0 0">O 2º piso (quartos da família e de hóspedes, com ramais da L2) fica sobre o escritório e a sala de estar, e o acesso é pela escadaria principal. A <b>adega</b> fica no subsolo, escavada na rocha, e só se chega a ela pela escada no fim do corredor de serviço. A <b>cantina</b>, prédio de produção onde fica a câmara climatizada dos espumantes, está a uns 80 m da casa.</p>
+  </div>
+</section>
+
+<!-- ============ ARQUIVO ============ -->
+<section class="view" id="v-arquivo">
+  <div class="archive">
+    <aside class="doclist" id="doclist"></aside>
+    <div id="docview"></div>
+  </div>
+</section>
+
+<!-- ============ FOTOS ============ -->
+<section class="view" id="v-fotos">
+  <p class="small" style="text-align:center">Clique numa foto para ampliá-la e ler o verso, com as anotações do fotógrafo ou do perito. Novas fotos aparecem quando as etapas são abertas.</p>
+  <div class="photos" id="photos"></div>
+</section>
+
+<!-- ============ NOTAS ============ -->
+<section class="view" id="v-notas">
+  <div class="paper notes">
+    <h2>Quadro dos detetives</h2>
+    <p style="font-size:14px;color:#6d6250">Tudo o que vocês escreverem aqui fica salvo neste navegador.</p>
+    <div id="notefields"></div>
+    <label>Linha do tempo que vocês reconstruíram</label>
+    <textarea class="big" data-note="timeline" placeholder="21h30 sobremesa... 22h04 apagão..."></textarea>
+    <label>Teorias &amp; perguntas em aberto</label>
+    <textarea class="big" data-note="teorias"></textarea>
+  </div>
+</section>
+
+<!-- ============ DICAS ============ -->
+<section class="view" id="v-dicas">
+  <div class="prose">
+    <h2>Dicas</h2>
+    <p>Abra uma dica por vez. A terceira de cada etapa é quase uma resposta.</p>
+    <div id="hints"></div>
+  </div>
+</section>
+
+<!-- ============ ACUSAÇÃO ============ -->
+<section class="view" id="v-acusacao">
+  <div class="paper accuse">
+    <div class="stamp blue">RELATÓRIO FINAL</div>
+    <div class="meta">RELATÓRIO FINAL DO INQUÉRITO 1.047/94 · Para: Del. E. Pagliarini</div>
+    <p id="acc-lock" style="font-style:italic">Recomendamos abrir as três etapas do arquivo antes de acusar. Vocês podem acusar a qualquer momento, mas só têm uma chance de ver o resultado com honra. 😉</p>
+    <div class="row"><label>1. Quem matou Otávio Valmorbida?</label>
+      <select id="a-quem"><option value="">— escolham —</option>
+        <option value="helena">Helena Valmorbida</option><option value="rafael">Rafael Valmorbida</option>
+        <option value="lucia">Lúcia Ferraz</option><option value="jeanluc">Jean-Luc Moreau</option>
+        <option value="brandao">Dr. Augusto Brandão</option><option value="saulo">Dr. Saulo Vieira</option>
+        <option value="ninguem">Ninguém: foi mesmo um acidente</option></select></div>
+    <div class="row"><label>2. Com o quê?</label>
+      <select id="a-arma"><option value="">— escolham —</option>
+        <option value="queda">Nada: queda acidental na escada</option>
+        <option value="atiçador">O atiçador da lareira</option>
+        <option value="castiçal">Um castiçal de bronze</option>
+        <option value="garrafa">A garrafa magnum nº 001 da Reserva do Centenário</option>
+        <option value="empurrao">Empurrão escada abaixo</option></select></div>
+    <div class="row"><label>3. Por quê?</label>
+      <select id="a-motivo"><option value="">— escolham —</option>
+        <option value="venda">Impedir a venda da vinícola aos franceses</option>
+        <option value="garantir">Garantir que a venda acontecesse</option>
+        <option value="divida">Conseguir dinheiro para pagar dívidas</option>
+        <option value="heranca">Antecipar a herança prevista no testamento</option>
+        <option value="desvio">Impedir que Otávio denunciasse um desvio de dinheiro</option></select></div>
+    <div class="row"><label>4. (Bônus) Onde e quando ele realmente morreu?</label>
+      <select id="a-quando"><option value="">— escolham —</option>
+        <option value="a">Na escada da adega, por volta das 23h12</option>
+        <option value="b">Na sala de degustação, durante o apagão (22h04–22h19)</option>
+        <option value="c">Na biblioteca, por volta das 21h45</option>
+        <option value="d">Na sala de degustação, por volta das 23h00</option></select></div>
+    <button class="btn" onclick="accuse()">Entregar relatório ao delegado</button>
+    <div id="acc-result"></div>
+  </div>
+  <div id="solution" class="prose"></div>
+</section>
+
+</main>
+<footer>Caso fictício. Todos os personagens, empresas e fatos foram inventados para este jogo.</footer>
+
+<div class="modal" id="modal" onclick="if(event.target===this)closeModal()"><button class="close" onclick="closeModal()">×</button><div class="inner" id="modalInner"></div></div>
+
+<script>
+/* ===================== STATE ===================== */
+const LS='valmorbida_v1';
+let S={stage:1,read:{},notes:{},hints:{}};
+try{const s=JSON.parse(localStorage.getItem(LS));if(s)S=Object.assign(S,s);}catch(e){}
+function save(){try{localStorage.setItem(LS,JSON.stringify(S));}catch(e){}}
+function resetAll(){S={stage:1,read:{},notes:{},hints:{}};save();location.hash='';location.reload();}
+
+/* ===================== NAV ===================== */
+function go(v){
+  document.querySelectorAll('section.view').forEach(s=>s.classList.toggle('active',s.id==='v-'+v));
+  document.querySelectorAll('#tabs button').forEach(b=>b.classList.toggle('active',b.dataset.v===v));
+  try{history.replaceState(null,'','#'+v);}catch(e){}
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+document.querySelectorAll('#tabs button').forEach(b=>b.onclick=()=>go(b.dataset.v));
+
+/* ===================== PORTRAITS ===================== */
+function portrait(o){
+  const {hair='#3b2f25',skin='#e0b993',coat='#2c3e5a',bg='#cdbb95',extra=''}=o;
+  return `<svg class="portrait" viewBox="0 0 86 104"><rect width="86" height="104" fill="${bg}"/>
+  <path d="M8 104 Q10 70 43 68 Q76 70 78 104Z" fill="${coat}"/>
+  <rect x="36" y="56" width="14" height="14" fill="${skin}"/>
+  <ellipse cx="43" cy="42" rx="17" ry="20" fill="${skin}"/>
+  <path d="M25 40 Q26 18 43 18 Q61 18 61 40 Q58 28 43 27 Q30 28 25 40Z" fill="${hair}"/>${extra}</svg>`;
+}
+function pimg(c){return `<img class="portrait" src="img/${c.id}.jpg" alt="${c.name}" style="object-fit:cover">`;}
+const CHARS=[
+ {id:'otavio',victim:true,name:'Otávio Valmorbida',age:71,role:'A vítima · patriarca',p:{hair:'#d8d8d0',coat:'#3a3a3a'},
+  desc:'Terceira geração da família, homem de poucas palavras e mãos de agricultor. Teimoso, orgulhoso da história da casa e desconfiado de gente de fora. Viúvo desde 1979. Cardiopata desde o infarto de 1985, toma antiarrítmico. Nas últimas semanas andava calado e fez uma viagem misteriosa a Pinto Bandeira.',
+  facts:'Tipo sanguíneo O+. Usava sempre um relógio Omega Seamaster que ganhou de Irene.'},
+ {id:'helena',name:'Helena Valmorbida',age:44,role:'Filha mais velha · enóloga-chefe',p:{hair:'#4a2d1d',coat:'#6b2737',skin:'#e6c3a0'},
+  desc:'Formou-se em Enologia em Bordeaux e voltou para dedicar a vida à vinícola. É ela quem cuida da cantina, das safras e da câmara de espumantes. Solteira, intensa, tem uma ligação quase física com aquelas parreiras. Descobriu sozinha que o pai negociava a venda e ficou furiosa.',
+  facts:'Na noite do crime: vestido vinho, botas de couro.'},
+ {id:'rafael',name:'Rafael Valmorbida',age:38,role:'Filho mais novo',p:{hair:'#1f1a16',coat:'#556070',skin:'#ddb48e'},
+  desc:'Charmoso, falante e problemático. Mora em São Paulo há quinze anos, onde "trabalha com investimentos". Tem dívidas de jogo com gente perigosa. Veio à festa disposto a pedir dinheiro ao pai, que já tinha negado. Defende a venda abertamente: "Pai, vende e vai pescar".',
+  facts:'Fuma cigarros Hollywood e usa isqueiro Zippo.'},
+ {id:'lucia',name:'Lúcia Ferraz',age:52,role:'Governanta',p:{hair:'#5a4a3a',coat:'#2f3a2f',skin:'#c99a72'},
+  desc:'Trabalha na casa há 31 anos. Criou Helena e Rafael depois da morte de Dona Irene. Discreta, observadora, sabe onde fica cada coisa e cada segredo da família. Há quem diga, baixinho, que ela e Otávio foram mais do que patrão e empregada.',
+  facts:'Guarda as chaves da adega e do enxoval.'},
+ {id:'jeanluc',name:'Jean-Luc Moreau',age:45,role:'Representante da Maison Delacroix',p:{hair:'#7a6a55',coat:'#4b4b4b',skin:'#ecc7a6'},
+  desc:'Francês elegante, fala português com sotaque carregado. Está há uma semana na Serra para fechar a compra. É a primeira vez que visita a casa. Está sob forte pressão de Paris: se o negócio cair, o emprego dele cai junto.',
+  facts:'Fuma Gauloises. Discutiu com Otávio às 21h45.'},
+ {id:'brandao',name:'Dr. Augusto Brandão',age:60,role:'Advogado da família há 30 anos',p:{hair:'#9a9a92',coat:'#22334f',skin:'#e3bb95',extra:'<rect x="56" y="58" width="16" height="4" fill="#5a3b20" transform="rotate(-15 56 58)"/>'},
+  desc:'Amigo íntimo de Otávio, padrinho de Rafael e frequentador da casa desde os anos 60. Conhece cada canto da propriedade. Desde 1985 tem procuração para pagar fornecedores. Cortês e meticuloso. É ele quem mais insiste para que a morte seja tratada como acidente.',
+  facts:'Fuma cachimbo, tabaco aromático. Casado com Marta, que ficou em Porto Alegre.'},
+ {id:'saulo',name:'Dr. Saulo Vieira',age:57,role:'Médico da família',p:{hair:'#2e2e2e',coat:'#5a4632',skin:'#d9ae86'},
+  desc:'Cardiologista em Caxias do Sul, cuida de Otávio desde o infarto. Velho companheiro de caça e de truco. Bonachão, mas na noite da festa estava preocupado com um paciente internado em estado grave.',
+  facts:'Prescreveu o antiarrítmico de Otávio. Dormiria no quarto de hóspedes.'}
+];
+const WIT=[
+ ['Dorival Zanella','Vigia noturno','Faz a ronda da propriedade desde 1977. A guarita fica junto ao portão, com vista para a varanda e para o jardim leste.'],
+ ['Zilá Bortolini','Cozinheira','Trabalha na casa há 12 anos. Passou a noite inteira na cozinha com Lúcia.'],
+ ['Nei Gasparin','Fotógrafo (Studio Gasparin)','Contratado para registrar o centenário. Fotografou das 20h30 até a meia-noite.'],
+ ['Tonico Dalla Rosa','Jardineiro','Encontrou um objeto entre as hortênsias na manhã de 26/06.'],
+ ['Valdecir Pozza','Eletricista','Examinou o quadro de força em 27/06 a pedido da polícia.']
+];
+document.getElementById('chars').innerHTML=CHARS.map(c=>`<div class="card ${c.victim?'victim':''}">${pimg(c)}<div class="role">${c.role}</div><h4>${c.name}</h4><div class="small" style="color:#6d6250">${c.age} anos</div><p>${c.desc}</p><div class="facts">${c.facts}</div></div>`).join('');
+document.getElementById('witness').innerHTML=WIT.map(w=>`<div class="card"><div class="role">${w[1]}</div><h4 style="font-size:17px">${w[0]}</h4><p style="font-size:14px">${w[2]}</p></div>`).join('');
+
+/* ===================== MAP ===================== */
+(function(){
+ const r=(x,y,w,h,label,sub,fill='#efe4c8')=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${fill}" stroke="#2a241c" stroke-width="3"/><text x="${x+w/2}" y="${y+h/2-(sub?6:0)}" text-anchor="middle" font-family="Special Elite" font-size="14" fill="#2a241c">${label}</text>${sub?`<text x="${x+w/2}" y="${y+h/2+12}" text-anchor="middle" font-family="Special Elite" font-size="11" fill="#6d6250">${sub}</text>`:''}`;
+ const door=(x,y,vert)=>vert?`<rect x="${x-4}" y="${y}" width="8" height="26" fill="#f3ead4" stroke="#2a241c" stroke-width="1"/>`:`<rect x="${x}" y="${y-4}" width="26" height="8" fill="#f3ead4" stroke="#2a241c" stroke-width="1"/>`;
+ const t=(x,y,s,sz=12,c='#2a241c',a='middle')=>`<text x="${x}" y="${y}" font-family="Special Elite" font-size="${sz}" fill="${c}" text-anchor="${a}">${s}</text>`;
+ let s='';
+ s+=`<rect x="0" y="0" width="920" height="600" fill="#f3ead4"/>`;
+ // garden
+ s+=`<rect x="770" y="250" width="140" height="210" fill="#dfe3c6" stroke="#8a9a6a" stroke-dasharray="4 4"/>`+t(840,272,'JARDIM LESTE',11,'#5d6b3f');
+ for(let i=0;i<7;i++)s+=`<circle cx="${790+(i%3)*22}" cy="${320+Math.floor(i/3)*30+(i%2)*6}" r="10" fill="#b9c6e8" stroke="#6d7fae"/>`;
+ s+=t(818,415,'hortênsias',11,'#4a5a8a');
+ s+=`<circle cx="802" cy="372" r="7" fill="#9b2226"/>`+t(860,377,'◉ garrafa',11,'#9b2226');
+ // cantina
+ s+=r(790,30,120,120,'CANTINA','câmara espumantes','#e2d6b6');
+ s+=`<path d="M780 150 Q770 210 760 230" stroke="#8b8066" stroke-dasharray="5 5" fill="none"/>`+t(800,200,'caminho ~80 m',10,'#6d6250');
+ // house
+ s+=r(40,40,180,240,'ESCRITÓRIO','☎ L1');
+ s+=r(220,40,160,240,'ESCADARIA','(quartos no 2º piso)');
+ s+=r(380,40,180,240,'SALA DE ESTAR','truco 22h45–23h30');
+ s+=r(560,40,50,400,'','');
+ s+=`<text transform="translate(590 250) rotate(-90)" font-family="Special Elite" font-size="13" text-anchor="middle" fill="#2a241c">CORREDOR DE SERVIÇO</text>`;
+ s+=`<rect x="568" y="60" width="34" height="340" fill="none" stroke="#9b2226" stroke-width="1" stroke-dasharray="2 3" opacity=".5"/>`;
+ s+=t(585,56,'passadeira',9,'#9b2226');
+ s+=r(610,40,150,130,'COZINHA','☎ L2');
+ s+=r(610,170,150,130,'BIBLIOTECA','☎ L1');
+ s+=r(610,300,150,140,'','','#ead9c0');
+ s+=t(685,340,'SALA DE',14)+t(685,357,'DEGUSTAÇÃO',14);
+ s+=`<rect x="700" y="425" width="50" height="12" fill="#7a5a3a"/>`+t(725,420,'lareira',10,'#6d6250');
+ s+=`<rect x="622" y="310" width="70" height="12" fill="#8a6a4a"/>`+t(657,334,'expositor 001–012',9,'#6d6250');
+ s+=`<rect x="756" y="340" width="8" height="40" fill="#bcd3e6" stroke="#2a241c"/>`+t(752,395,'janela',10,'#2a3f6a','end');
+ s+=r(40,280,260,160,'SALÃO DE JANTAR','');
+ s+=r(300,280,140,160,'HALL','☎ L2');
+ s+=r(440,280,120,160,'COPA','');
+ // stairs adega
+ for(let i=0;i<6;i++)s+=`<line x1="562" y1="${400+i*7}" x2="608" y2="${400+i*7}" stroke="#2a241c" stroke-width="1.5"/>`;
+ s+=t(585,456,'↓ adega',11,'#2a241c');
+ // varanda
+ s+=`<rect x="40" y="440" width="520" height="60" fill="#e3d7b8" stroke="#2a241c" stroke-width="2" stroke-dasharray="6 3"/>`+t(300,476,'VARANDA (coberta)',13);
+ // doors
+ s+=door(560,100,true)+door(610,90,true); // sala estar-corredor, cozinha-corredor (north)
+ s+=door(610,240,true);  // biblioteca-corredor
+ s+=door(610,385,true);  // degustação-corredor
+ s+=`<rect x="690" y="296" width="26" height="8" fill="#f3ead4" stroke="#9b2226" stroke-width="2"/>`+t(745,292,'porta interna',9,'#9b2226');
+ s+=door(560,350,true);  // copa-corredor
+ s+=door(300,340,true)+door(440,340,true)+door(340,280,false)+door(350,440,false);
+ // quadro
+ s+=`<rect x="602" y="212" width="8" height="18" fill="#e6b800" stroke="#2a241c"/>`+t(632,206,'⚡ quadro',11,'#7a5a00','start');
+ // body
+ s+=t(585,446,'✕',22,'#9b2226');
+ // guarita
+ s+=r(800,520,80,50,'GUARITA','vigia','#e2d6b6');
+ s+=`<line x1="640" y1="540" x2="800" y2="545" stroke="#8b8066" stroke-dasharray="3 4"/>`+t(700,560,'portão',10,'#6d6250');
+ s+=`<path d="M800 520 L770 460 M820 520 L820 460" stroke="#b9aa86" stroke-dasharray="2 5"/>`+t(745,505,'linha de visão do vigia',9,'#8b8066');
+ // north arrow
+ s+=`<g transform="translate(60,560)"><path d="M0 0 L8 -26 L16 0 L8 -6Z" fill="#2a241c"/>${t(8,16,'N',12)}</g>`;
+ document.getElementById('mapsvg').innerHTML=s;
+})();
+
+/* ===================== PHOTOS (SVG scenes) ===================== */
+function person(x,y,sc,coat,head='#e0b993',hair='#3b2f25',extra=''){
+  return `<g transform="translate(${x} ${y}) scale(${sc})"><path d="M-22 70 Q-20 18 0 16 Q20 18 22 70Z" fill="${coat}"/><circle cx="0" cy="0" r="13" fill="${head}"/><path d="M-13 -2 Q-12 -15 0 -15 Q12 -15 13 -2 Q8 -9 0 -9 Q-8 -9 -13 -2Z" fill="${hair}"/>${extra}</g>`;
+}
+const PH={
+ F1:{stage:1,r:'-2deg',cap:'20h30 · Brinde de abertura',svg:`<svg viewBox="0 0 300 220"><defs><filter id="fd"><feColorMatrix type="saturate" values=".55"/></filter></defs><g filter="url(#fd)"><rect width="300" height="220" fill="#8a6a4e"/><rect y="150" width="300" height="70" fill="#5e4636"/><rect x="20" y="40" width="120" height="60" fill="#6b4f3a" stroke="#4a3626"/>${[0,1,2,3,4,5].map(i=>`<rect x="${26+i*19}" y="50" width="14" height="40" fill="#24402a"/>`).join('')}<rect x="26" y="50" width="14" height="40" fill="#3b2a20"/>${person(225,95,.95,'#22334f','#e3bb95','#9a9a92','<rect x="12" y="10" width="14" height="3" fill="#5a3b20"/><circle cx="27" cy="9" r="3" fill="#5a3b20"/>')}${person(110,105,1.25,'#3a3a3a','#e0b993','#d8d8d0')}${person(170,108,1.2,'#556070','#ddb48e','#1f1a16')}<rect x="133" y="110" width="12" height="46" rx="4" fill="#1d3a22"/><rect x="136" y="98" width="6" height="14" fill="#9b2226"/><rect x="133" y="128" width="12" height="12" fill="#f3ead4"/></g><rect width="300" height="220" fill="#ffcc88" opacity=".08"/></svg>`,
+  back:'Seu Otávio e o filho Rafael segurando juntos a garrafa nº 001 para a foto oficial. Ao fundo, o Dr. Augusto com o cachimbo de sempre, de paletó azul-marinho. — Nei',
+  tech:'Studio Gasparin · neg. 03 · 25/06/94 20h34 · Sala de degustação. Obs. do perito: Rafael segura a garrafa com a mão fechada no ombro, logo abaixo do lacre. Otávio segura por baixo, pela base e pelo rótulo.'},
+ F2:{stage:1,r:'2deg',cap:'Local · pé da escada da adega',svg:`<svg viewBox="0 0 300 220"><rect width="300" height="220" fill="#4a4540"/>${[0,1,2,3,4,5,6].map(i=>`<rect x="${40+i*18}" y="${20+i*18}" width="${220-i*18}" height="18" fill="${i%2?'#6b655c':'#77716a'}" stroke="#3a3530"/>`).join('')}<rect x="0" y="146" width="300" height="74" fill="#5a544c"/><path d="M80 175 q30 -12 60 -4 q30 6 60 -2 l20 8 q-20 14 -44 10 l-40 4 q-30 2 -56 -4z" fill="none" stroke="#f3f0e6" stroke-width="2.5" stroke-dasharray="5 3"/><circle cx="210" cy="176" r="10" fill="none" stroke="#f3f0e6" stroke-width="2.5" stroke-dasharray="4 3"/><ellipse cx="214" cy="190" rx="9" ry="4" fill="#6a1a1a" opacity=".8"/><text x="20" y="210" font-family="Special Elite" font-size="11" fill="#e6e0d0">IGP · FOTO 2 · 26/06 00h41</text></svg>`,
+  back:'Contorno do corpo, de bruços, com a cabeça junto ao último degrau. Só uma mancha de sangue pequena no último degrau e no chão, perto da cabeça.',
+  tech:'Perito: "Quantidade de sangue incompatível com a extensão do ferimento craniano. Não há respingos nos degraus de cima, só a mancha junto à cabeça. Verificar se o corpo foi deslocado."'},
+ F3:{stage:1,r:'-1deg',cap:'Relógio da vítima',svg:`<svg viewBox="0 0 300 220"><rect width="300" height="220" fill="#d8d2c4"/><rect x="128" y="0" width="44" height="220" fill="#3a3a3a"/><circle cx="150" cy="110" r="62" fill="#c9c9c9" stroke="#8a8a8a" stroke-width="6"/><circle cx="150" cy="110" r="52" fill="#1d2433"/>${Array.from({length:12},(_,i)=>{const a=i*Math.PI/6;return `<line x1="${150+44*Math.sin(a)}" y1="${110-44*Math.cos(a)}" x2="${150+50*Math.sin(a)}" y2="${110-50*Math.cos(a)}" stroke="#eee" stroke-width="3"/>`}).join('')}<line x1="150" y1="110" x2="${150+30*Math.sin((11+12/60)*Math.PI/6)}" y2="${110-30*Math.cos((11+12/60)*Math.PI/6)}" stroke="#eee" stroke-width="5"/><line x1="150" y1="110" x2="${150+44*Math.sin(12*Math.PI/30)}" y2="${110-44*Math.cos(12*Math.PI/30)}" stroke="#eee" stroke-width="3"/><path d="M110 70 L150 112 L190 60 M150 112 L120 160 M150 112 L200 140 M150 112 L105 115" stroke="#fff" stroke-width="1.3" opacity=".8"/><rect x="212" y="102" width="22" height="16" fill="#bdbdbd" stroke="#777"/><line x1="212" y1="110" x2="200" y2="110" stroke="#999" stroke-width="5"/><text x="10" y="210" font-family="Special Elite" font-size="11" fill="#333">IGP · FOTO 5</text></svg>`,
+  back:'Omega Seamaster no pulso esquerdo. Cristal estilhaçado. Ponteiros parados em 23h12.',
+  tech:'Perito: "A coroa parece estar fora da posição normal, saliente. Encaminhar ao laboratório."'},
+ F4:{stage:1,r:'1.5deg',cap:'Passadeira do corredor de serviço',svg:`<svg viewBox="0 0 300 220"><rect width="300" height="220" fill="#9a8f80"/><rect x="70" y="0" width="160" height="220" fill="#7a2626"/>${[0,1,2,3,4,5,6,7,8,9,10].map(i=>`<line x1="70" y1="${i*20}" x2="230" y2="${i*20}" stroke="#6a1e1e" stroke-width="1"/>`).join('')}<path d="M128 220 Q126 120 132 20" stroke="#c99a8a" stroke-width="5" fill="none" opacity=".75"/><path d="M168 220 Q172 120 166 20" stroke="#c99a8a" stroke-width="5" fill="none" opacity=".75"/><text x="236" y="30" font-family="Special Elite" font-size="10" fill="#222">↑ escada</text><text x="236" y="210" font-family="Special Elite" font-size="10" fill="#222">↓ porta sala</text><text x="236" y="222" font-family="Special Elite" font-size="10" fill="#222">degustação</text></svg>`,
+  back:'Duas trilhas paralelas no pelo da passadeira, distantes uns 25 cm uma da outra.',
+  tech:'Perito: "As trilhas começam em frente à porta da sala de degustação e terminam no topo da escada da adega, num trecho de cerca de 3 m. Padrão compatível com o arrasto de um corpo pelos calcanhares."'},
+ F5:{stage:1,r:'-2.5deg',cap:'Expositor do Centenário',svg:`<svg viewBox="0 0 300 220"><rect width="300" height="220" fill="#7a5a40"/><rect x="20" y="30" width="260" height="160" fill="#4e3626"/>${Array.from({length:12},(_,i)=>{const x=30+(i%6)*42,y=40+Math.floor(i/6)*75;return `<rect x="${x}" y="${y}" width="36" height="66" fill="#3a271c" stroke="#2a1a10"/>`+(i===0?`<text x="${x+18}" y="${y+38}" font-family="Special Elite" font-size="11" fill="#e6d7b0" text-anchor="middle">001</text>`:`<rect x="${x+11}" y="${y+10}" width="14" height="50" rx="4" fill="#1d3a22"/><rect x="${x+14}" y="${y+4}" width="8" height="10" fill="#9b2226"/>`)}).join('')}<text x="10" y="210" font-family="Special Elite" font-size="11" fill="#eee">IGP · FOTO 7 · sala de degustação</text></svg>`,
+  back:'Nicho 001 vazio. As outras onze garrafas estão no lugar, lacradas.',
+  tech:'Perito: "Garrafa nº 001 não localizada na sala nem na adega. Buscas no entorno, amanhã cedo."'},
+ F6:{stage:2,r:'2deg',cap:'Garrafa nº 001 nas hortênsias',svg:`<svg viewBox="0 0 300 220"><rect width="300" height="220" fill="#5a6a3a"/>${Array.from({length:14},(_,i)=>`<circle cx="${(i*53)%300}" cy="${(i*37)%220}" r="${28+(i%3)*8}" fill="${i%2?'#7f93c4':'#9aaedc'}" opacity=".85"/>`).join('')}<g transform="rotate(-28 150 120)"><rect x="110" y="104" width="90" height="32" rx="10" fill="#1d3a22"/><path d="M200 108 L222 112 L216 120 L224 128 L200 132Z" fill="#1d3a22"/><rect x="128" y="106" width="30" height="28" fill="#efe6cc"/><path d="M112 112 q-6 8 0 16" stroke="#6a1a1a" stroke-width="5" fill="none"/></g><text x="10" y="210" font-family="Special Elite" font-size="11" fill="#fff">IGP · FOTO 11 · 26/06 09h20</text></svg>`,
+  back:'Encontrada pelo jardineiro Tonico, às 9h, entre as hortênsias, logo abaixo da janela da sala de degustação. Vidro lascado e cacos verdes espalhados no canteiro.',
+  tech:'Perito: "Manchas escuras na base da garrafa. Recolhida para exame. A janela fica a uns 2 m acima do canteiro."'},
+ F7:{stage:2,r:'-1.5deg',cap:'23h05 · Truco na sala de estar',svg:`<svg viewBox="0 0 300 220"><defs><filter id="fd2"><feColorMatrix type="saturate" values=".6"/></filter></defs><g filter="url(#fd2)"><rect width="300" height="220" fill="#7a5f45"/><ellipse cx="150" cy="170" rx="130" ry="40" fill="#2f5a3a"/>${person(55,85,1,'#6b2737','#e6c3a0','#4a2d1d')}${person(120,78,1,'#5a4632','#d9ae86','#2e2e2e')}${person(185,80,1,'#4b4b4b','#ecc7a6','#7a6a55','<rect x="14" y="12" width="10" height="2" fill="#eee"/>')}${person(250,86,1,'#d7c39a','#e3bb95','#9a9a92','<rect x="12" y="10" width="14" height="3" fill="#5a3b20"/>')}${[0,1,2,3].map(i=>`<rect x="${110+i*22}" y="160" width="16" height="22" fill="#fff" stroke="#999" transform="rotate(${i*7-10} ${118+i*22} 170)"/>`).join('')}</g></svg>`,
+  back:'Truco depois do jantar. Da esquerda para a direita: Helena, Dr. Saulo, Jean-Luc e Dr. Augusto, que tinha trocado o paletó por um cardigã bege. Rafael não quis jogar. — Nei',
+  tech:'Studio Gasparin · neg. 19 · 25/06/94 23h05. Lareira da sala de estar acesa (visível no negativo 18).'},
+ F8:{stage:2,r:'1deg',cap:'Luminol · sala de degustação',svg:`<svg viewBox="0 0 300 220"><rect width="300" height="220" fill="#0e0f14"/>${Array.from({length:30},(_,i)=>`<rect x="${(i%6)*50}" y="${Math.floor(i/6)*44}" width="49" height="43" fill="#16181f"/>`).join('')}<ellipse cx="210" cy="170" rx="55" ry="26" fill="#3fa9ff" opacity=".55"/><ellipse cx="200" cy="168" rx="28" ry="12" fill="#8fd0ff" opacity=".7"/><path d="M180 160 Q120 120 40 110" stroke="#3fa9ff" stroke-width="10" opacity=".35" fill="none" stroke-dasharray="14 10"/><rect x="250" y="190" width="50" height="30" fill="#2a1a10"/><text x="10" y="18" font-family="Special Elite" font-size="11" fill="#8fd0ff">IGP · FOTO 14 · LUMINOL · 27/06</text><text x="255" y="185" font-family="Special Elite" font-size="10" fill="#aaa">lareira</text><text x="10" y="120" font-family="Special Elite" font-size="10" fill="#aaa">→ porta corredor</text></svg>`,
+  back:'Reação positiva intensa junto à lareira e trilha fraca em direção à porta que dá para o corredor de serviço.',
+  tech:'Perito: "O piso foi lavado. A reação indica sangue em grande quantidade antes da limpeza."'}
+};
+const pic=k=>`<img src="img/${k}.jpg" alt="${PH[k].cap}" style="width:100%;display:block;aspect-ratio:4/3;object-fit:cover;background:#222">`;
+function renderPhotos(){
+  document.getElementById('photos').innerHTML=Object.entries(PH).filter(([k,p])=>p.stage<=S.stage).map(([k,p])=>`<div class="polaroid" style="--r:${p.r}" onclick="openPhoto('${k}')">${pic(k)}<div class="cap">${p.cap}</div><div class="num">${k}</div></div>`).join('');
+}
+function openPhoto(k){const p=PH[k];document.getElementById('modalInner').innerHTML=`<div class="polaroid" style="cursor:default"><img src="img/${k}.jpg" style="width:100%;display:block"><div class="cap">${p.cap}</div></div><div class="back">${p.back}<div class="tech">${p.tech}</div></div>`;document.getElementById('modal').classList.add('open');}
+function closeModal(){document.getElementById('modal').classList.remove('open')}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+
+/* ===================== DOCUMENTS ===================== */
+const D=[];
+function doc(stage,id,group,title,sub,html){D.push({stage,id,group,title,sub,html});}
+
+/* ---------- ETAPA 1 ---------- */
+doc(1,'bo','Ocorrência','Boletim de Ocorrência nº 1.047/94','DP Bento Gonçalves · 26/06',`<div class="paper typed"><div class="stamp">B.O.</div>
+<div class="meta">POLÍCIA CIVIL DO ESTADO DO RIO GRANDE DO SUL · DP BENTO GONÇALVES · BOLETIM DE OCORRÊNCIA Nº 1.047/94</div>
+<table><tr><th>Natureza</th><td>Morte a esclarecer</td></tr><tr><th>Data/hora do fato</th><td>25/06/1994, entre 21h50 e 23h40 (a apurar)</td></tr>
+<tr><th>Comunicação</th><td>25/06/1994, 23h46, telefonema de Helena Valmorbida</td></tr>
+<tr><th>Local</th><td>Casa principal da Vinícola Valmorbida, Linha Graciema, s/nº, Bento Gonçalves/RS. Pé da escada de acesso à adega (subsolo).</td></tr>
+<tr><th>Vítima</th><td>OTÁVIO VALMORBIDA, 71 anos, viúvo, vitivinicultor</td></tr>
+<tr><th>Quem encontrou</th><td>Lúcia Ferraz, governanta, às 23h40</td></tr></table>
+<h3>HISTÓRICO</h3>
+<p>A guarnição chegou ao local às 00h20 de 26/06. A vítima estava em decúbito ventral no pé da escada de pedra (14 degraus) que liga o corredor de serviço à adega, com ferimento na cabeça e sem sinais vitais. Os presentes informaram que estava em curso a festa do centenário da vinícola e que a vítima "devia ter tropeçado ao descer para buscar o vinho do brinde". O médico da família, Dr. Saulo Vieira, já tinha constatado o óbito antes da chegada da polícia.</p>
+<p>A família e os convidados informaram falta de energia elétrica na casa entre aproximadamente 22h e 22h20.</p>
+<p>O relógio de pulso da vítima estava danificado e parado às 23h12.</p>
+<p>O Dr. Augusto Brandão, advogado da família, pediu que a remoção fosse feita "com discrição" e declarou à guarnição que "o Otávio era cardíaco e tinha bebido; foi uma fatalidade".</p>
+<p>Local preservado. Acionada a perícia, que chegou às 00h35.</p>
+<p>Presentes na casa: Helena Valmorbida, Rafael Valmorbida, Lúcia Ferraz, Jean-Luc Moreau, Dr. Augusto C. Brandão, Dr. Saulo Vieira, Zilá Bortolini (cozinheira), Nei Gasparin (fotógrafo). Na guarita: Dorival Zanella (vigia).</p>
+<p>Escrivão: <span class="sig">R. Tessaro</span></p></div>`);
+
+doc(1,'local','Perícia','Relatório de Local (preliminar)','Perita Ivone Sartori · 26/06 03h10',`<div class="paper typed"><div class="stamp blue">PERÍCIA</div>
+<div class="meta">DEPARTAMENTO DE CRIMINALÍSTICA · SEÇÃO DE LOCAIS DE CRIME · RELATÓRIO PRELIMINAR · Perita criminal: Ivone Sartori</div>
+<h3>1. CORPO</h3>
+<p>Homem idoso, de terno escuro, em decúbito ventral no piso do subsolo, com a cabeça junto ao último degrau. Ferimento contuso extenso na região posterior esquerda da cabeça. Escoriações na face e nos joelhos.</p>
+<p><b>Observação:</b> a mancha de sangue sob a cabeça é pequena (cerca de 15 cm) e não há respingos nem marcas nos degraus. Um ferimento dessa extensão costuma sangrar muito. Possível deslocamento do corpo após a lesão.</p>
+<h3>2. ESCADA E CORREDOR</h3>
+<p>Escada de pedra basáltica com 14 degraus e corrimão de ferro à direita. A lâmpada do topo funciona.</p>
+<p>A passadeira de lã vermelha do corredor de serviço tem duas trilhas paralelas no pelo, da porta da sala de degustação até o topo da escada (foto F4).</p>
+<p>Os sapatos da vítima, de couro preto, têm a parte de trás dos calcanhares raspada e com fiapos vermelhos.</p>
+<h3>3. SALA DE DEGUSTAÇÃO</h3>
+<p>Lareira ainda com brasas. Piso de lajotas de basalto úmido junto à lareira. Mesa de degustação sem toalha. O expositor das garrafas do Centenário tem o nicho nº 001 vazio (foto F5). A janela leste estava destrancada.</p>
+<h3>4. OBJETOS DA VÍTIMA</h3>
+<ul><li>Relógio Omega com o cristal quebrado, parado em 23h12 (foto F3)</li><li>Carteira com documentos e dinheiro, intacta</li><li>No bolso interno do paletó, uma folha dobrada de caderno com anotações manuscritas (ver documento próprio)</li><li>Óculos de leitura no bolso externo, sem danos</li></ul>
+<h3>5. PROVIDÊNCIAS</h3>
+<p>Corpo encaminhado para necropsia. Solicitados: exame do relógio, busca da garrafa nº 001, exame com luminol na sala de degustação e vistoria do quadro elétrico.</p>
+<p><span class="sig">Ivone Sartori</span></p></div>`);
+
+doc(1,'caderno','Objetos da vítima','Folha do caderno de Otávio','Encontrada no bolso do paletó',`<div class="paper hand">
+<div style="text-align:right">25/6 — Centenário</div>
+<p>— Pinto Bandeira, quinta. Linha Jansen, 220. Nada. Um potreiro e um galpão caído. <u>Nenhuma tanoaria.</u> O vizinho disse que nunca houve.</p>
+<p>— Lacombe quer resposta até dia 30.</p>
+<p>— Rafa pediu de novo. Não.</p>
+<p>— Helena não pode saber ainda. <span class="strike">Venda</span> Venda SUSPENSA.</p>
+<p>— Falar com o Dr. — sala de degustação, 22h, antes do brinde. Ou explica, ou segunda-feira vou à polícia. 30 anos...</p>
+<p>— Garrafa nº 1 à meia-noite. Pelo pai, pelo nono.</p>
+</div>`);
+
+const dep=(nome,quem,data,body)=>`<div class="paper typed"><div class="meta">TERMO DE DECLARAÇÕES · Inquérito 1.047/94 · Declarante: ${nome} · ${quem} · ${data}</div>${body}<p style="margin-top:22px">Nada mais disse. Lido e achado conforme.</p></div>`;
+
+doc(1,'d-helena','Depoimentos','Helena Valmorbida','filha · enóloga',dep('HELENA VALMORBIDA','44 anos, enóloga','26/06/1994, 02h15',`
+<p>Meu pai andava estranho a semana toda. Na quinta pegou o carro sozinho e foi a Pinto Bandeira sem dizer por quê. Quando voltou não falou com ninguém.</p>
+<p>Eu sei da venda para os franceses. Ouvi meu pai conversando com o Jean-Luc na terça. Fiquei furiosa e deixei um bilhete na escrivaninha dele. Não falamos disso durante a festa, porque eu não queria estragar a noite dele.</p>
+<p>Depois da sobremesa fui para a sala de estar com os outros. Quando a luz caiu, às 22h04, pensei logo na câmara de espumantes da cantina. Sem energia, o gerador de lá tem que entrar sozinho, e às vezes não entra. Peguei a lanterna no hall e corri para lá pela garoa. Lá a energia estava normal, o problema era só na casa. Conferi as temperaturas mesmo assim e voltei. Cheguei de volta por volta de 22h25, com as botas enlameadas, e a luz já tinha voltado.</p>
+<p>Às 22h40, mais ou menos, o Dr. Augusto insistiu muito para jogarmos truco. Achei curioso, porque ele detesta cartas. Jogamos até umas 23h30, quando perguntei pelo meu pai. A Lúcia disse que ele tinha ido descansar. Uns dez minutos depois ouvimos o grito dela.</p>
+<p>Perguntada se o pai costumava descer à adega, respondeu: "Ele conhecia aquela escada de olhos fechados. Desceu ali a vida inteira."</p>`));
+
+doc(1,'d-rafael','Depoimentos','Rafael Valmorbida','filho',dep('RAFAEL VALMORBIDA','38 anos, autônomo, residente em São Paulo','26/06/1994, 02h40',`
+<p>Sim, discuti com meu pai às 20h45, antes do jantar. Pedi um adiantamento da herança. Ele negou. Falei alto, admito. Disse que ele ia me deixar morrer na mão daquela gente. Mas eu amava meu pai.</p>
+<p>Na foto das 20h30 eu segurei a garrafa nº 001 junto com ele, foi ideia do fotógrafo.</p>
+<p>Depois da sobremesa fiquei no salão de jantar terminando uma garrafa de Merlot, sozinho. Quando a luz caiu, demorei para achar meu isqueiro no bolso. Então fui pela copa até a cozinha perguntar à Lúcia onde ficava o quadro de força. Faz quinze anos que não moro aqui. Ela disse que era no corredor de serviço.</p>
+<p>Quando abri a porta da cozinha para o corredor, ouvi um baque abafado lá do fundo, lá pelos lados da escada da adega. Pensei que fosse uma caixa caindo. Fui tateando com o isqueiro até o quadro. Perto da porta da biblioteca senti cheiro de fumo de cachimbo. Demorei para entender qual era o disjuntor geral: a alavanca estava para baixo, não estava desarmada, alguém desligou. Liguei de novo, eram 22h19 no meu relógio.</p>
+<p>Depois fui para a varanda e fiquei lá bebendo até perto da meia-noite. Não quis jogar truco.</p>
+<p>Perguntado se viu alguém no corredor, respondeu que estava escuro demais e que a porta da sala de degustação estava fechada.</p>`));
+
+doc(1,'d-lucia','Depoimentos','Lúcia Ferraz','governanta',dep('LÚCIA FERRAZ','52 anos, governanta','26/06/1994, 01h50',`
+<p>Servi o sagu às 21h30. O seu Otávio adorava, porque era receita da Dona Irene. Repetiu uma taça cheia lá pelas 21h40.</p>
+<p>Às 21h50 ele passou pela copa e me disse que ia subir para descansar um pouco antes do brinde e que eu não deixasse ninguém incomodar. Achei normal, porque ele já não aguentava festa comprida.</p>
+<p>Quando a luz caiu eu estava na cozinha com a Zilá. Acendemos velas. Lá pelas 22h10 o Rafael apareceu com o isqueiro perguntando do quadro, e eu mostrei a porta do corredor. Mais tarde a luz voltou.</p>
+<p>Das 22h45 em diante fiquei com a Zilá preparando as taças e os petiscos do brinde. Às 23h30 a Helena perguntou do pai. Às 23h40 desci à adega para buscar o espumante e encontrei ele lá embaixo. Gritei. O Dr. Saulo veio correndo.</p>
+<p>Perguntada sobre o testamento, disse que sabe que foi lembrada nele e que "isso é coisa entre mim e o seu Otávio, de trinta anos de casa".</p>
+<p>Perguntada sobre a sala de degustação, disse que não entrou lá depois do brinde das 20h30.</p>`));
+
+doc(1,'d-jeanluc','Depoimentos','Jean-Luc Moreau','representante francês',dep('JEAN-LUC MOREAU','45 anos, francês, executivo','26/06/1994, 03h05 (com auxílio de intérprete)',`
+<p>Às 21h45 conversei com o senhor Otávio na varanda. Ele me disse que a venda estava "suspensa" até ele esclarecer "umas questões de contabilidade". Fiquei muito contrariado e falamos alto, sim. Paris quer o fechamento até o dia 30.</p>
+<p>Por volta das 22h fui procurar o lavabo e me perdi. Entrei pela copa num corredor estreito com um tapete vermelho. Vi o senhor Otávio entrando na sala do fundo, a das garrafas. Ele me viu e disse: "Agora não, Jean-Luc. Estou esperando o doutor. Assunto de família." E fechou a porta.</p>
+<p>Voltei e fui fumar na varanda. A luz caiu logo depois, uns dois ou três minutos. Fiquei na varanda, fumando no escuro, até a luz voltar. Eu não conheço a casa, não ia sair andando sem luz.</p>
+<p>Às 22h30 liguei para Paris do telefone do hall para avisar a direção sobre a suspensão. Depois joguei esse jogo de cartas de vocês, o truco, até as 23h30.</p>
+<p>Perguntado sobre qual "doutor", respondeu: "Há dois doutores nesta casa, não? Não sei qual."</p>`));
+
+doc(1,'d-brandao','Depoimentos','Dr. Augusto Brandão','advogado',dep('DR. AUGUSTO CARVALHO BRANDÃO','60 anos, advogado, OAB/RS','26/06/1994, 03h30',`
+<p>Conheço o Otávio há mais de trinta anos. Somos como irmãos. Isto é uma tragédia, e eu peço respeito à família.</p>
+<p>Depois da sobremesa fui à biblioteca, pouco antes das dez, e liguei de lá para minha esposa, Marta, em Porto Alegre. Ela não pôde vir por causa de uma gripe. Conversamos uns vinte minutos, e a luz caiu durante a conversa. Continuei falando no escuro, porque o telefone funciona sem energia. Fiquei na biblioteca até a luz voltar.</p>
+<p>Não vi o Otávio depois do jantar. Não tínhamos nada combinado.</p>
+<p>Às 22h40 propus um truco para animar o pessoal, que estava abatido com a falta de luz. Joguei até as 23h30. Senti frio e troquei o paletó por um cardigã.</p>
+<p>O Otávio era cardíaco, tinha bebido e já não enxergava bem no escuro. Para mim é evidente que tropeçou ao descer para buscar o vinho do brinde. Peço que a família seja poupada de um inquérito longo.</p>
+<p>Perguntado sobre a venda da vinícola, disse que "acompanhava de longe, era assunto do Otávio com os franceses".</p>`));
+
+doc(1,'d-saulo','Depoimentos','Dr. Saulo Vieira','médico',dep('DR. SAULO VIEIRA','57 anos, médico cardiologista','26/06/1994, 02h00',`
+<p>Sou o médico do Otávio desde o infarto de 1985. Ele tomava antiarrítmico e estava estável. No jantar me disse: "Saulo, amanhã quero falar contigo sobre o coração." Combinamos para domingo de manhã.</p>
+<p>Por volta das 21h55 subi ao quarto de hóspedes para telefonar ao Hospital Nossa Senhora da Serra, em Caxias, por causa de um paciente meu internado em estado grave. Liguei logo depois das dez. A luz caiu durante a ligação e eu continuei falando no escuro com a enfermeira de plantão por uns dez minutos. Depois desci.</p>
+<p>Joguei truco das 22h45 às 23h30. Quando a Lúcia gritou, desci à adega. O Otávio estava morto havia algum tempo: frio nas extremidades e rigidez começando na mandíbula. Achei estranho tão pouco sangue para aquele ferimento, mas não sou legista.</p>
+<p>Perguntado se uma arritmia poderia ter causado a queda, respondeu: "Poderia. Mas uma queda dessas não explica tudo o que eu vi."</p>`));
+
+doc(1,'d-dorival','Depoimentos','Dorival Zanella (vigia)','testemunha',dep('DORIVAL ZANELLA','63 anos, vigia noturno','26/06/1994, 04h00',`
+<p>Fico na guarita do portão. De lá vejo a varanda e o jardim do lado das hortênsias.</p>
+<p>Quando a luz caiu, olhei o relógio da guarita: 22h04. A guarita tem bateria e a luz dela continuou acesa.</p>
+<p>Às 22h08 vi a lanterna da dona Helena indo para a cantina. Ela sempre corre para lá quando falta luz.</p>
+<p>Na varanda tinha um dos senhores fumando. Eu via a brasa do cigarro, e ele resmungava numa língua estrangeira. Ficou lá até a luz voltar.</p>
+<p>Lá pelas 22h11 vi uma chama de isqueiro na janela da sala das garrafas, do lado leste. A janela abriu e alguma coisa caiu nas hortênsias. Pensei que fosse o gato da Lúcia pulando e não fui ver. Hoje me arrependo.</p>
+<p>Depois das onze o moço Rafael ficou na varanda bebendo. Às vezes entrava e voltava.</p>`));
+
+doc(1,'d-zila','Depoimentos','Zilá Bortolini (cozinheira)','testemunha',dep('ZILÁ BORTOLINI','47 anos, cozinheira','26/06/1994, 04h20',`
+<p>Fiquei a noite inteira na cozinha com a dona Lúcia. Quando faltou luz acendemos as velas.</p>
+<p>O moço Rafael chegou com o isqueiro perguntando do quadro de força. A dona Lúcia mostrou a porta do corredor. Na hora em que ele abriu a porta, nós duas ouvimos um barulho surdo lá no fundo do corredor, tipo um saco de batata caindo escada abaixo. O Rafael ainda estava parado ali na porta, do nosso lado.</p>
+<p>Depois ele sumiu no escuro e uns minutos depois a luz voltou.</p>`));
+
+/* ---------- ETAPA 2 ---------- */
+doc(2,'necropsia','Laudos','Laudo de Necropsia nº 312/94','Dep. Médico-Legal · Dr. Plínio Garbin',`<div class="paper typed"><div class="stamp">LAUDO</div>
+<div class="meta">DEPARTAMENTO MÉDICO-LEGAL · POSTO DE CAXIAS DO SUL · LAUDO DE NECROPSIA Nº 312/94 · Legista: Dr. Plínio Garbin · 26/06/1994</div>
+<p><b>Examinado:</b> Otávio Valmorbida, 71 anos. 1,74 m, 79 kg. Tipo sanguíneo: O, Rh positivo.</p>
+<h3>1. CAUSA DA MORTE</h3>
+<p>Traumatismo cranioencefálico por <b>golpe único de instrumento contundente</b> na região parietal posterior esquerda, com fratura com afundamento e hemorragia intensa no couro cabeludo.</p>
+<h3>2. ACHADOS NO FERIMENTO</h3>
+<p>O ferimento tem formato curvo, como um arco de circunferência de uns 9 cm de diâmetro. No couro cabeludo foram recolhidos <b>fragmentos de vidro verde-escuro</b> e <b>partículas de cera vermelha</b>, do tipo usado para lacrar garrafas.</p>
+<p>O formato <b>não é compatível</b> com a aresta reta de um degrau de pedra.</p>
+<h3>3. OUTRAS LESÕES</h3>
+<p>Escoriações na face, no queixo e nos dois joelhos, <b>sem reação vital</b>: não há infiltração hemorrágica nem inflamação. Isso significa que foram produzidas <b>depois da morte</b>, o que é compatível com um corpo já sem vida rolando ou sendo empurrado escada abaixo.</p>
+<p>Não há lesões de defesa nas mãos ou nos antebraços. A vítima provavelmente foi atingida por trás, sem perceber.</p>
+<p>A parte posterior dos calcanhares e as meias têm fibras de lã vermelha e escoriação do couro dos sapatos por arrasto.</p>
+<h3>4. ESTIMATIVA DO HORÁRIO DA MORTE</h3>
+<p><b>Conteúdo gástrico:</b> sagu de vinho tinto com creme em <b>fase inicial de digestão</b>, com os grânulos de sagu ainda íntegros. Isso é compatível com morte entre <b>20 e 40 minutos depois da última ingestão</b>. A digestão para com a morte.</p>
+<p><b>Temperatura retal</b> às 00h35, no local, de 33,8 °C, com ambiente (adega) a 14 °C. Morte estimada entre 21h45 e 22h45.</p>
+<p><b>Alcoolemia:</b> 0,6 g/L, embriaguez leve. Não basta para explicar uma queda.</p>
+<h3>5. CONCLUSÃO</h3>
+<p>Morte violenta, produzida por agressão. A queda na escada foi posterior à morte. O corpo foi deslocado.</p>
+<p><span class="sig">Dr. Plínio Garbin</span> · Médico-Legista</p></div>`);
+
+doc(2,'relogio','Laudos','Exame do relógio Omega','Lab. de Criminalística · 27/06',`<div class="paper typed">
+<div class="meta">LABORATÓRIO DE CRIMINALÍSTICA · EXAME DE OBJETO · Relógio de pulso Omega Seamaster, aço, corda automática</div>
+<p><b>1.</b> O cristal foi estilhaçado por um impacto direto e concentrado, do tipo pancada contra uma superfície dura e plana. Não é o padrão de um tombo em escada, em que o relógio costuma raspar.</p>
+<p><b>2.</b> A coroa estava <b>puxada para a posição de acertar as horas</b>. Nesse modelo, puxar a coroa trava o ponteiro dos segundos e para o movimento.</p>
+<p><b>3.</b> O mecanismo funciona normalmente: ao empurrar a coroa de volta, o relógio voltou a andar.</p>
+<p><b>Conclusão:</b> o relógio <b>não parou por causa do impacto</b>. Alguém puxou a coroa e acertou manualmente os ponteiros em 23h12 antes de quebrar o cristal ou depois disso. A vítima não faria isso sozinha durante uma queda.</p>
+<span class="margin-note">→ hora encenada. Quem tinha álibi às 23h12?? — Pagliarini</span>
+</div>`);
+
+doc(2,'degust','Laudos','Laudo complementar: sala de degustação','Perita Ivone Sartori · 27/06',`<div class="paper typed"><div class="stamp blue">PERÍCIA</div>
+<div class="meta">DEPARTAMENTO DE CRIMINALÍSTICA · LAUDO COMPLEMENTAR · SALA DE DEGUSTAÇÃO · 27/06/1994</div>
+<h3>1. LUMINOL</h3>
+<p>Reação positiva intensa no piso, numa área de cerca de 1,2 m² junto à lareira, e uma trilha fraca até a porta que dá para o corredor de serviço (foto F8). O piso foi lavado depois do fato. Foram encontrados vestígios de vinho tinto misturados ao sangue.</p>
+<h3>2. LAREIRA</h3>
+<p>Entre as cinzas havia restos parcialmente queimados de um tecido de <b>linho branco</b>, com um pedaço de bordado em linha azul em forma de <b>"V"</b>.</p>
+<h3>3. OBJETOS EXAMINADOS</h3>
+<table><tr><th>Objeto</th><th>Resultado</th></tr>
+<tr><td>Atiçador de ferro da lareira</td><td>Luminol negativo. Coberto de fuligem antiga e intacta. <b>Não foi usado como arma.</b></td></tr>
+<tr><td>Dois castiçais de bronze (mesa)</td><td>Luminol negativo. Cera de vela branca. <b>Descartados.</b></td></tr>
+<tr><td>Balde de gelo de prata</td><td>Vazio, com resíduo de água. Luminol fracamente positivo na borda.</td></tr>
+<tr><td>Janela leste</td><td>Trinco aberto. Uma gota de vinho tinto no parapeito interno.</td></tr></table>
+<h3>4. PORTA INTERNA</h3>
+<p>A sala de degustação tem uma porta interna que dá direto na <b>biblioteca</b>, sem passar pelo corredor. Estava fechada, mas não trancada.</p>
+<p><span class="sig">Ivone Sartori</span></p></div>`);
+
+doc(2,'garrafa','Laudos','Exame da garrafa nº 001','Lab. de Criminalística · 27/06',`<div class="paper typed">
+<div class="meta">LABORATÓRIO DE CRIMINALÍSTICA · EXAME DE OBJETO · Garrafa magnum 1,5 L encontrada em 26/06, 09h, entre as hortênsias do jardim leste, por Antônio "Tonico" Dalla Rosa</div>
+<p><b>Rótulo:</b> "Valmorbida · Reserva do Centenário · 1894–1994 · Nº 001/012". Vidro verde-escuro e lacre de cera vermelha.</p>
+<p><b>1.</b> O vidro está trincado e lascado no ombro e na base, e há cacos verdes no canteiro. O lacre está intacto: a garrafa nunca foi aberta, o vinho vazou pelas trincas.</p>
+<p><b>2.</b> A <b>base</b> da garrafa, que tem 9,2 cm de diâmetro, tem sangue humano do <b>grupo O</b> e fios de cabelo grisalho compatíveis com os da vítima. A curvatura da base corresponde ao ferimento descrito no laudo de necropsia.</p>
+<p><b>3. Impressões papilares:</b></p>
+<ul><li>Várias de <b>Otávio Valmorbida</b>, no corpo e no rótulo.</li>
+<li>Quatro dedos e polegar de <b>Rafael Valmorbida</b> no <b>ombro e na base do gargalo</b>, de uma mão fechada segurando a garrafa de pé.</li>
+<li><b>Por cima</b> das impressões de Rafael, no gargalo, há uma <b>marca de trama de tecido</b> com sangue. Quem empunhou a garrafa por último fez isso <b>com a mão envolta num pano</b>, e esse pano borrou parcialmente as digitais de Rafael. <b>As digitais de Rafael são anteriores ao golpe.</b></li></ul>
+<p><b>Nota do perito:</b> quem golpeia com a base de uma garrafa de 3 kg segura pelo gargalo. A sobreposição mostra que a última mão a segurar o gargalo não foi a de Rafael, ou não foi uma mão nua.</p>
+<span class="margin-note">Ver foto F1, 20h34: Rafael segurando a garrafa pelo ombro, para a foto.</span>
+</div>`);
+
+doc(2,'eletrica','Laudos','Relatório do eletricista','Valdecir Pozza · 27/06',`<div class="paper typed">
+<div class="meta">POZZA ELETRICIDADE · Relatório técnico solicitado pela DP Bento Gonçalves · 27/06/1994</div>
+<p>Examinei o quadro de força da casa principal, que fica no corredor de serviço, na parede ao lado da porta da biblioteca.</p>
+<p>1) O disjuntor geral está em perfeito estado. Não tem marca de aquecimento, curto ou sobrecarga. Os outros disjuntores também estão normais.</p>
+<p>2) Se tivesse desarmado sozinho, a alavanca ficaria no meio. Pelo que o moço Rafael contou, ela estava toda para baixo, <b>desligada na mão</b>.</p>
+<p>3) Naquela noite não houve falta de luz na rede da companhia. A cantina tem o quadro dela e ficou com energia normal o tempo todo. Só a casa principal ficou no escuro, porque só o geral da casa foi desligado.</p>
+<p>4) Quem não conhece a casa não acha esse quadro no escuro. Fica atrás de uma portinhola de madeira pintada da mesma cor da parede. Eu mesmo, que instalei, tive que procurar.</p>
+<p><span class="sig">Valdecir Pozza</span></p></div>`);
+
+doc(2,'telefone','Laudos','Extrato telefônico CRT · 25/06','Companhia Riograndense de Telecomunicações',`<div class="paper telex">
+<div class="meta" style="font-family:'IBM Plex Mono'">CRT · COMPANHIA RIOGRANDENSE DE TELECOMUNICAÇÕES · RELAÇÃO DE CHAMADAS DDD/DDI · ATENDIMENTO A REQUISIÇÃO JUDICIAL</div>
+<p>LINHA 1 · (054) 451-2210 · VINÍCOLA VALMORBIDA LTDA (ESCRITÓRIO)<br>RAMAIS: ESCRITÓRIO, BIBLIOTECA</p>
+<p>LINHA 2 · (054) 451-2894 · OTÁVIO VALMORBIDA (RESIDÊNCIA)<br>RAMAIS: HALL, COZINHA, QUARTOS 2º PISO (3)</p>
+<table style="font-family:'IBM Plex Mono';font-size:13px"><tr><th>DATA</th><th>HORA</th><th>LINHA</th><th>DESTINO</th><th>DURAÇÃO</th></tr>
+<tr><td>25/06</td><td>19:12</td><td>L2</td><td>(011) 285-xxxx SÃO PAULO/SP</td><td>06 min</td></tr>
+<tr><td>25/06</td><td>21:41</td><td>L1</td><td>(051) 332-xxxx PORTO ALEGRE/RS</td><td>03 min</td></tr>
+<tr><td>25/06</td><td>22:06</td><td>L2</td><td>(054) 221-xxxx CAXIAS DO SUL/RS</td><td>11 min</td></tr>
+<tr><td>25/06</td><td>22:31</td><td>L2</td><td>00 33 1 4xxx-xxxx PARIS/FRANÇA</td><td>14 min</td></tr>
+<tr><td>25/06</td><td>23:46</td><td>L2</td><td>(054) 451-1190 BENTO GONÇALVES/RS</td><td>02 min</td></tr></table>
+<p>NÃO HÁ OUTRAS CHAMADAS INTERURBANAS EM 25/06. CHAMADAS LOCAIS NÃO SÃO DISCRIMINADAS.</p>
+<span class="margin-note">(051) 332-xxxx = residência do Dr. A. C. Brandão, Porto Alegre<br>(054) 221-xxxx = Hosp. N. Sra. da Serra, Caxias, confirmado pela enfermeira de plantão<br>(011) = SP, assinante "N. Albuquerque"<br>451-1190 = esta delegacia</span>
+</div>`);
+
+doc(2,'d-nei','Depoimentos','Nei Gasparin (fotógrafo)','testemunha',dep('NEI GASPARIN','34 anos, fotógrafo','27/06/1994',`
+<p>Fui contratado para fotografar a noite toda. Fiz 24 fotos. Entrego os negativos à polícia.</p>
+<p>Às 20h30 fiz as fotos do brinde de abertura na sala de degustação. Pedi ao Rafael para segurar a garrafa nº 001 com o pai, porque ficava bonito, as duas gerações.</p>
+<p>Durante o apagão eu estava no hall trocando o filme no escuro, às apalpadelas. Não vi ninguém passar, mas a porta da copa para o corredor fica fora da vista do hall.</p>
+<p>Às 23h05 fotografei o truco. Reparei que o Dr. Augusto estava de cardigã, e no jantar ele estava de paletó azul-marinho. Achei estranho, porque a sala de estar estava quentinha com a lareira acesa. Ele também lavava as mãos toda hora, foi duas vezes ao lavabo durante o jogo.</p>`));
+
+/* ---------- ETAPA 3 ---------- */
+doc(3,'auditoria','Papéis do escritório','Carta da auditoria Lacombe & Associés','17/06/1994 · encontrada na gaveta de Otávio',`<div class="paper typed"><div class="stamp">CONFIDENCIAL</div>
+<div class="meta">LACOMBE &amp; ASSOCIÉS · Auditores Independentes · Paris · São Paulo · São Paulo, 17 de junho de 1994</div>
+<p>Ao Sr. Otávio Valmorbida<br>Vinícola Valmorbida Ltda.</p>
+<p>Ref.: Due diligence, aquisição pela Maison Delacroix S.A.</p>
+<p>Prezado senhor,</p>
+<p>No exame dos pagamentos a fornecedores entre 1989 e 1994, encontramos <b>61 pagamentos à TANOARIA SERRA ALTA LTDA.</b>, de Pinto Bandeira/RS, por "fornecimento de barricas de carvalho". O total corrigido equivale a cerca de <b>US$ 412.000</b>.</p>
+<p>No inventário físico da cave, feito em 14/06/1994, contamos 340 barricas. Todas têm marca de tanoarias francesas ou da Tanoaria Mazzini, de Garibaldi. <b>Não encontramos nenhuma barrica da Tanoaria Serra Alta</b>, nem registro de entrada delas no estoque.</p>
+<p>Pedimos esclarecimentos por escrito <b>antes do fechamento previsto para 30/06/1994</b>. Sem eles, vamos recomendar à Maison Delacroix que suspenda a operação.</p>
+<p>Atenciosamente,<br><span class="sig">P. Lacombe</span></p>
+<span class="margin-note">Quem aprovou isso?? Ver as autorizações. — O.V.</span>
+</div>`);
+
+doc(3,'autoriz','Papéis do escritório','Autorizações de pagamento (3)','Arquivo de fornecedores',`<div class="paper typed">
+<div class="meta">VINÍCOLA VALMORBIDA LTDA · AUTORIZAÇÕES DE PAGAMENTO · cópias carbono, pasta "Fornecedores 89–94"</div>
+<table><tr><th>Data</th><th>Favorecido</th><th>Histórico</th><th>Assinatura</th></tr>
+<tr><td>12/03/1990</td><td>Tanoaria Serra Alta Ltda.</td><td>40 barricas carvalho 225 L</td><td>Otávio Valmorbida — <i>p.p.</i> <span class="sig" style="font-size:20px">A. C. Brandão</span></td></tr>
+<tr><td>08/11/1992</td><td>Tanoaria Serra Alta Ltda.</td><td>32 barricas carvalho 225 L + tostagem</td><td>Otávio Valmorbida — <i>p.p.</i> <span class="sig" style="font-size:20px">A. C. Brandão</span></td></tr>
+<tr><td>21/02/1994</td><td>Tanoaria Serra Alta Ltda.</td><td>50 barricas carvalho 300 L</td><td>Otávio Valmorbida — <i>p.p.</i> <span class="sig" style="font-size:20px">A. C. Brandão</span></td></tr></table>
+<p style="font-size:13px">p.p. = por procuração. Procuração pública lavrada em 04/1985, Tabelionato de Bento Gonçalves, conferindo ao Dr. Augusto Carvalho Brandão poderes para "efetuar pagamentos a fornecedores e representar a empresa perante repartições".</p>
+<span class="margin-note">Todas as 61 têm a mesma assinatura. Nenhuma com a minha. — O.V.</span>
+</div>`);
+
+doc(3,'jucergs','Papéis do escritório','Fax da Junta Comercial (JUCERGS)','23/06/1994 18h22',`<div class="paper telex">
+<div class="meta" style="font-family:'IBM Plex Mono'">FAX · 23/06/94 18:22 · DE: JUCERGS - JUNTA COMERCIAL DO ESTADO DO RS · PARA: (054) 451-2210 · ATT. SR. OTAVIO · PAG 1/1</div>
+<p>FICHA CADASTRAL SIMPLIFICADA</p>
+<p>RAZÃO SOCIAL: TANOARIA SERRA ALTA LTDA<br>
+CONSTITUIÇÃO: 02/02/1989<br>
+ENDEREÇO: LINHA JANSEN, 220 - DIST. PINTO BANDEIRA - BENTO GONÇALVES/RS<br>
+CORRESPONDÊNCIA: CAIXA POSTAL 1180 - PORTO ALEGRE/RS<br>
+CAPITAL: CR$ (equivalente a US$ 1.000)<br>
+OBJETO: FABRICAÇÃO E COMÉRCIO DE TONÉIS E BARRICAS</p>
+<p>SÓCIOS:<br>
+MARTA CARVALHO BRANDÃO ......... 90% - ADMINISTRADORA<br>
+IVO CARVALHO ................... 10%</p>
+<p>SITUAÇÃO: ATIVA. NÃO CONSTAM ALTERAÇÕES.</p>
+<span class="margin-note">Marta.</span>
+</div>`);
+
+doc(3,'d-lucia2','Depoimentos','Lúcia Ferraz (complementar)','28/06/1994',dep('LÚCIA FERRAZ','governanta, depoimento complementar','28/06/1994',`
+<p>Lembrei de umas coisas que não contei antes porque não achei que tivessem importância.</p>
+<p>No domingo de manhã cedo o Dr. Augusto me entregou o paletó azul-marinho dele e pediu que eu mandasse à Lavanderia Alpina, em Bento, porque tinha derramado vinho no jantar. A manga direita estava úmida, como se tivesse sido lavada na pia. Mandei na segunda.</p>
+<p>A toalha de linho da mesa de degustação sumiu. É uma das toalhas bordadas com o V azul, feitas pela finada Dona Irene. Eu mesma pus a toalha lá às sete da noite.</p>
+<p>O seu Otávio confiava no Dr. Augusto para tudo. Depois do infarto de 85 era o doutor quem assinava os pagamentos de fornecedores. Na quinta, quando o seu Otávio voltou de Pinto Bandeira, chamou o doutor por telefone e falou muito sério. Ouvi ele dizer "sábado conversamos, Augusto. Pessoalmente."</p>
+<p>O Dr. Augusto conhece esta casa como a palma da mão. Foi ele quem me ensinou onde fica a portinhola do quadro de força, anos atrás, num temporal.</p>`));
+
+doc(3,'lavanderia','Papéis do escritório','Ordem de serviço · Lavanderia Alpina','27/06/1994 · apreendida',`<div class="paper typed">
+<div class="meta">LAVANDERIA ALPINA · Rua Marechal Deodoro, Bento Gonçalves · ORDEM DE SERVIÇO Nº 4471 · Entrada: 27/06/1994</div>
+<table><tr><th>Cliente</th><td>Dr. A. Brandão (entregue por: Vinícola Valmorbida)</td></tr>
+<tr><th>Peça</th><td>01 paletó de lã fria azul-marinho, forro de cetim</td></tr>
+<tr><th>Queixa</th><td>"Mancha de vinho tinto na manga"</td></tr>
+<tr><th>Observações do atendente</th><td>Manga direita e punho com lavagem caseira recente. Resíduo marrom-avermelhado no <b>forro interno do punho direito</b>. <b>Não sai com o tratamento para tanino (vinho).</b> Teste de proteína <b>positivo</b>: provável sangue. Peça retida. Cliente avisado por telefone em 27/06, 16h. Cliente pediu para "jogar fora a peça".</td></tr></table>
+<span class="margin-note">Apreendido 28/06. IGP: sangue humano, grupo O. O Dr. Brandão não tem nenhum ferimento (examinado em 28/06). — Pagliarini</span>
+</div>`);
+
+doc(3,'telex','Papéis do escritório','Telex da Maison Delacroix','24/06/1994 · bagagem de Jean-Luc',`<div class="paper telex">
+<p>TELEX 24JUN94 1702 GMT<br>DE: MAISON DELACROIX SA - DIRECTION GENERALE - PARIS<br>A: M. JEAN-LUC MOREAU - HOTEL DOS IMIGRANTES - BENTO GONCALVES BRESIL</p>
+<p>VALMORBIDA HESITE. CLOSING 30/06 IMPERATIF AVANT NOUVELLE MONNAIE BRESILIENNE. SI L ACCORD ECHOUE VOTRE POSTE EST EN JEU. FAITES LE NECESSAIRE. STOP. DIRECTION.</p>
+<hr>
+<p><i>Tradução juramentada:</i> "Valmorbida hesita. Fechamento em 30/06 é imprescindível, antes da nova moeda brasileira. Se o acordo fracassar, seu cargo está em jogo. Faça o necessário. Direção."</p>
+<span class="margin-note">"Faça o necessário"... — mas com o velho morto, a venda depende de Helena (45%) e Rafael (45%). Helena nunca venderia.</span>
+</div>`);
+
+doc(3,'cobranca','Papéis do escritório','Carta para Rafael','20/06/1994 · quarto de Rafael',`<div class="paper hand" style="font-family:'Caveat';">
+<p>Rafael,</p>
+<p>O prazo é dia 30. São 38 mil dólares, contando os juros. Não me faça ir buscar em Bento. Eu sei onde fica a vinícola do teu pai e sei que velho não vive para sempre.</p>
+<p>Liga até sábado.</p>
+<p style="text-align:right">— N. Albuquerque</p>
+</div>`);
+
+doc(3,'testamento','Papéis do escritório','Certidão: resumo do testamento','Tabelionato de Bento Gonçalves',`<div class="paper typed">
+<div class="meta">2º TABELIONATO DE NOTAS DE BENTO GONÇALVES · CERTIDÃO EM BREVE RELATO · Testamento público de OTÁVIO VALMORBIDA, lavrado em 14/08/1991</div>
+<ul><li>Quotas da Vinícola Valmorbida Ltda.: <b>45%</b> para Helena Valmorbida e <b>45%</b> para Rafael Valmorbida.</li>
+<li><b>10%</b> das quotas, a "Casa do Vale" (casa de colono na Linha Graciema) e uma pensão mensal vitalícia para <b>Lúcia Ferraz</b>, "em reconhecimento a uma vida dedicada a esta família".</li>
+<li>Testamenteiro: <b>Dr. Augusto Carvalho Brandão</b>.</li></ul>
+<p>Não consta testamento posterior.</p>
+<span class="margin-note">Testamenteiro = Brandão controlaria o inventário. Tempo para "arrumar" a contabilidade?</span>
+</div>`);
+
+doc(3,'bilhete','Papéis do escritório','Bilhete de Helena ao pai','22/06/1994 · escrivaninha de Otávio',`<div class="paper hand">
+<p>Pai,</p>
+<p>Ouvi tua conversa com o francês. Se o senhor vender a Valmorbida eu saio desta casa e não volto nunca mais. A mãe nunca ia perdoar. O nono plantou essas parreiras com as mãos.</p>
+<p>Não faz isso comigo.</p>
+<p style="text-align:right">— H.</p>
+<span class="margin-note" style="color:#7a1a1a">(no verso, letra de Otávio:) "Não vou vender, filha. Ia te contar no brinde."</span>
+</div>`);
+
+/* ===================== ARCHIVE RENDER ===================== */
+const GATES={
+ 2:{q:'Para abrir a Etapa 2, respondam: em que cômodo Otávio realmente foi atacado?',opts:['','Escada da adega','Biblioteca','Sala de degustação','Sala de estar','Escritório','Cozinha'],a:'Sala de degustação',
+    bad:'Não. Releiam o caderno de Otávio, o depoimento de Jean-Luc e o relatório da perita, e olhem a foto da passadeira.'},
+ 3:{q:'Para abrir a Etapa 3, respondam: quando Otávio morreu?',opts:['','Entre 21h30 e 21h50','Durante o apagão, entre 22h04 e 22h19','Entre 22h45 e 23h12','Às 23h12, como marca o relógio','Entre 23h12 e 23h40'],a:'Durante o apagão, entre 22h04 e 22h19',
+    bad:'Não. Comparem a digestão do sagu com o horário em que ele repetiu a sobremesa, vejam o que o laboratório diz do relógio e lembrem do baque que Zilá ouviu.'}
+};
+let current=null;
+function renderList(){
+  const L=document.getElementById('doclist');let h='';
+  const names={1:'Etapa 1 · Arquivo inicial',2:'Etapa 2 · Perícia e laudos',3:'Etapa 3 · Papéis do escritório'};
+  for(let st=1;st<=3;st++){
+    h+=`<div class="stage-h">${names[st]}</div>`;
+    if(st>S.stage){
+      if(st===S.stage+1){const g=GATES[st];h+=`<div class="locked gate"><div class="lockt">🔒 Envelope lacrado</div><p style="margin:6px 0">${g.q}</p><select id="gate${st}">${g.opts.map(o=>`<option>${o}</option>`).join('')}</select><button class="btn" onclick="tryGate(${st})">Romper o lacre</button><div class="feedback" id="fb${st}"></div></div>`;}
+      else h+=`<div class="locked">🔒 Lacrado. Abram a etapa anterior primeiro.</div>`;
+      continue;
+    }
+    let lastG='';
+    D.filter(d=>d.stage===st).forEach(d=>{
+      if(d.group!==lastG){h+=`<div style="font-size:11px;color:#8d856f;margin:8px 10px 2px;font-family:'Special Elite'">${d.group.toUpperCase()}</div>`;lastG=d.group;}
+      h+=`<button class="docbtn ${current===d.id?'active':''} ${S.read[d.id]?'read':''}" onclick="openDoc('${d.id}')">${d.title}<small>${d.sub}</small></button>`;
+    });
+  }
+  L.innerHTML=h;
+}
+function openDoc(id){
+  current=id;const d=D.find(x=>x.id===id);S.read[id]=1;save();
+  document.getElementById('docview').innerHTML=d.html;renderList();
+  if(window.innerWidth<860)document.getElementById('docview').scrollIntoView({behavior:'smooth'});
+}
+function tryGate(st){
+  const v=document.getElementById('gate'+st).value,fb=document.getElementById('fb'+st),g=GATES[st];
+  if(v===g.a){S.stage=st;save();renderList();renderPhotos();renderHints();
+    document.getElementById('docview').innerHTML=`<div class="paper typed"><div class="stamp">LIBERADO</div><h2>Etapa ${st} aberta</h2><p>${st===2?'Correto: Otávio foi atacado na <b>sala de degustação</b> e arrastado até a escada. Os laudos chegaram do laboratório. Também há novas fotos na aba Fotos.':'Correto: Otávio morreu <b>durante o apagão</b>, e o relógio foi adulterado para indicar 23h12. Vocês receberam os papéis apreendidos no escritório de Otávio e com os suspeitos. Agora é com vocês.'}</p></div>`;}
+  else{fb.className='feedback bad';fb.textContent=v?g.bad:'Escolham uma resposta.';}
+}
+
+/* ===================== NOTES ===================== */
+document.getElementById('notefields').innerHTML=CHARS.filter(c=>!c.victim).map(c=>`<label>${c.name}</label><textarea data-note="${c.id}" placeholder="motivo, oportunidade, álibi, contradições..."></textarea>`).join('');
+document.querySelectorAll('textarea[data-note]').forEach(t=>{t.value=S.notes[t.dataset.note]||'';t.addEventListener('input',()=>{S.notes[t.dataset.note]=t.value;save();});});
+
+/* ===================== HINTS ===================== */
+const HINTS={1:['O caderno de Otávio marca um encontro num horário e num lugar. Jean-Luc viu alguma coisa nesse horário.','A perita estranhou a quantidade de sangue no pé da escada. Se ele tivesse caído ali, onde estaria o resto do sangue?','Vejam a foto F4 e o mapa: as trilhas de arrasto começam diante de qual porta? A resposta da Etapa 1 é a sala de degustação.'],
+ 2:['O legista diz quanto tempo depois de comer ele morreu. Lúcia diz a que horas ele repetiu o sagu.','Relógio com a coroa puxada não para sozinho numa queda. Quem fez questão de estar acompanhado às 23h12, e quem ficou sozinho nessa hora?','Zilá ouviu o baque do corpo na escada enquanto Rafael estava parado ao lado dela, na cozinha. O vigia viu algo ser jogado pela janela às 22h11. A resposta da Etapa 2 é: durante o apagão.'],
+ 3:['Há dois "doutores" na casa. Confiram no extrato telefônico quem estava mesmo ao telefone durante o apagão, e de qual linha cada um poderia ter ligado.','Quem é Marta? Releiam os depoimentos da Etapa 1 e procurem esse nome.','Comparem a foto F1 (20h30) com a F7 (23h05). Quem trocou de roupa, e por quê? Depois leiam a ordem da lavanderia.']};
+function renderHints(){
+  document.getElementById('hints').innerHTML=[1,2,3].map(st=>`<div class="hint"><h4>ETAPA ${st}${st>S.stage?' · 🔒 abram a etapa primeiro':''}</h4>${st<=S.stage?HINTS[st].map((h,i)=>{const k=st+'-'+i;return `<button class="btn ghost" style="color:#e9e2cf;margin:4px 4px 0 0" onclick="showHint('${k}')">Dica ${i+1}</button><div class="h ${S.hints[k]?'show':''}" id="h${k}">${h}</div>`}).join(''):''}</div>`).join('');
+}
+function showHint(k){S.hints[k]=1;save();document.getElementById('h'+k).classList.add('show');}
+
+/* ===================== ACCUSATION ===================== */
+function accuse(){
+  const q=document.getElementById('a-quem').value,a=document.getElementById('a-arma').value,m=document.getElementById('a-motivo').value,w=document.getElementById('a-quando').value;
+  const R=document.getElementById('acc-result');
+  if(!q||!a||!m){R.innerHTML='<div class="result">O delegado quer as três respostas: quem, com o quê e por quê.</div>';return;}
+  const ok=[q==='brandao',a==='garrafa',m==='desvio',w==='b'];
+  const pts=ok.slice(0,3).filter(Boolean).length+(ok[3]?0.5:0);
+  const verdict=ok[0]&&ok[1]&&ok[2]?'🏆 CASO RESOLVIDO. O delegado Pagliarini fecha a pasta, acende um palheiro e diz: "Eu sabia que tinha sangue de menos naquela escada."':ok[0]?'✔️ Culpado certo, mas a acusação tem furos. A defesa do Dr. Brandão vai explorar cada um deles.':'❌ A pessoa errada foi acusada. O verdadeiro culpado continua tomando vinho na Serra… Leiam a solução.';
+  R.innerHTML=`<div class="result">Quem: ${ok[0]?'✔️':'✖️'} · Arma: ${ok[1]?'✔️':'✖️'} · Motivo: ${ok[2]?'✔️':'✖️'} · Bônus local/hora: ${ok[3]?'✔️':'✖️'}<br><br>Pontuação: ${pts} / 3,5<br><br>${verdict}</div><p><button class="btn" onclick="showSolution()">Ler a solução completa</button></p>`;
+}
+function showSolution(){const s=document.getElementById('solution');s.style.display='block';s.innerHTML=SOLUTION;s.scrollIntoView({behavior:'smooth'});}
+const SOLUTION=`
+<h2>Solução: o que aconteceu de verdade</h2>
+<p><b>O assassino é o Dr. Augusto Brandão.</b> Ele matou Otávio Valmorbida com um golpe da base da garrafa magnum nº 001 da Reserva do Centenário, na sala de degustação, durante o apagão que ele mesmo provocou. O motivo era impedir que Otávio o denunciasse pelo desvio de cerca de US$ 412 mil, feito ao longo de cinco anos por meio de uma tanoaria fantasma registrada no nome da esposa dele, Marta.</p>
+
+<h3>O motivo</h3>
+<p>Desde o infarto de 1985, Brandão tinha procuração para pagar fornecedores. Em 1989 abriu a <b>Tanoaria Serra Alta Ltda.</b> no nome da mulher, Marta Carvalho Brandão (90%), e de um parente, Ivo Carvalho. Durante cinco anos assinou 61 pagamentos por barricas que nunca existiram. A auditoria da venda para os franceses descobriu o rombo. Otávio foi a Pinto Bandeira e encontrou só um potreiro, pediu a ficha à Junta Comercial, recebeu o fax em 23/06 e leu ali o nome <b>Marta</b>. Ligou para Brandão: "sábado conversamos, Augusto. Pessoalmente." No caderno escreveu: "Ou explica, ou segunda-feira vou à polícia."</p>
+
+<h3>A reconstrução</h3>
+<div class="timeline">
+<div><b>21h40</b> Otávio repete o sagu.</div>
+<div><b>21h41</b> Brandão liga da biblioteca (Linha 1) para a esposa em Porto Alegre. A ligação dura <b>3 minutos</b>, não os vinte que ele alegou. Depois ele usa essa ligação como álibi.</div>
+<div><b>21h50</b> Otávio diz a Lúcia que vai descansar, para despistar, e na verdade vai ao encontro.</div>
+<div><b>~22h00</b> Jean-Luc vê Otávio entrar na sala de degustação: "Estou esperando o doutor."</div>
+<div><b>22h04</b> Brandão sai da biblioteca, abre a portinhola escondida do quadro (que ele conhece há anos) e <b>desliga o disjuntor geral</b> à mão. A casa fica às escuras.</div>
+<div><b>~22h05–22h07</b> Ele passa pela <b>porta interna</b> entre a biblioteca e a sala de degustação. No escuro, enrola a mão na <b>toalha de linho</b> da mesa, pega a garrafa nº 001 pelo gargalo e golpeia Otávio pelas costas com a base. O vidro trinca e o sangue e o vinho se espalham junto à lareira. O punho direito do paletó fica manchado.</div>
+<div><b>~22h08</b> Ele puxa a coroa do Omega, acerta os ponteiros em <b>23h12</b> (hora em que planejava estar jogando truco, diante de testemunhas) e quebra o cristal contra o piso.</div>
+<div><b>~22h10</b> Arrasta o corpo pelos braços, cerca de 3 m pela passadeira, até a escada, e o empurra. É o <b>baque</b> que Zilá e Lúcia ouvem no exato momento em que Rafael abre a porta da cozinha.</div>
+<div><b>~22h11</b> De volta à sala, acende o isqueiro do cachimbo, abre a janela leste e joga a garrafa nas hortênsias. É a chama que o vigia Dorival vê.</div>
+<div><b>22h11–22h19</b> Lava o piso com a água do balde de gelo, enxuga com a toalha de linho e queima a toalha na lareira acesa. Volta para a biblioteca pela porta interna. O cheiro de cachimbo fica no corredor, e Rafael o sente ao passar perto da porta da biblioteca.</div>
+<div><b>22h19</b> Rafael religa o disjuntor.</div>
+<div><b>22h40</b> Brandão, que detesta cartas, <b>insiste no truco</b> para ter testemunhas às 23h12. Antes troca o paletó manchado por um <b>cardigã</b>, com a desculpa do frio numa sala aquecida pela lareira. Durante o jogo vai lavar as mãos duas vezes.</div>
+<div><b>Domingo</b> Pede a Lúcia que mande o paletó à lavanderia, com "mancha de vinho". A lavanderia identifica sangue. Ao mesmo tempo ele pressiona delegado e prefeito para encerrar o caso como acidente.</div>
+</div>
+
+<h3>As provas que o condenam</h3>
+<ol>
+<li><b>O álibi telefônico é falso.</b> Ele disse que falou com Marta por vinte minutos durante o apagão. O extrato da Linha 1, a única com ramal na biblioteca, mostra uma ligação para a casa dele às 21h41, de <b>3 minutos</b>, e nada durante o apagão.</li>
+<li><b>O "Dr." do caderno é ele.</b> O outro doutor, Saulo, estava comprovadamente ao telefone com o hospital das 22h06 às 22h17, na Linha 2, do quarto no 2º piso. Isso foi confirmado pela enfermeira.</li>
+<li><b>Ele conhecia o quadro escondido.</b> O eletricista diz que um estranho não o acharia no escuro. Lúcia conta que foi Brandão quem lhe mostrou onde ficava. Jean-Luc, na primeira visita à casa, não saberia. Rafael precisou perguntar.</li>
+<li><b>Ele teve acesso direto.</b> A porta interna liga a biblioteca, onde ele disse estar, à sala de degustação, sem passar pelo corredor.</li>
+<li><b>Cheiro de cachimbo.</b> Ele é o único que fuma cachimbo. Rafael fuma Hollywood e Jean-Luc, Gauloises.</li>
+<li><b>Trocou de roupa.</b> Na foto F1 está de paletó azul-marinho. Na F7, às 23h05, de cardigã bege, numa sala aquecida.</li>
+<li><b>O paletó tem sangue grupo O</b>, o da vítima, no punho direito. Brandão não tinha ferimento nenhum. A desculpa do vinho cai no teste de proteína, e ele ainda pediu para "jogar fora a peça".</li>
+<li><b>Motivo documentado:</b> a auditoria, as 61 autorizações assinadas "p.p. A. C. Brandão", o fax da Junta Comercial com o nome de <b>Marta Carvalho Brandão</b> e o caderno de Otávio.</li>
+<li><b>Interesse no "acidente":</b> como testamenteiro, ele controlaria o inventário e teria tempo para sumir com os papéis.</li>
+</ol>
+
+<h3>Por que os outros são inocentes</h3>
+<ul>
+<li><b>Rafael</b> era o bode expiatório perfeito: tinha dívidas, discutiu com o pai, deixou impressões na garrafa e estava sozinho às 23h12. Mas as impressões vêm da foto das 20h30 e estão <i>por baixo</i> da marca do pano ensanguentado: quem golpeou segurou o gargalo depois, com a mão enrolada na toalha. E na hora do baque ele estava parado na porta da cozinha, diante de Zilá e Lúcia. Foi ele quem religou a luz e notou que o disjuntor tinha sido desligado à mão.</li>
+<li><b>Helena</b> tinha motivo aparente, já que era contra a venda. Mas Otávio já tinha desistido de vender ("Venda SUSPENSA", e o verso do bilhete). E das 22h08 às 22h25 ela estava na cantina, a 80 m, vista pelo vigia.</li>
+<li><b>Jean-Luc</b> recebeu o telex ameaçador. Mas com Otávio morto a venda ficaria mais difícil, porque Helena (45%) nunca venderia. Durante o apagão o vigia viu a brasa do cigarro dele na varanda e o ouviu resmungar em francês. E ele não conhecia a casa nem o quadro escondido.</li>
+<li><b>Lúcia</b> herdaria 10% e a Casa do Vale, mas passou a noite toda com Zilá na cozinha. Foi a testemunha que abriu o caso.</li>
+<li><b>Dr. Saulo</b> era o "outro doutor", a ambiguidade de propósito. Estava ao telefone com Caxias das 22h06 às 22h17, comprovado pelo extrato e pela enfermeira.</li>
+<li><b>As armas falsas:</b> o atiçador tinha fuligem intacta e os castiçais deram luminol negativo. A tese da queda acidental cai porque as lesões da escada não têm reação vital, o ferimento tem formato curvo e havia pouco sangue no local.</li>
+</ul>
+
+<h3>Epílogo</h3>
+<p>O Dr. Augusto Carvalho Brandão foi preso em 1º de julho de 1994, no primeiro dia do Real. Marta Brandão foi indiciada por estelionato. A venda à Maison Delacroix nunca aconteceu. Helena assumiu a vinícola e Rafael, com sua parte, pagou as dívidas e voltou a morar em Bento.</p>
+<p>Na noite de 26 de junho de 1995, a família abriu a garrafa nº 002 da Reserva do Centenário. Lúcia pôs na mesa outra toalha bordada por Dona Irene. Ninguém falou nada por um bom tempo.</p>
+<p style="text-align:center;font-family:'Special Elite';color:#b8913a;margin-top:30px">— CASO ENCERRADO —</p>`;
+
+/* ===================== INIT ===================== */
+renderList();renderPhotos();renderHints();
+document.getElementById('docview').innerHTML=`<div class="paper typed"><h2>Arquivo do Inquérito 1.047/94</h2><p>Escolham um documento na lista. Sugestão de ordem: Boletim de Ocorrência → Relatório de Local → Folha do caderno → depoimentos.</p><p>Os documentos lidos ficam marcados com ✓. As etapas lacradas abrem quando vocês respondem a pergunta do envelope.</p></div>`;
+const h=(location.hash||'').slice(1);if(h&&document.getElementById('v-'+h))go(h);
+</script>
+</body>
+</html>
