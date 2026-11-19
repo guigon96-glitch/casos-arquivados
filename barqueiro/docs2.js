@@ -65,7 +65,7 @@ doc(2,'nec4','4ª vítima · Sônia Lisboa','Laudo de necropsia nº 214/98','IML
 <h3>PESCOÇO</h3><p>Há um sulco de fio fino (náilon) no pescoço, mas <b>sem reação vital</b>: não há hemorragia nos tecidos nem sinais de asfixia. <b>O fio foi apertado depois da morte.</b></p>
 <h3>HORÁRIO</h3><p>Conteúdo gástrico: jantar (arroz, frango) em fase de digestão de 1 a 3 horas. Jantou às 20h, segundo a governanta. Morte estimada entre <b>21h30 e 23h30 de 17/07</b>.</p>
 <h3>TOXICOLOGIA</h3><p>Alcoolemia: 0,3 g/L. <b>Diazepam: negativo.</b></p>
-<h3>MÃOS</h3><p>Unha do dedo médio direito quebrada. Debaixo das unhas, fibras sintéticas cinza iguais às do casaco.</p>
+<h3>SANGUE</h3><p>Grupo sanguíneo: <b>B, Rh negativo</b>.</p><h3>MÃOS</h3><p>Unha do dedo médio direito quebrada. Debaixo das unhas, fibras sintéticas cinza iguais às do casaco.</p>
 <h3>OBSERVAÇÃO</h3><p>As hipóstases (manchas) aparecem nas costas <b>e</b> no lado esquerdo. O corpo ficou deitado de costas por algum tempo depois da morte e só depois foi colocado sobre o lado esquerdo, onde foi encontrado.</p>
 <p><span class="sig">Dr. Fausto Brum</span></p></div>`);
 

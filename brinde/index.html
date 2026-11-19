@@ -127,6 +127,7 @@ section.view.active{display:block;animation:fade .25s ease}
 .small{font-size:13.5px;color:#a69e88}
 .warn{border:1px solid var(--red);color:#f0c8bf;padding:10px 14px;border-radius:3px;background:rgba(155,34,38,.12);margin:12px 0;font-size:15px}
 footer{text-align:center;color:#7d7766;font-size:13px;padding:30px 10px;font-family:"Special Elite",monospace}
+.paper:has(> .stamp) .meta{padding-right:170px}
 </style>
 </head>
 <body>
@@ -454,7 +455,7 @@ function buildMap(){
  s+=`<rect x="70" y="60" width="90" height="40" fill="#7a4a28"/><rect x="45" y="220" width="10" height="55" fill="#5a3a20"/>`;
  s+=`<rect x="618" y="178" width="12" height="110" fill="#6a4020"/><rect x="740" y="178" width="12" height="110" fill="#6a4020"/><rect x="662" y="250" width="46" height="24" rx="4" fill="#7a4a28"/>`;
  s+=`<rect x="410" y="80" width="110" height="34" rx="8" fill="#6b3a3a"/><circle cx="465" cy="195" r="22" fill="#2f5a3a" stroke="#1d3a22"/><rect x="420" y="250" width="70" height="20" fill="#5a3a20"/>`+t(455,264,'lareira',{sz:9,c:'#fff'});
- s+=`<rect x="630" y="60" width="60" height="22" fill="#555"/><rect x="700" y="100" width="45" height="50" fill="#bfb6a2" stroke="#7d7568"/>`;
+ s+=`<rect x="630" y="60" width="60" height="22" fill="#555"/><rect x="722" y="118" width="32" height="40" fill="#bfb6a2" stroke="#7d7568"/>`;
  s+=`<rect x="622" y="308" width="72" height="14" fill="#5a3a20"/>`;for(let i=0;i<12;i++)s+=`<rect x="${624+i*6}" y="310" width="4" height="10" fill="${i===0?'#efe6cf':'#1d3a22'}"/>`;
  s+=`<rect x="640" y="372" width="60" height="30" rx="3" fill="#7a4a28"/><rect x="700" y="424" width="56" height="14" fill="#3a2a1a"/>`;
  for(let i=0;i<8;i++)s+=`<rect x="${232+i*18}" y="60" width="16" height="200" fill="none" stroke="#9b8f78" stroke-width=".8"/>`;
@@ -747,7 +748,7 @@ doc(3,'jucergs','Papéis do escritório','Fax da Junta Comercial (JUCERGS)','23/
 CONSTITUIÇÃO: 02/02/1989<br>
 ENDEREÇO: LINHA JANSEN, 220 - DIST. PINTO BANDEIRA - BENTO GONÇALVES/RS<br>
 CORRESPONDÊNCIA: CAIXA POSTAL 1180 - PORTO ALEGRE/RS<br>
-CAPITAL: CR$ (equivalente a US$ 1.000)<br>
+CAPITAL: NCz$ 1.000,00 (mil cruzados novos)<br>
 OBJETO: FABRICAÇÃO E COMÉRCIO DE TONÉIS E BARRICAS</p>
 <p>SÓCIOS:<br>
 MARTA CARVALHO BRANDÃO ......... 90% - ADMINISTRADORA<br>

@@ -139,7 +139,7 @@ const ACCUSE_Q=[
  ['copia','3. Quem cometeu essa morte?',[['armando','Armando Lisboa'],['mariana','Mariana Lisboa'],['vicente','Cabo Vicente Pires'],['ruy','Ruy Campello'],['daniel','Daniel Rennó de Sá'],['lucio','Lúcio Bragança']],'armando'],
  ['motivo','4. Por que o Barqueiro mata?',[['fanatismo','Fanatismo religioso: castigar pecadores'],['heranca','Dinheiro ou herança'],['vinganca','Vingança pela morte do irmão no incêndio criminoso de 1978 e pela farsa que o encobriu'],['seguro','Para ficar com o dinheiro do seguro'],['ciume','Ciúme ou vingança amorosa']],'vinganca'],
  ['proximo','5. (Bônus) Quem seria a próxima vítima?',[['ruy','Ruy Campello'],['lucio','Lúcio Bragança'],['lidia','Lídia Salles'],['celina','Dra. Celina'],['zelia','Dona Zélia']],'ruy'],
- ['moedas','6. (Bônus) Quantas moedas o verdadeiro Barqueiro usou?',[['6','6'],['8','8'],['10','10'],['23','23']],'8']
+ ['moedas','6. (Bônus) Quantas moedas coloniais o verdadeiro Barqueiro deixou nas vítimas dele?',[['6','6'],['8','8'],['10','10'],['23','23']],'8']
 ];
 const SOLUTION=`
 <h2>Solução: a travessia do Barqueiro</h2>
