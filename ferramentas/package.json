@@ -1,0 +1,12 @@
+{
+  "name": "casos-arquivados-ferramentas",
+  "private": true,
+  "description": "Fontes usadas na geração dos PDFs (impressão e kit físico)",
+  "dependencies": {
+    "@fontsource/caveat": "^5.0.0",
+    "@fontsource/ibm-plex-mono": "^5.0.0",
+    "@fontsource/playfair-display": "^5.0.0",
+    "@fontsource/source-serif-4": "^5.0.0",
+    "@fontsource/special-elite": "^5.0.0"
+  }
+}
