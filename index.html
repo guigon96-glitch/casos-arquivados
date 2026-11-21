@@ -59,7 +59,7 @@ footer{text-align:center;color:#7d7766;font-size:13px;padding:0 20px 40px;font-f
 <script>
 const LEVELS=['Iniciante','Intermediário','Avançado','Especialista'];
 let CASES=[],F={nivel:'Todos',q:'',sort:'num'};
-const progress=slug=>{try{const k={brinde:'valmorbida_v1',barqueiro:'barqueiro_v1'}[slug]||('caso_'+slug);const s=JSON.parse(localStorage.getItem(k)||'null');return s&&s.stage?s.stage:0;}catch(e){return 0;}};
+const progress=slug=>{try{const k={brinde:'valmorbida_v1',barqueiro:'barqueiro_v1',marques:'marques_v1'}[slug]||('caso_'+slug);const s=JSON.parse(localStorage.getItem(k)||'null');return s&&s.stage?s.stage:0;}catch(e){return 0;}};
 function render(){
   const q=F.q.toLowerCase();
   let L=CASES.filter(c=>(F.nivel==='Todos'||c.dificuldade===F.nivel)&&(!q||[c.titulo,c.local,c.sinopse,(c.tags||[]).join(' ')].join(' ').toLowerCase().includes(q)));
