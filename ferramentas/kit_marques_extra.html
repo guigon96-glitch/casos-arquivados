@@ -1,0 +1,15 @@
+<style>
+#K .kc{width:85.6mm;height:54mm;border-radius:3mm;display:inline-flex;flex-direction:column;justify-content:space-between;padding:4mm 5mm;margin:3mm;border:1px dashed #999;-webkit-print-color-adjust:exact;print-color-adjust:exact;box-sizing:border-box;vertical-align:top}
+#K .kc.f{background:linear-gradient(135deg,#1d2a2e,#0f1517);color:#e9d9a8}
+#K .kc.b{background:#f4f1ea;color:#222;font-family:"IBM Plex Mono";font-size:10px}
+#K .kc .lg{font-family:"Playfair Display";font-size:17px;letter-spacing:.08em}
+#K .kc .st{height:9mm;background:#222;margin:0 -5mm}
+#K .env{border:2px dashed #8f1d21;padding:8mm;text-align:center;height:120mm;display:flex;flex-direction:column;justify-content:center;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+</style><script>
+(function(){const card=(num,sub)=>`<div class="kc f"><div class="lg">MARQUÊS DE ITU</div><div style="font-family:'Special Elite';font-size:10px;letter-spacing:.2em">HOTEL · DESDE 1946 · JARDINS</div><div style="font-family:'Special Elite';font-size:22px;text-align:right">${num}</div></div><div class="kc b"><div class="st"></div><div>${sub}</div><div style="font-size:8px">Ao deixar o hotel, devolva este cartão na recepção. Alameda Lorena · São Paulo</div></div>`;
+const X=document.createElement('div');X.id='X';X.innerHTML=`<div class="pg"><h2 class="sec">Adereços extras <span class="tag">recortar · dobrar ao meio</span></h2>
+<p style="font-size:12px">Cartões-chave para recortar (frente e verso lado a lado: recortem o par e dobrem ao meio). Entram no Envelope 1 (704-A) e no Envelope 4 (MST-03).</p>
+${card('704','CARTÃO 704-A · HÓSPEDE: TOLEDO, M. · 15/09 → 16/09')}${card('MST-03','CARTÃO-MESTRE Nº 3 · USO EXCLUSIVO DA RECEPÇÃO · ABRE TODAS AS PORTAS')}${card('512','CARTÃO 512-A · HÓSPEDE: LACERDA, O. · 15/09 → 16/09')}
+</div><div class="pg"><div class="env"><div style="font-family:'Special Elite';color:#8f1d21;font-size:24px;letter-spacing:.15em">🔐 ENVELOPE DO COFRE 704</div><p style="font-size:15px">Colem esta etiqueta num envelope pequeno e coloquem dentro as páginas do <b>pen drive</b> (estão na versão para imprimir, logo depois do lacre do cofre).</p><p style="font-size:15px">Só abram depois de acertar a senha no site.</p><div style="font-family:'IBM Plex Mono';font-size:28px">☐ ☐ ☐ ☐</div></div></div>`;
+const K=document.getElementById('K');while(X.firstElementChild)K.appendChild(X.firstElementChild);document.head.appendChild(document.querySelector('#X style')||document.createElement('style'));})();
+</script>

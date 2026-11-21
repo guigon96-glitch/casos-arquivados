@@ -1,0 +1,68 @@
+<style>
+@page{size:A4;margin:13mm 12mm}
+html,body.print{background:#fff!important;color:#222}
+body.print header.top,body.print nav.tabs,body.print main,body.print footer,body.print .modal{display:none!important}
+#P{font-family:"Source Serif 4",Georgia,serif;color:#222}
+#P .paper{box-shadow:none;border:1px solid #c9b98f;max-width:none;margin:0 0 9mm;break-inside:avoid;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+#P .paper.long{break-inside:auto}
+#P .paper.news{columns:2}
+#P .pg{break-before:page}
+#P h2.sec{font-family:"Playfair Display";font-size:28px;border-bottom:3px solid #222;padding-bottom:4px;margin:0 0 7mm}
+#P .cover{height:268mm;display:flex;flex-direction:column;justify-content:space-between;background:#15171b;color:#f3ecd9;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+#P .cover .img{height:150mm;background-size:cover;background-position:center}
+#P .cover .txt{padding:10mm 14mm}
+#P .qr{display:flex;gap:6mm;align-items:center;background:#f1ead8;color:#222;padding:5mm;border-radius:2mm;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+#P .qr img{width:34mm;height:34mm}
+#P .cards{display:grid;grid-template-columns:1fr 1fr;gap:5mm}
+#P .cards .card{box-shadow:none;border:1px solid #c9b98f;break-inside:avoid;padding:4mm;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+#P .cards .card p{font-size:12.5px}
+#P .photos2{display:grid;grid-template-columns:1fr 1fr;gap:6mm}
+#P .ph{border:1px solid #bbb;padding:3mm;break-inside:avoid;background:#fbfaf5}
+#P .ph img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
+#P .ph .cap{font-family:"Caveat";font-size:20px;margin-top:2mm}
+#P .ph .bk{font-size:11.5px;color:#333;margin-top:1mm}
+#P .ph .bk i{font-family:"Special Elite";font-style:normal;font-size:11px;color:#555}
+#P .seal{height:250mm;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;border:4px double #8f1d21;padding:15mm;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+#P .seal .big{font-family:"Special Elite";color:#8f1d21;font-size:30px;letter-spacing:.15em}
+#P .fill{border-bottom:1px solid #777;height:9mm}
+#P .opts{font-size:15px;line-height:2;text-align:left}
+#P .inlinepic{max-width:110mm}#P .maph{font-family:"Special Elite";font-size:12px;border-bottom:2px solid #222;margin-bottom:2mm}#P .paper svg{width:100%;height:auto}#P .cover{background:#14181a;height:255mm}#P .cover .img{height:135mm}body.print > div[style*="relative"],body.print #countdown{display:none!important}
+#P .prose p,#P .prose li{font-size:14px}#P .prose h2{color:#222;font-size:24px}#P .prose h3{color:#8f1d21}
+</style>
+<script>
+window.buildPrint=function(QR,URL){
+ document.body.classList.add('print');
+ const docsOf=st=>D.filter(d=>d.stage===st).map(d=>d.html.replace('class="paper','class="paper '+((d.html.length>2400)?'long ':''))).join('');
+ const photosOf=st=>{const ks=Object.keys(PH).filter(k=>PH[k].stage===st);return ks.length?`<h2 class="sec pg">${NAMES[st]} · Fotografias</h2><div class="photos2">${ks.map(k=>`<div class="ph"><img src="img/${k}.jpg"><div class="cap">${k.toUpperCase()} · ${PH[k].cap}</div><div class="bk">${PH[k].back}<br><i>${PH[k].tech}</i></div></div>`).join('')}</div>`:'';};
+ const qrBox=t=>`<div class="qr"><img src="${QR}"><div><b style="font-family:'Special Elite'">${t}</b><br><span style="font-size:12px">${URL}</span></div></div>`;
+ const seal=st=>{const g=GATES[st];return `<div class="seal pg"><div class="big">ENVELOPE ${st} · LACRADO</div><p style="font-size:18px">Não virem a página antes de responder:</p><p style="font-family:'Playfair Display';font-size:24px;max-width:150mm">${g.q}</p><div class="opts">${g.opts.filter(Boolean).map(o=>'☐ '+o).join('<br>')}</div><p style="font-size:14px;max-width:140mm">Confiram no site (aba <b>Arquivo</b>, lacre do Envelope ${st}). Só sigam se acertarem.</p>${qrBox('Conferir a resposta no site')}</div>`;};
+ let PFC=0;const pfx=h=>{const k='p'+(PFC++)+'_';return h.replace(/id="([A-Za-z0-9_]+)"/g,'id="'+k+'$1"').replace(/url\(#([A-Za-z0-9_]+)\)/g,'url(#'+k+'$1)').replace(/href="#([A-Za-z0-9_]+)"/g,'href="#'+k+'$1"');};
+ const docsN=st=>D.filter(d=>d.stage===st&&!d.cofre).map(d=>d.html.replace('<div id="planta1946svg"></div>',planta1946()).replace('class="paper','class="paper '+((d.html.length>2400)?'long ':''))).join('');
+ const docsC=()=>D.filter(d=>d.cofre).map(d=>d.html.replace('class="paper','class="paper '+((d.html.length>2400)?'long ':''))).join('');
+ const pinTxt=(k,st,only)=>FLOORS[k].pins.filter(p=>only?p[1]===st:p[1]<=st).map(p=>`<li><b>${p[5]}</b> — ${p[6]}</li>`).join('');
+ const floorPage=(k,st,only,title)=>{const old=S.stage;S.stage=st;const svg=pfx(floorSVG(k));S.stage=old;const L=pinTxt(k,st,only);return `<div class="paper" style="break-inside:avoid"><div class="maph">${title||('HOTEL MARQUÊS DE ITU · '+FLOORS[k].name.toUpperCase())}</div>${svg}${L?`<ul style="font-size:12px;margin:3mm 0 0">${L}</ul>`:''}</div>`;};
+ const newPins=st=>{const ks=Object.keys(FLOORS).filter(k=>FLOORS[k].pins.some(p=>p[1]===st)||(st===4&&(k==='andar7'||k==='subsolo')));return ks.length?`<h2 class="sec pg">${NAMES[st]} · Plantas atualizadas</h2>`+ks.map(k=>floorPage(k,st,true,FLOORS[k].name.toUpperCase()+' · marcadores novos'+(st===4&&(k==='andar7'||k==='subsolo')?' + planta de 1946 sobreposta':''))).join(''):'';};
+ const cofrePage=`<div class="seal pg"><div class="big">🔐 COFRE DA SUÍTE 704</div><p style="font-size:18px">As próximas páginas são o conteúdo do pen drive guardado no cofre.</p><p style="font-family:'Playfair Display';font-size:22px;max-width:150mm">Só virem a página depois de descobrir a senha de 4 dígitos e abrir o cofre no site (aba 🔐 Cofre 704).</p><div class="opts">Senha: ☐☐☐☐</div>${qrBox('Testar a senha no site')}</div>`;
+ const P=document.createElement('div');P.id='P';
+ P.innerHTML=`
+ <div class="cover"><div class="img" style="background-image:url(img/cover.jpg)"></div><div class="txt">
+  <div style="font-family:'Special Elite';letter-spacing:.2em;font-size:11px;color:#c8a85a">INVESTIGAÇÃO PARTICULAR · HOTEL MARQUÊS DE ITU · SÃO PAULO · SETEMBRO DE 2007</div>
+  <h1 style="font-family:'Playfair Display';font-size:46px;margin:2mm 0">A Madrinha do 7º Andar</h1><p style="font-style:italic;margin:0 0 6mm">Um casamento, um hotel de 1946, uma câmera às 01h12. E cinco dias para encontrar quem subiu e não desceu.</p>
+  ${qrBox('Escaneiem para conferir os lacres, abrir o cofre, pedir dicas e entregar o relatório final')}</div></div>
+ <div class="pg prose">${RULES.replace(/<p><button[\s\S]*?<\/p>/,'')}<p><b>Na versão impressa:</b> entre os envelopes há páginas lacradas. Respondam juntos e confiram no site pelo QR code. O cofre, o relatório final e a solução também estão no site.</p></div>
+ <div class="pg">${CASE}</div>
+ <div class="pg"><h2 class="sec">A desaparecida</h2><div class="cards">${document.getElementById('victims').innerHTML}</div></div>
+ <div class="pg"><h2 class="sec">Suspeitos</h2><div class="cards">${document.getElementById('chars').innerHTML}</div></div>
+ <div class="pg"><h2 class="sec">Outras pessoas</h2><div class="cards">${document.getElementById('witness').innerHTML}</div></div>
+ <div class="pg"><h2 class="sec">Plantas do hotel</h2><p style="font-size:13px">Elevador social e escadaria social: câmeras só na cabine e nos halls (DVR 1). Escada de serviço: câmeras só nos patamares do térreo e do subsolo (DVR 2). ◉ câmera · ▤ leitor de cartão · ● pessoa/quarto · ! pista</p>${['terreo','andar5','andar7','subsolo'].map(k=>floorPage(k,1,false)).join('')}</div>
+ <div class="pg"><h2 class="sec">${NAMES[1]}</h2>${docsN(1)}${photosOf(1)}</div>
+ ${[2,3,4,5].map(st=>`${seal(st)}<div class="pg"><h2 class="sec">${NAMES[st]}</h2>${docsN(st)}${photosOf(st)}${newPins(st)}</div>${st===3?cofrePage+'<div class="pg"><h2 class="sec">Pen drive (cofre 704)</h2>'+docsC()+'</div>':''}`).join('')}
+ <div class="pg"><h2 class="sec">Relatório final</h2><div class="paper typed long">
+  ${ACCUSE_Q.map(q=>`<p>${q[1]}</p><div class="fill"></div>`).join('')}
+  <p>Provas principais:</p><div class="fill"></div><div class="fill"></div><div class="fill"></div><div class="fill"></div>
+  <p style="margin-top:8mm">Assinaturas: ______________________ &nbsp; ______________________</p></div>
+  ${qrBox('Digitem o relatório na aba "Relatório final" para ver o resultado e a solução')}</div>`;
+ document.body.appendChild(P);
+};
+window.PRINT_HOOK=()=>buildPrint(window.QRDATA,window.QRURL);
+</script>

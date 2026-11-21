@@ -79,7 +79,21 @@ finalQs:ACCUSE_Q.map(q=>q[1]).concat(['Provas principais:'])}""" % (qr(url), url
     s = base('barqueiro').replace('</body>', open(os.path.join(FERR, 'kit.html')).read() + f"<script>buildKit({cfg});</script></body>")
     pdf('barqueiro', s, 'kit.pdf')
 
-CASOS = {'brinde': brinde, 'barqueiro': barqueiro}
+def marques():
+    url = BASE_URL + '/marques/'
+    s = base('marques').replace('</head>', f"<script>window.QRDATA='{qr(url)}';window.QRURL='{url}';</script>" + open(os.path.join(FERR, 'print_marques.html')).read() + '</head>')
+    pdf('marques', s, 'impressao.pdf')
+    slots = ['15/09 19:00 cerimônia','21:00 recepção','22:30 terraço','23:40','23:51','00:30 buquê','00:35','00:40','00:41','00:49','00:50','00:52','00:58','01:05','01:07','01:09','01:12','01:13','01:15','01:20','01:22','01:30','01:31','01:34','01:37','01:40','01:47','02:30','03:10','06:28','16/09 09:02','17/09 07:40','17/09 23:04','18/09 23:10','19/09 22:58','20/09 23:20']
+    cfg = """{title:'A Madrinha do 7º Andar',caseLine:'INVESTIGAÇÃO PARTICULAR · HOTEL MARQUÊS DE ITU · SÃO PAULO · 2007',cover:'img/cover.jpg',qr:'%s',url:'%s',nEnv:5,
+stageNames:{1:'Segunda · A contratação',2:'Terça · O hotel',3:'Quarta · A família',4:'Quinta · Dinheiro e concreto',5:'Sexta · O último dia'},gates:GATES,
+people:CHARS,victims:VICTIMS.map(v=>Object.assign({},v,{n:''})),
+props:{1:['briefing','portas1','detalh'],2:['livro','achados','cel-helena'],3:['agenda','autoriz','receita'],4:['portas2','comprov','disjuntor','pagto'],5:['valet','cupom','memorial']},
+timeSlots:%s,
+finalQs:ACCUSE_Q.map(q=>q[1]).concat(['Provas principais:'])}""" % (qr(url), url, json.dumps(slots, ensure_ascii=False))
+    s = base('marques').replace('</body>', open(os.path.join(FERR, 'kit.html')).read() + f"<script>buildKit({cfg});</script>" + open(os.path.join(FERR, 'kit_marques_extra.html')).read() + '</body>')
+    pdf('marques', s, 'kit.pdf')
+
+CASOS = {'brinde': brinde, 'barqueiro': barqueiro, 'marques': marques}
 if __name__ == '__main__':
     for slug in (sys.argv[1:] or CASOS):
         CASOS[slug]()
